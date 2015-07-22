@@ -1,3 +1,8 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -59,7 +64,7 @@ a {
   padding-right: .5em;
   float: left;
   width: 15em;
-  height: 100em;
+  height: 80%;
   border-right: 1px solid #eee;
 }
 
