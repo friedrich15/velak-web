@@ -1,4 +1,7 @@
-
+$(document).on({
+    ajaxStart: function() { $("body").addClass("loading");    },
+     ajaxStop: function() { $("body").removeClass("loading"); }
+});
                                                     // ** Projects (adding, removing, saving, ...)
 function saveProject(name) {
   $.ajax({
@@ -9,16 +12,46 @@ function saveProject(name) {
     $(".temp").removeClass("temp").attr("id", data.id);
   })
 }
+
+function loadProject(li_element, id) {
+  $.ajax({
+    type: "POST",
+    url: "/admin/load_project",
+    data: {"id": id}
+  }).done(function(project){
+    console.log(project.name);
+    $("#input-title").val(project.title);
+    $("#input-name").val(project.name);
+    $("#input-description").val(project.description);
+    $(".active-link").removeClass("active-link");
+    $(li_element).addClass("active-link");
+    $("#info-container").show();
+  });
+}
+
+function updateProject() {
+  var title = $("#input-title").val();
+  var name = $("#input-name").val();
+  var description = $("#input-description").val();
+  var id = $(".active-link").attr("name");
+  console.log(description);
+  $.ajax({
+    type: "POST",
+    url: "/admin/update_project",
+    data: {
+      "id": id,
+      "title": title,
+      "name": name,
+      "description": description
+    }
+  }).done(function(){
+    showAlert("success", "Saving of '" + title + "' successful!");
+  })
+
+}
+
 function deleteProject(id, obj){
   var name = $(obj).prev().text();
-  // console.log(name);
-  // if($(obj).parent('li').hasClass("all-new")){
-  //   if(confirm("Really remove " + name + "?")){
-  //     $(obj).closest('li').remove();
-  //     showAlert("success", name+" successfully removed!")
-  //   }
-  // }
-  // else{
 
   if(confirm("Really remove " + name + "?")){
     $.ajax({

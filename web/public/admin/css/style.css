@@ -2,6 +2,13 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+body.loading {
+  overflow: hidden;
+}
+body.loading #modal {
+  display: block;
+}
+
 a {
   color: #00B7FF;
 }
@@ -17,6 +24,20 @@ a {
 
 .navbar {
   margin-bottom: 0;
+}
+
+#modal {
+  display:    none;
+  position:   fixed;
+  z-index:    1000;
+  top:        0;
+  left:       0;
+  height:     100%;
+  width:      100%;
+  background: rgba( 255, 255, 255, .8 )
+              url('../img/ajax-loader.gif')
+              50% 50%
+              no-repeat;
 }
 
 #alert-container {
@@ -56,20 +77,17 @@ a {
   text-indent: -.4em;
   word-wrap: break-word;
 }
+
+.active-link a {
+  color: #6d6;
+}
+
 .pLink {
   color: #ccc;
 }
 .pLink:hover {
   text-decoration: none;
 }
-
-/*#div-projectList li:hover:before
-{
-    position: relative;
-    color: #ddd;
-    font-size: .7em;
-    content: "> ";
-}*/
 
 .deleteLink {
   margin-left: 1em;
@@ -79,4 +97,12 @@ a {
   cursor: pointer;
   display: none;
   word-wrap: normal;
+}
+
+#main-container {
+  float: left;
+}
+
+#info-container {
+  display: none;
 }

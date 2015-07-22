@@ -11,6 +11,7 @@ block content
       ul.nav.navbar-nav
         li.active
           a(href="#") First
+  #modal
   #alert-container
   #menu-container
     #div-addProject.input-group.input-group-sm
@@ -22,7 +23,7 @@ block content
       ul#project-list.list-unstyled
         each project in projects
           if project.deleted !== true  
-            li().li-project
+            li(name= project._id, onclick="loadProject(this, '"+project._id+"')").li-project
               a(href="#").pLink= project.title
               a(id=project._id, onclick="deleteProject(this.id, this)").deleteLink
                 span.glyphicon.glyphicon-remove-circle
@@ -34,4 +35,13 @@ block content
     //- button(onclick="showAlert('success', 'Du hast es geschafft')")
     //- button(onclick="showAlert('warning', 'Das kritisch!')")
     //- button(onclick="showAlert('danger', 'Geh jetzt glaubst das das stimmt oder wie, das is ja ur oida..')")
-    
+    #info-container
+      label Title:
+      input(type='text', id='input-title').form-control
+      label Name:
+      input(type='name', id='input-name').form-control
+      label Description:
+      textarea(id='input-description').form-control
+      button(onclick='updateProject()').btn.btn-default save
+      
+  
