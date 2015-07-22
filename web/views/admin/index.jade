@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  nav.navbar.navbar-default
+    .navbar-header
+      button(type="button", class="navbar-toggle collapsed", data-toggle="collapse", data-target="#bs-example-navbar-collapse-1", aria-expanded="false")
+        span(class="sr-only") Toggle navigation
+        span(class="icon-bar")
+      a(href="#").navbar-brand Home
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li.active
+          a(href="#") First
+  #alert-container
+  #menu-container
+    #div-addProject.input-group.input-group-sm
+      input(type="text", placeholder="new project", onkeypress="checkKey(event)")#new-project-input.form-control
+      span.input-group-btn
+        button(onclick="addProject()").btn.btn-default Add
+    #div-projectList
+      p projects
+      ul#project-list.list-unstyled
+        each project in projects
+          if project.deleted !== true  
+            li().li-project
+              a(href="#").pLink= project.title
+              a(id=project._id, onclick="deleteProject(this.id, this)").deleteLink
+                span.glyphicon.glyphicon-remove-circle
+          
+          
+
+  #main-container
+    //- button(onclick="showAlert('info', 'Das ist Info')")
+    //- button(onclick="showAlert('success', 'Du hast es geschafft')")
+    //- button(onclick="showAlert('warning', 'Das kritisch!')")
+    //- button(onclick="showAlert('danger', 'Geh jetzt glaubst das das stimmt oder wie, das is ja ur oida..')")
+    

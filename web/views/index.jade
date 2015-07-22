@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  #top-menu
+    ul.menu-list.list-inline
+      li  
+        a(href="/").logo-style velak
+      li.li-menu
+        a(onclick="load_content(this, 'gala')", class=(i=="gala" ? "active":"")).menu-link velak-gala
+      li.li-menu
+        a(onclick="load_content(this, 'export')", class=(i=="export" ? "active":"")).menu-link velak-export
+      li.li-menu
+        a(onclick="load_content(this, 'other')", class=(i=="other" ? "active":"")).menu-link other
+  #side-menu
+    ul.side-list.list-unstyled
+      li.li-side
+        a.side-link newsletter
+      li.li-side  
+        a.side-link about
+      li.li-side  
+        a.side-link FAQ
+      li.li-side  
+        a.side-link contact
+        
+  #main-container
+    #content-container
+      p.p-content= content
+      

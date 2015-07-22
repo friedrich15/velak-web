@@ -1,0 +1,82 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.noselect, a {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+#alert-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.my-alert {
+  cursor: default;
+  display: none;
+  padding: 2em;
+}
+
+#menu-container {
+  padding-right: .5em;
+  float: left;
+  width: 15em;
+  height: 100em;
+  border-right: 1px solid #eee;
+}
+
+#div-addProject {
+  padding: 1em;
+  text-align: center;
+}
+#div-addProject * {
+  margin: .4em;
+}
+
+#div-projectList {
+  padding-left: 1.5em;
+  padding-right: .5em;
+  text-indent: -.4em;
+  word-wrap: break-word;
+}
+.pLink {
+  color: #ccc;
+}
+.pLink:hover {
+  text-decoration: none;
+}
+
+/*#div-projectList li:hover:before
+{
+    position: relative;
+    color: #ddd;
+    font-size: .7em;
+    content: "> ";
+}*/
+
+.deleteLink {
+  margin-left: 1em;
+  font-size: .9em;
+  right: .2em;
+  color: red;
+  cursor: pointer;
+  display: none;
+  word-wrap: normal;
+}
