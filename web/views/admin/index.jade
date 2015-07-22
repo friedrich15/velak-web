@@ -23,7 +23,7 @@ block content
       ul#project-list.list-unstyled
         each project in projects
           if project.deleted !== true  
-            li(name= project._id, onclick="loadProject(this, '"+project._id+"')").li-project
+            li(name= project._id, onclick="loadProject(this)").li-project
               a(href="#").pLink= project.title
               a(id=project._id, onclick="deleteProject(this.id, this)").deleteLink
                 span.glyphicon.glyphicon-remove-circle

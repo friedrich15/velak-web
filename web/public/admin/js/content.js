@@ -10,10 +10,12 @@ function saveProject(name) {
     data: {"name": name}
   }).done(function(data){
     $(".temp").removeClass("temp").attr("id", data.id);
-  })
+    $(".all-new").removeClass("all-new").attr("name", data.id);
+  });
 }
 
-function loadProject(li_element, id) {
+function loadProject(li_element) {
+  var id = $(li_element).attr("name");
   $.ajax({
     type: "POST",
     url: "/admin/load_project",
@@ -108,5 +110,5 @@ function showAlert(type, alert_text) {        // ** trigger Alert
   $("<div/>", {
     class: "my-alert noselect alert alert-"+type,
     html: alert_text
-  }).appendTo("#alert-container").fadeIn(500).delay(5000).fadeOut(1000);
+  }).appendTo("#alert-container").fadeIn(500).delay(3000).fadeOut(1000);
 }
