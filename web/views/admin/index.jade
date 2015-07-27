@@ -31,25 +31,30 @@ block content
           
 
   #main-container
-    //- button(onclick='showAlert('info', 'Das ist Info')')
-    //- button(onclick='showAlert('success', 'Du hast es geschafft')')
-    //- button(onclick='showAlert('warning', 'Das kritisch!')')
-    //- button(onclick='showAlert('danger', 'Geh jetzt glaubst das das stimmt oder wie, das is ja ur oida..')')
-    #info-container
-      label Title:
-      input(type='text', id='input-title').form-control
-      label Name:
-      input(type='name', id='input-name').form-control
-      label Description:
-      textarea(id='input-description').form-control
-      select#category-selector
-        option(value='gala') gala
-        option(value='export') export
-        option(value='other') other
-      br
-      input(type='checkbox', value='visible')#project-visible
-      | visible
-      br
-      button(onclick='updateProject()').btn.btn-default save
+    ul(role='tablist').nav.nav-tabs#tab-menu
+      li(role="presentation").active
+        a(href='#info-container', data-toggle='tab', aria-controls='info-container', role='tab') main info
+      li(role='presentation')
+        a(href='#photo-container', data-toggle='tab', aria-controls='photo-container', role='tab') media
+    .tab-content
+      #info-container(role='tabpanel').tab-pane
+        label Title:
+        input(type='text', id='input-title').form-control
+        label Name:
+        input(type='name', id='input-name').form-control
+        label Description:
+        textarea(id='input-description').form-control
+        select#category-selector
+          option(value='gala') gala
+          option(value='export') export
+          option(value='other') other
+        br
+        input(type='checkbox', value='visible')#project-visible
+        | visible
+        br
+        button(onclick='updateProject()').btn.btn-default save
+      #photo-container(role='tabpanel').tab-pane.active
+        p photo-upload
+      
       
   

@@ -63,7 +63,7 @@ a {
 #menu-container {
   padding-right: .5em;
   float: left;
-  width: 15em;
+  width: 15%;
   height: 80%;
   border-right: 1px solid #eee;
 }
@@ -106,9 +106,19 @@ a {
 
 #main-container {
   float: left;
+  width: 80%;
 }
 
 #info-container {
-  display: none;
-  margin: 2em;
+
+  /*display: none;*/
+  padding: 2em;
+  width: 50%;
+}
+#photo-container {
+
+  padding: 2em;
+  width: 49%%;
+  height: 20em;
+  border: 1px solid #aaa;
 }
