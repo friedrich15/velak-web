@@ -118,7 +118,13 @@ a {
 #photo-container {
 
   padding: 2em;
-  width: 49%%;
+  text-align: center;
+}
+#photo-upload {
+  width: 80%;
   height: 20em;
-  border: 1px solid #aaa;
+  margin: 0 auto;
+  border: 2px dashed #aaa;
+  border-radius: .2em;
+  background-color: #f0ffff;
 }
