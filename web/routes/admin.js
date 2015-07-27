@@ -8,7 +8,7 @@ var Audio = mongoose.model('Audio');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  Project.find().sort("position").exec( function ( err, projects, count ){
+  Project.find().sort('position').exec( function ( err, projects, count ){
     res.render('admin/index', {
       title: 'velak | admin',
       projects: projects
@@ -31,8 +31,9 @@ router.post('/update_project', function(req, res, next) {
     project.name = req.body.name;
     project.description = req.body.description;
     project.category = req.body.category;
+    project.visible = req.body.visible;
     project.save(function(err, project){
-      console.log("hallo " + project);
+      console.log('hallo ' + project);
       if(err){res.send(err)}
       else{res.send(project)}
     });
@@ -54,7 +55,8 @@ router.post('/save_project', function(req, res, next){
   new Project({
     title: req.body.name,
     name: req.body.name,
-    description: "",
+    description: '',
+    visible: false,
     deleted: false
   }).save(function(err, project){
     if (err) {res.send(err)}

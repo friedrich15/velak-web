@@ -4,13 +4,13 @@ block content
   #top-menu
     ul.menu-list.list-inline
       li  
-        a(href="/").logo-style velak
+        a(href='/').logo-style velak
       li.li-menu
-        a(onclick="load_content(this, 'gala')", class=(i=="gala" ? "active":"")).menu-link velak-gala
+        a(onclick='load_content(this, "gala")', class=(cat=='gala' ? 'active':'')).menu-link velak-gala
       li.li-menu
-        a(onclick="load_content(this, 'export')", class=(i=="export" ? "active":"")).menu-link velak-export
+        a(onclick='load_content(this, "export")', class=(cat=='export' ? 'active':'')).menu-link velak-export
       li.li-menu
-        a(onclick="load_content(this, 'other')", class=(i=="other" ? "active":"")).menu-link other
+        a(onclick='load_content(this, "other")', class=(cat=='other' ? 'active':'')).menu-link other
   #side-menu
     ul.side-list.list-unstyled
       li.li-side
@@ -26,6 +26,12 @@ block content
     #content-container
       ul#project-list.list-unstyled
         each project in projects
-          if project.deleted !== true && project.category == cat
-            li= project.title
-      
+          if project.deleted !== true && project.visible == true && project.category == cat
+            li(onclick='load_project("'+project._id+'", "'+cat+'")')= project.title
+      #project-content
+        if currentProject !== undefined
+          p#project-title= currentProject.name
+          p#project-description= currentProject.description
+        else
+          p#project-title
+          p#project-description
