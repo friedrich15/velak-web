@@ -1,2 +1,3 @@
 velakAdmin
 asd0Admin
+db.createUser({"user": "velakAdmin", "pwd": "asd0Admin", "roles": [ "readWrite", "dbAdmin" ]})

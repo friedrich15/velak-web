@@ -30,6 +30,7 @@ router.post('/update_project', function(req, res, next) {
     project.title = req.body.title;
     project.name = req.body.name;
     project.description = req.body.description;
+    project.category = req.body.category;
     project.save(function(err, project){
       console.log("hallo " + project);
       if(err){res.send(err)}

@@ -1,9 +1,16 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
+var Project = mongoose.model('Project');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'velak' });
+  Project.find().sort("position").exec(function(err, projects){
+    res.render('index', {
+      title: 'velak',
+      projects: projects
+    });
+  ;})
 });
 
 router.get('/site/:i', function(req, res, next) {
@@ -11,24 +18,30 @@ router.get('/site/:i', function(req, res, next) {
   var title = "velak"
   var i = req.params.i;
   if (i!=null){
-    content = "this is the content of "+ req.params.i;
-    title = "velak | " + i
+    Project.find().sort("position").exec(function(err, projects){
+      res.render('index', {
+        title: "velak | " + i,
+        projects: projects,
+        cat: i
+      });
+    });
   }
   console.log(title, content);
-  res.render('index', {
-    title: title,
-    content: content,
-    i: i
-  });
+
 })
 
 router.post('/site/:i', function(req, res, next) {
   var i = req.params.i
-  var data = {
-    "title": "velak | " + i,
-    "content": "this is the content of " + i
-  }
-  res.send(data);
+  Project.find().sort("position").exec(function(err, projects){
+    var data = {
+      "title": "velak | " + i,
+      "projects": projects,
+      "cat": i
+    }
+    console.log(data);
+    res.send(data);
+  });
+
 })
 
 

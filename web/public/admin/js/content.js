@@ -25,6 +25,7 @@ function loadProject(li_element) {
     $("#input-title").val(project.title);
     $("#input-name").val(project.name);
     $("#input-description").val(project.description);
+    $("#category-selector").val(project.category);
     $(".active-link").removeClass("active-link");
     $(li_element).addClass("active-link");
     $("#info-container").show();
@@ -36,6 +37,7 @@ function updateProject() {
   var name = $("#input-name").val();
   var description = $("#input-description").val();
   var id = $(".active-link").attr("name");
+  var category = $( "#category-selector option:selected" ).text();
   console.log(description);
   $.ajax({
     type: "POST",
@@ -44,13 +46,16 @@ function updateProject() {
       "id": id,
       "title": title,
       "name": name,
-      "description": description
+      "description": description,
+      "category": category
     }
   }).done(function(){
     showAlert("success", "Saving of '" + title + "' successful!");
   })
 
 }
+
+// #TODO:0 hide info-form after deleteProject
 
 function deleteProject(id, obj){
   var name = $(obj).prev().text();

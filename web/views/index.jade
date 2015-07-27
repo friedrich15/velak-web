@@ -24,5 +24,8 @@ block content
         
   #main-container
     #content-container
-      p.p-content= content
+      ul#project-list.list-unstyled
+        each project in projects
+          if project.deleted !== true && project.category == cat
+            li= project.title
       
