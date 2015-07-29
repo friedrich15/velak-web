@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Project = mongoose.model('Project');
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   Project.find().sort('position').exec(function(err, projects){

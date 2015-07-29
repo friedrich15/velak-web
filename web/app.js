@@ -4,10 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-
+var multer = require('multer');
 
 var app = express();
+
+
+// var upload = multer({ dest: './uploads/'});
+
+
 
 require('./models/project');
 
@@ -30,7 +34,6 @@ var users = require('./routes/users');
 app.use('/', routes);
 app.use('/admin', admin);
 app.use('/users', users);
-
 
 
 // catch 404 and forward to error handler

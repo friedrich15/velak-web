@@ -54,8 +54,12 @@ block content
         br
         button(onclick='updateProject()').btn.btn-default save
       #photo-container(role='tabpanel').tab-pane.active
-        p photo-upload
-        form(action='/photo_upload')#photo-upload.dropzone
+        a(onclick='$("#photo-upload").toggle(100)') show/hide photo-upload
+        //- form(action='/admin/photo_upload', method='POST', enctype='multipart/form-data')#photo-upload
+        //-   input(type='file', name='image')
+        //-   input(type='submit')
+        form(action='/admin/photo_upload', enctype='multipart/form-data')#photo-upload.dropzone
+        #gallery-container
       
       
   
