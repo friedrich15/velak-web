@@ -2,7 +2,8 @@ $(document).on({
     ajaxStart: function() { $('body').addClass('loading');    },
      ajaxStop: function() { $('body').removeClass('loading'); }
 });
-                                                    // ** Projects (adding, removing, saving, ...)
+
+                                                // ** Projects (adding, removing, saving, ...)
 function saveProject(name) {
   $.ajax({
     type: 'POST',

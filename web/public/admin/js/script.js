@@ -19,7 +19,3 @@ function append_hover() {
   );
 
 }
-
-function deleteProject(obj) {
-  // alert('ahuiui')
-}

@@ -1,6 +1,13 @@
-extends layout
-
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/error.css')
+    script(type='text/javascript', src='/js/jquery-2.1.4.min.js')
+  body
+    .msg  
+      h2= message
+      h1= error.status
+      p Sorry you took a wrong turn!
+      #errmsg
+        p= error.stack
