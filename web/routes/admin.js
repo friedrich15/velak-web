@@ -32,12 +32,9 @@ router.get('/', function(req, res, next) {
   console.log('admin ist da');
 });
 
-router.get('/load_project/:id', function(req, res, next) {
-  Project.findById(req.params.id, function(err, project) {
-    res.render('admin/edit', {
-      title: 'velak | admin',
-      projects: project
-    });
+router.post('/load_project', function(req, res, next) {
+  Project.findById(req.body.id, function(err, project) {
+    res.send(project);
   });
 });
 
