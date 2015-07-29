@@ -19,7 +19,7 @@ body {
   padding: 20px;
   font-family: Verdana, 16px;;
   text-align: justify;
-  background: url('/img/error-img.jpg') no-repeat center center fixed;
+  background: url('/img/rain.gif') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -31,10 +31,12 @@ body {
   width: 20em;
   margin: auto;
   padding: 2em;
-  color: #000;
+  color: #333;
   border-radius: .5em;
   text-shadow: 0 0 2px #111;
-  background-color:rgba(255,255,255,0.5);
+  background-color:rgba(255,255,255,0.8);
+
+  box-shadow: 0 0 .2em #aaa;
 }
 
 

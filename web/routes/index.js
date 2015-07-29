@@ -18,7 +18,7 @@ router.get('/site/:i', function(req, res, next) {
   var content = '';
   var title = 'velak'
   var i = req.params.i;
-  if (i!=null){
+  if (i=='gala' || i=='export' || i=='other'){
     Project.find().sort('position').exec(function(err, projects){
       res.render('index', {
         title: 'velak | ' + i,
@@ -27,6 +27,11 @@ router.get('/site/:i', function(req, res, next) {
       });
     });
   }
+  else {
+    var err = new Error('Page Not Found');
+    err.status = 404;
+    next(err);
+  }
   console.log(title, content);
 
 });
@@ -34,6 +39,7 @@ router.get('/site/:i', function(req, res, next) {
 router.get('/site/:cat/:id', function(req, res, next) {
   Project.find().sort('position').exec(function(err, projects){
     for (p = 0; p < projects.length; p++) {
+      
       if (projects[p]._id == req.params.id){
         var currentProject = projects[p];
         res.render('index', {
@@ -44,6 +50,10 @@ router.get('/site/:cat/:id', function(req, res, next) {
         });
       }
     }
+    var err = new Error('Page Not Found');
+    err.status = 404;
+    next(err);
+
   });
 });
 
