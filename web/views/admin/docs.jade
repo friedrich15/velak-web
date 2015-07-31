@@ -26,4 +26,7 @@ block content
             li
               a(onclick='$("#content_'+post._id+'").toggle()')= post.name
               .post-content(id= 'content_' + post._id)
-                form(action='/admin/docs/doc_upload', enctype='multipart/form-data').dropzone.doc-upload
+                form(action='/admin/docs/doc_upload', method='post', enctype='multipart/form-data')
+                  label(for='input_'+post._id)
+                    .doc-upload
+                  input(type='file', id='input_'+post._id, name='file', onchange='submit()', multiple).hidden

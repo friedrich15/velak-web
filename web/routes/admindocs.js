@@ -27,4 +27,9 @@ router.post('/add_post', function(req, res, next) {
   };
 
 });
+
+router.post('/doc_upload', function(req, res, next) {
+  console.log(req.body);
+})
+
 module.exports = router;
