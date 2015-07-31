@@ -36,6 +36,7 @@ var mongoose = require('mongoose'),
     Doc = new Schema({
       name          : String,
       originalName  : String,
+      fileType      : String,
       fileSize      : Number,
       description   : String,
       position      : Number,
