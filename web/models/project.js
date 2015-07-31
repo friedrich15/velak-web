@@ -33,6 +33,30 @@ var mongoose = require('mongoose'),
       deleted             : Boolean
     });
 
+    Doc = new Schema({
+      name          : String,
+      originalName  : String,
+      fileSize      : Number,
+      description   : String,
+      position      : Number,
+      filePath      : String
+    }),
+
+    Post = new Schema({
+      title               : String,
+      position            : Number,
+      name                : String,
+      description         : String,
+      descriptionSource   : String,
+      descriptionVersion  : [String],
+      category            : String,
+      docs                : [Doc],
+      visible             : Boolean,
+      deleted             : Boolean
+    });
+
+mongoose.model('Post', Post);
+mongoose.model('Doc', Doc);
 mongoose.model('Project', Project);
 mongoose.model('Photo', Photo);
 mongoose.model('Audio', Audio);

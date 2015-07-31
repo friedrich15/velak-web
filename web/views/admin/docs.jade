@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  nav.navbar.navbar-default
+    .navbar-header
+      button(type='button', class='navbar-toggle collapsed', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+        span(class='sr-only') Toggle navigation
+        span(class='icon-bar')
+      a(href='#').navbar-brand Home
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li
+          a(href='/admin') Products
+        li.active
+          a(href='#') Docs
+  #docs-main-container
+
+    .content-container
+      .post-container  
+        form(action='/admin/docs/add_post', method='POST').input-group.input-group-sm  
+          input(name='name', type='text', placeholder='new post')#new-data-input.form-control
+          button(type='submit')#addbutton.btn.btn-default Add
+      .posting-container
+        ul.postings.list-unstyled
+          each post in posts
+            li
+              a(onclick='$("#content_'+post._id+'").toggle()')= post.name
+              .post-content(id= 'content_' + post._id)
+                form(action='/admin/docs/doc_upload', enctype='multipart/form-data').dropzone.doc-upload

@@ -29,10 +29,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
+var admin_docs = require('./routes/admindocs');
 var users = require('./routes/users');
 
 app.use('/', routes);
 app.use('/admin', admin);
+app.use('/admin/docs', admin_docs);
 app.use('/users', users);
 
 

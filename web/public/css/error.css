@@ -28,7 +28,7 @@ body {
 
 .msg {
   text-align: center;
-  width: 20em;
+  width: 50em;
   margin: auto;
   padding: 2em;
   color: #333;
@@ -41,8 +41,8 @@ body {
 
 
 #errmsg {
-  display: none;
-  height: 10em;
+
+  height: 30em;
   font-size: 12px;
   text-align: left;
   overflow-y: scroll;

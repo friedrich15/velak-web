@@ -1,0 +1,20 @@
+.content-container {
+  margin: 1em;
+}
+
+.post-container {
+  width: 20em;
+}
+
+#addbutton {
+  display: none;
+}
+
+.post-content {
+  padding: 1em;
+}
+
+.doc-upload {
+  width: 3em;
+  height: 3em;
+}
