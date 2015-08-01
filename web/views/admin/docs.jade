@@ -26,7 +26,16 @@ block content
             li
               a(onclick='$("#content_'+post._id+'").toggle()')= post.name
               .post-content(id= 'content_' + post._id)
-                form(action='/admin/docs/doc_upload/'+post._id, method='post', enctype='multipart/form-data')
-                  label(for='input_'+post._id)
-                    .doc-upload
-                  input(type='file', id='input_'+post._id, name='files', onchange='submit()', multiple).hidden
+                ul.list-inline
+                  each doc in post.docs
+                    li
+                      .file-container
+                        .file-icon
+                        a(href= doc.filePath)
+                          span= doc.originalName
+                  li
+                    form(action='/admin/docs/doc_upload/'+post._id, method='post', enctype='multipart/form-data')
+                      label(for='input_'+post._id)
+                        .doc-upload
+                          span.glyphicon.glyphicon-plus
+                      input(type='file', id='input_'+post._id, name='files', onchange='submit()', multiple).hidden

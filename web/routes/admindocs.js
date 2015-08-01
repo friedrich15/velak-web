@@ -30,27 +30,28 @@ router.post('/add_post', function(req, res, next) {
 });
 
 router.post('/doc_upload/:id', uploaddocs.array('files'), function(req, res, next) {
-  Post.findById(req.params.id, function(err, post){
-    var files = req.files;
-    console.log(files);
-    // if (!post.docs){post.docs = [];}
-    for (i=0; i<files.length; i++) {
-      var file = files[i];
-      console.log(file);
-      post.docs.push(new Doc({
-        name : file.filename,
-        originalName : file.originalname,
-        fileType : file.mimetype,
-        fileSize : file.filesize
-      }));
+  Post.find().sort('position').exec( function ( err, posts, count ){
+    Post.findById(req.params.id, function(err, post){
+      var files = req.files;
+      console.log(files);
+      // if (!post.docs){post.docs = [];}
+      for (i=0; i<files.length; i++) {
+        var file = files[i];
+        console.log(file.extension);
+        post.docs.push(new Doc({
+          name : file.filename,
+          originalName :  file.originalname,
+          fileType :      file.mimetype,
+          fileExtension:  file.extension,
+          fileSize :      file.filesize,
+          filePath :      file.path
+        }));
 
 
-    };
-    post.save(function(){
-      res.render('admin/docs', {
-        title: 'velak | docs',
-        post: post
-      })
+      };
+      post.save(function(){
+        res.redirect('/admin/docs');
+      });
     });
   });
 });
