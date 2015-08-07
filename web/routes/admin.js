@@ -6,7 +6,7 @@ var Photo  = mongoose.model('Photo');
 var Audio = mongoose.model('Audio');
 var multer = require('multer');
 
-var upload = multer({dest:'uploads/'});
+var uploadphotos = multer({dest:'uploads/photos/'});
 
 // var multer = require('multer');
 //
@@ -87,8 +87,20 @@ router.post('/save_project', function(req, res, next){
   })
 })
 
-router.post('/photo_upload', upload.single('file'), function (req, res, next) {
-  console.log(req.file);
+router.post('/photo_upload/:id', uploadphotos.array('files'), function (req, res, next) {
+  Project.findById(req.params.id, function(err, project) {
+    for(i=0; i<req.files.length; i++){
+      var file = req.files[i];
+      project.photo.push( new Photo({
+        name          : file.name,
+        originalName  : file.originalname,
+        fileSize      : file.size,
+        filePath      : file.path
+      }));
+      project.save();
+    }
+  });
+  res.redirect('/admin');
 });
 
 

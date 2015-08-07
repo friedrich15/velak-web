@@ -30,6 +30,7 @@ function loadProject(li_element) {
     $('.active-link').removeClass('active-link');
     $(li_element).addClass('active-link');
     $('#info-container').show();
+    $('#photo-upload').prop('action', '/admin/photo_upload/' + project._id);
   });
 }
 
