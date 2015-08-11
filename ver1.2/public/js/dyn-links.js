@@ -9,8 +9,9 @@ $(document).ready(function(){
       console.log(href);
       if (href.indexOf('http://') !== 0) {
 
-        link.addClass('active');
+
         (function(href){
+          
           link.on('click', function(e){
 
             if (e.metaKey || e.ctrlKey) return;
@@ -57,10 +58,11 @@ $(document).ready(function(){
 
 
         }
-        else { alert("something else other than 200 was returned"); }
+        else { console.log("something else other than 200 was returned"); }
       }
     }
     console.log(href);
+    $('main').addClass('loading');
     xmlhttp.open("GET", href, true);
 
     // Tells the browser to retrieve the response as a HTML document
@@ -84,6 +86,10 @@ $(document).ready(function(){
     mainElement.innerHTML = responseHtml.querySelector("main").innerHTML;
 
     convertLinks(mainElement);
+
+    $('main').removeClass('loading');
+
+
   }
 
 

@@ -2,6 +2,78 @@ body {
   font: 14px Verdana, Helvetica, Arial, sans-serif;
 }
 
+.loading {
+  overflow: hidden;
+}
+.loading #loadscreen {
+  display: block;
+}
+
+#loadscreen {
+  display:    none;
+  z-index:    1000;
+  position: fixed;
+  height:     100%;
+  width:      100%;
+  background: rgba( 255, 255, 255, .8 );
+
+}
+
 a {
   color: #00B7FF;
+}
+
+#alert-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.my-alert {
+  cursor: default;
+  display: none;
+  padding: 2em;
+}
+
+#project-menu {
+  float: left;
+  min-width: 17em;
+  width: 16%;
+  padding: 1em;
+}
+
+#div-projectList {
+  padding-left: 1.5em;
+  padding-right: .5em;
+  text-indent: -.4em;
+  word-wrap: break-word;
+}
+
+.active-link a {
+  color: #6d6;
+}
+
+.pLink {
+  color: #ccc;
+}
+.pLink:hover {
+  text-decoration: none;
+}
+
+.deleteLink {
+  margin-left: 1em;
+  font-size: .9em;
+  right: .2em;
+  color: red;
+  cursor: pointer;
+  display: none;
+  word-wrap: normal;
+}
+
+
+#project-content {
+  float: left;
+  padding: 1em;
 }
