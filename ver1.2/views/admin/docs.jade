@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  header
+    nav.navbar.navbar-default
+      .navbar-header
+        button(type='button', class='navbar-toggle collapsed', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+          span(class='sr-only') Toggle navigation
+          span(class='icon-bar')
+        a(href='#').navbar-brand Home
+      .collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li
+            a(href='/admin/projects').pjax Projects
+          li.active
+            a(href='/admin/docs').pjax Docs
+  main
+    .my-content
+      h1 Documents
