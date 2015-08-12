@@ -1,6 +1,17 @@
-(function(){
+$(document).ready(function(){
   append_hover();
-})();
+
+});
+
+var $container = jQuery('.grid');
+
+$container.masonry({
+
+  columnWidth: 200,
+  itemSelector: '.grid-item'
+
+});
+
 
 function append_hover() {
   $( "li.li-project" ).hover(
@@ -33,9 +44,12 @@ function updateProject() {
       'visible': visible
     }
   }).done(function(project){
-    showAlert('success', 'Saving of "' + project.name + '" successful!');
-    // console.log(project.id)
-    openPage('/admin/project/'+ project.id, project.name)
+    var messageText = 'Saving of "' + project.name + '" successful!';
+    var message = {
+      type : 'success',
+      text : messageText
+    }
+    openPage('/admin/project/'+ project.id, message)
   })
 
 }
@@ -48,6 +62,7 @@ function saveProject(name) {
   }).done(function(data){
     $('.temp').removeClass('temp').attr('id', data.id);
     $('.all-new').removeClass('all-new').attr('name', data.id);
+    openPage('/admin/project/' + data.id);
   });
 }
 
@@ -77,6 +92,33 @@ function addProject() {
   }
 }
 
+function deleteProject(id, obj){
+  var name = $(obj).prev().text();
+
+  if(confirm('Really remove ' + name + '?')){
+    $.ajax({
+      type: 'POST',
+      url: '/admin/delete_project',
+      data: {'id': id}
+    }).done(function(data){
+      var messageText = 'Project "' + data.project.name + '" succesfully moved to bin.';
+      var message = {
+        type: 'info',
+        text: messageText
+      };
+      openPage('/admin/projects', message)
+    }).fail(function(obj, i, err){
+      showAlert('danger', 'Removing was not possible: ' + err)
+    });
+  }
+}
+
+function createDownloadLink(id) {
+
+  $.get( '/admin/create_link/' + id, function(){
+
+  });
+}
 
 function checkKey(e){         // ** check if Enter is pressed on inputfield
   console.log(e.charCode);

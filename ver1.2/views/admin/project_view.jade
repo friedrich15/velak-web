@@ -1,63 +1,79 @@
 extends layout
 
 block content
-  
-  header
-    nav.navbar.navbar-default
-      .navbar-header
-        button(type='button', class='navbar-toggle collapsed', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
-          span(class='sr-only') Toggle navigation
-          span(class='icon-bar')
-        a(href='#').navbar-brand Home
-      .collapse.navbar-collapse
-        ul.nav.navbar-nav
-          li.active
-            a(href='/admin/projects').pjax Projects
-          li
-            a(href='/admin/docs').pjax Docs
-  main
-    #loadscreen
-    #alert-container
-    #project-menu
-      #div-addProject.input-group.input-group-sm
-        input(type='text', placeholder='new project', onkeypress='checkKey(event)')#new-project-input.form-control
-        span.input-group-btn
-          button(onclick='addProject()').btn.btn-default Add
-      #div-projectList
-        p projects
-        ul#project-list.list-unstyled
-          each project in projects  
-            li(name= project._id, class=(project.id == currentProject.id ? 'active-link':'')).li-project
-              a(href='/admin/project/' + project._id).pjax.pLink= project.name
-              a(id=project._id, onclick='deleteProject(this.id, this)').deleteLink
-                span.glyphicon.glyphicon-remove-circle
-    #project-content
-      //- .content-menu  
-      //-   ul(role='tablist').nav.nav-tabs#tab-menu
-      //-   li(role="presentation").active
-      //-     a(href='#info-container', data-toggle='tab', aria-controls='info-container', role='tab') main info
-      //-   li(role='presentation')
-      //-     a(href='#photo-container', data-toggle='tab', aria-controls='photo-container', role='tab') media
-      //- .tab-content
-      #info-container(role='tabpanel').tab-pane.active
-        label Name:
-        input(type='text', name='name', id='input-name', value= currentProject.name).form-control
-        label Title:
-        input(type='text', name='title' id='input-title', value= currentProject.title).form-control
-        label Description:
-        textarea(name='description', id='input-description').form-control= currentProject.description
-        select(name='category')#category-selector
-          option(value='gala') gala
-          option(value='export') export
-          option(value='other') other
-        br
-        input(name='visible', type='checkbox', value='visible', checked=currentProject.visible)#project-visible
-        | visible
-        br
-        button(onclick='updateProject()').btn.btn-default save
-        //- #photo-container(role='tabpanel').tab-pane
-        //-   a(onclick='$("#photo-upload").toggle(100)') show/hide photo-upload
-        //- 
-        //-   form(action='/admin/photo_upload', method='post', enctype='multipart/form-data')#photo-upload
-        //-     input(type='file', name='files', onchange='submit()', multiple)
-        //-   #gallery-container
+  #content
+    header
+      nav.navbar.navbar-default
+        .navbar-header
+          button(type='button', class='navbar-toggle collapsed', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+            span(class='sr-only') Toggle navigation
+            span(class='icon-bar')
+          a(href='#').navbar-brand Home
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href='/admin/projects').pjax Projects
+            li
+              a(href='/admin/docs').pjax Docs
+    main
+      #loadscreen
+      #alert-container
+      nav#project-menu
+        #div-addProject.input-group.input-group-sm
+          input(type='text', placeholder='new project', onkeypress='checkKey(event)')#new-project-input.form-control
+          span.input-group-btn
+            button(onclick='addProject()').btn.btn-default Add
+        #div-projectList
+          p projects
+          ul#project-list.list-unstyled
+            each project in projects  
+              if project.deleted == false  
+                li(name= project._id, class=(project.id == currentProject.id ? 'active-link':'')).li-project
+                  a(href='/admin/project/' + project._id).pjax.pLink= project.name
+                  a(id=project._id, onclick='deleteProject(this.id, this)').deleteLink
+                    span.glyphicon.glyphicon-remove-circle
+
+      #project-content
+        ul(role='tablist').nav.nav-tabs#tab-menu
+          li(role="presentation").active
+            a(href='#info-container', data-toggle='tab', aria-controls='info-container', role='tab') main info
+          li(role='presentation')
+            a(href='#photo-container', data-toggle='tab', aria-controls='photo-container', role='tab') media
+        .tab-content
+          #info-container(role='tabpanel').tab-pane.active
+            label Name:
+            input(type='text', name='name', id='input-name', value= currentProject.name).form-control
+            label Title:
+            input(type='text', name='title' id='input-title', value= currentProject.title).form-control
+            label Description:
+            textarea(name='description', id='input-description', rows = 8).form-control= currentProject.description
+            select(name='category')#category-selector
+              option(value='gala') gala
+              option(value='export') export
+              option(value='other') other
+            br
+            input(name='visible', type='checkbox', value='visible', checked=currentProject.visible)#project-visible
+            | visible
+            br
+            button(onclick='updateProject()').btn.btn-default save
+          #photo-container(role='tabpanel').tab-pane
+            a(onclick='$("#photo-upload").toggle(100)') show/hide photo-upload
+          
+            form(action='/uploads/photo_upload/' + currentProject._id, method='post', enctype='multipart/form-data')#photo-upload.dropzone
+              //- input(type='file', name='files', onchange='submit()', multiple)
+            #gallery-container
+              - var pid = '"'+ currentProject._id + '"'
+              button(onclick='createDownloadLink(#{pid});').btn.btn-default create download link
+              .grid
+                .gutter-sizer
+                  each photo in photos
+                    .grid-item
+                      .thumbnail
+                        img(src= '../../uploads/small/small'+ photo.name)
+                        .caption
+                          label= photo.originalName
+                          br
+                          input(name='imgPublic', type='checkbox')
+                          span public
+                          button(onclick='deleteImg()').form-control.btn.btn-default delete
+                

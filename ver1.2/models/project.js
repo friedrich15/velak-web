@@ -7,7 +7,9 @@ var mongoose = require('mongoose'),
       fileSize      : Number,
       description   : String,
       position      : Number,
-      filePath      : String
+      filePath      : String,
+      filePublic    : Boolean,
+      deleted       : Boolean
     }),
 
     Audio = new Schema({
@@ -16,7 +18,9 @@ var mongoose = require('mongoose'),
       fileSize      : Number,
       description   : String,
       position      : Number,
-      filePath      : String
+      filePath      : String,
+      filePublic    : Boolean,
+      deleted       : Boolean
     })
 
     Project = new Schema({

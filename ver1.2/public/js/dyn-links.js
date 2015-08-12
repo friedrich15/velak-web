@@ -90,10 +90,13 @@ function finishedLoading(responseHtml, bonus) {
   mainElement.innerHTML = responseHtml.querySelector("main").innerHTML;
 
   convertLinks(mainElement);
+  append_hover();
 
   $('main').removeClass('loading');
+  $('.dropzone').dropzone();
+  
   if (bonus!==undefined) {
-    showAlert('success', 'Saving of "' + bonus + '" successful!');
+    showAlert(bonus.type, bonus.text);
   }
 
 }
