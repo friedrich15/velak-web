@@ -34,7 +34,8 @@ function updateProject() {
     }
   }).done(function(project){
     showAlert('success', 'Saving of "' + project.name + '" successful!');
-    openPage('/admin/project/'+ project.id)
+    // console.log(project.id)
+    openPage('/admin/project/'+ project.id, project.name)
   })
 
 }

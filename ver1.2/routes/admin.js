@@ -63,7 +63,13 @@ router.post('/update_project', function(req, res, next) {
     project.visible     = req.body.visible;
     project.save(function(err, project){
       if (err) {res.send(err)}
-      else {res.send(project)}
+      else {
+        console.log(project._id);
+        res.send({
+          id: project._id,
+          name: project.name
+        });
+      }
     });
   });
 });
