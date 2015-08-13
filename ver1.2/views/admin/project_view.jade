@@ -65,10 +65,19 @@ block content
               //- input(type='file', name='files', onchange='submit()', multiple)
             #gallery-container
               - var pid = '"'+ currentProject._id + '"'
-              button(onclick='createDownloadLink(#{pid});').btn.btn-default create download link
-              input(type='checkbox', onclick='selectAll(this)')#checkbox-selectAll
-              span select all
-              button(onclick='deleteSelected(#{pid})').btn.btn-default delete selected
+              .form-inline  
+                .form-group
+                  label(for='downloadLink').sr-only create Download
+                  button(onclick='createDownloadLink(#{pid});')#downloadLink.form-control.btn.btn-default create download link
+          
+                input(type='checkbox', onclick='selectAll(this)').form-control#checkbox-selectAll 
+                span Select all
+                
+                .form-group
+                  select.form-control
+                    option delete
+                    option public
+                  button(onclick='handleSelected(#{pid})').form-control.btn.btn-default do
               .grid
                 .gutter-sizer
                   each photo in photos
@@ -77,12 +86,12 @@ block content
                       - var iname = '"' + photo.originalName + '"'
                       .grid-item(id=photo._id)
                         .thumbnail
-                          input(name='imgDelete', type='checkbox').imgCheck
+                          input(id='check'+photo._id, name='imgDelete', type='checkbox').imgCheck
                           img(src= '../../uploads/small/small'+ photo.name)
                           .caption
                             label= photo.originalName
                             br
-                            input(name='imgPublic', type='checkbox')
-                            span public
+                            input(id= 'public'+photo._id, name='imgPublic', type='checkbox', onclick='publicState(this,#{pid},#{iid})', checked=photo.filePublic, hidden).public-checkbox
+                            label(for='public'+photo._id, title='public').glyphicon.glyphicon-eye-open
                             button(onclick='deleteImg(#{pid},#{iid})').form-control.btn.btn-default delete
                 

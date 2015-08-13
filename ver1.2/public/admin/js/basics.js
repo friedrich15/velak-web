@@ -125,27 +125,46 @@ function selectAll(obj) {
   $('.imgCheck').prop('checked', isChecked);
 }
 
-function deleteImg(projectId, imgId) {
-  $.get('/admin/delete_img/' + projectId + '/' + imgId, function(data){
-    $('#' + data.id).hide();
-    console.log(data.name);
-    showAlert('info', data.name + ' moved to bin.');
-  });
+function handleSelected(pid)
+
+function deleteImg(projectId, imgId, confirmed) {
+
+  if (!confirmed){
+    confirmed = confirm('Delete image?');
+    deleteImg(projectId, imgId, confirmed);
+  }
+  else {
+    $.get('/admin/delete_img/' + projectId + '/' + imgId, function(data){
+      $('#' + data.id).hide();
+      showAlert('info', data.name + ' moved to bin.');
+    });
+  }
 }
 
 function deleteSelected(pid) {
-  $('.imgCheck:checked').each(function() {
-    var iid = $(this).closest('.grid-item').attr('id');
-    deleteImg(pid, iid);
-  });
+  if (confirm('Really delete all selected images?')){
+    var confirmed = true;
+    $('.imgCheck:checked').each(function() {
+      var iid = $(this).closest('.grid-item').attr('id');
+      deleteImg(pid, iid, confirmed);
+      $('#checkbox-selectAll').prop('checked', false);
+    });
+  }
+}
+
+function publicState(obj, pid, iid) {
+  var isChecked = $(obj).is(':checked');
+  $.get('/admin/public_state/'+pid+'/'+iid+'/'+isChecked, function(data){
+    console.log(data);
+  })
 }
 
 function checkKey(e){         // ** check if Enter is pressed on inputfield
-  console.log(e.charCode);
   if(e.charCode == 13) {
     addProject();
   }
 }
+
 
 function showAlert(type, alert_text) {        // ** trigger Alert
   $('<div/>', {

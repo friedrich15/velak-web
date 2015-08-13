@@ -122,8 +122,25 @@ router.get('/delete_img/:pid/:iid', function(req, res, next) {
     }
     project.save(function(){
       res.send({id: req.params.iid, name: iname});
-    })
-  })
+    });
+  });
+});
+
+router.get('/public_state/:pid/:iid/:state', function(req, res, next) {
+  Project.findById(req.params.pid, function(err, project) {
+    var photos = project.photo;
+    var iname;
+    for (i=0; i<photos.length; i++) {
+      if (photos[i]._id == req.params.iid) {
+        console.log(photos[i]);
+        photos[i].filePublic = req.params.state;
+        console.log(photos[i]);
+      }
+    }
+    project.save(function(){
+      res.send('public = ' + req.params.state);
+    });
+  });
 })
 
 module.exports = router;
