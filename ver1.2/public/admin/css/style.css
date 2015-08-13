@@ -86,11 +86,15 @@ a {
   margin: .1em .7em;
 }
 
-.grid {
+#img-gallery {
   background: #efffef;
   padding: .3em;
-  display: inline-block;
 
+
+}
+
+.grid {
+  display: inline-block;
 }
 
 .grid-item {
@@ -107,6 +111,11 @@ a {
   height: 100%;
 }
 
+.public-checkbox {
+  display: none;
+  visibility: hidden;
+}
+
 .public-checkbox + label {
   cursor: pointer;
   color: #4444ee;
@@ -116,4 +125,15 @@ a {
 
 .public-checkbox:checked + label {
   opacity: 1;
+}
+.list-view .img-item {
+  padding: .3em;
+  border-bottom: 1px dashed #ddd;
+}
+
+.list-view img {
+  height: 30px;
+}
+.list-view > .img-item > *, .list-view > .img-item > * > * {
+  float: left;
 }

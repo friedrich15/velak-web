@@ -74,24 +74,27 @@ block content
                 span Select all
                 
                 .form-group
-                  select.form-control
-                    option delete
-                    option public
+                  select#action-selection.form-control
+                    option(value='delete') delete selection
+                    option(value='public') make public
+                    option(value='notpublic') make not public
                   button(onclick='handleSelected(#{pid})').form-control.btn.btn-default do
-              .grid
+                .form-group
+                  button(onclick='toggleView()') toggle gallery/list view
+              ul.grid.list-unstyled#img-gallery
                 .gutter-sizer
                   each photo in photos
                     if photo.deleted !== true
                       - var iid = '"'+ photo._id +'"'
                       - var iname = '"' + photo.originalName + '"'
-                      .grid-item(id=photo._id)
-                        .thumbnail
+                      li.grid-item(id=photo._id).img-item
+                        .thumbnail.img-thumb
                           input(id='check'+photo._id, name='imgDelete', type='checkbox').imgCheck
                           img(src= '../../uploads/small/small'+ photo.name)
-                          .caption
-                            label= photo.originalName
-                            br
-                            input(id= 'public'+photo._id, name='imgPublic', type='checkbox', onclick='publicState(this,#{pid},#{iid})', checked=photo.filePublic, hidden).public-checkbox
+                          .caption.img-caption
+                            p= photo.originalName
+                            
+                            input(id= 'public'+photo._id, name='imgPublic', type='checkbox', onclick='publicState(this,#{pid},#{iid})', checked=photo.filePublic).public-checkbox
                             label(for='public'+photo._id, title='public').glyphicon.glyphicon-eye-open
                             button(onclick='deleteImg(#{pid},#{iid})').form-control.btn.btn-default delete
                 

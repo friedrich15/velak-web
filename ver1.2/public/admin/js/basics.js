@@ -125,7 +125,39 @@ function selectAll(obj) {
   $('.imgCheck').prop('checked', isChecked);
 }
 
-function handleSelected(pid)
+function handleSelected(pid) {
+  var action = $('#action-selection').val();
+  switch(action) {
+    case 'delete':
+      deleteSelected(pid);
+      break;
+    case 'public':
+      $('.imgCheck:checked').each(function(){
+        var obj = $(this).siblings('.caption').children('.public-checkbox');
+        var iid = $(this).closest('.grid-item').attr('id');
+        publicState(obj, pid, iid, true);
+      });
+      break;
+    case 'notpublic':
+      $('.imgCheck:checked').each(function(){
+        var obj = $(this).siblings('.caption').children('.public-checkbox');
+        console.log(obj);
+        var iid = $(this).closest('.grid-item').attr('id');
+        publicState(obj, pid, iid, false);
+      });
+      break;
+  }
+}
+
+function publicState(obj, pid, iid, isChecked) {
+  if (isChecked==undefined){
+    isChecked = $(obj).is(':checked');
+  }
+  $.get('/admin/public_state/'+pid+'/'+iid+'/'+isChecked, function(data){
+    $(obj).prop('checked', isChecked);
+    console.log('heute, ', isChecked);
+  })
+}
 
 function deleteImg(projectId, imgId, confirmed) {
 
@@ -152,11 +184,13 @@ function deleteSelected(pid) {
   }
 }
 
-function publicState(obj, pid, iid) {
-  var isChecked = $(obj).is(':checked');
-  $.get('/admin/public_state/'+pid+'/'+iid+'/'+isChecked, function(data){
-    console.log(data);
-  })
+function toggleView() {
+  $('#img-gallery').toggleClass('list-view grid');
+  $('.img-item').toggleClass('grid-item');
+  $('.img-thumb').toggleClass('thumbnail form-inline');
+  $('.img-thumb').children('*').toggleClass('form-group');
+  $('.img-caption').toggleClass('caption form-inline');
+  $('.img-caption').children('*').toggleClass('form-group');
 }
 
 function checkKey(e){         // ** check if Enter is pressed on inputfield
