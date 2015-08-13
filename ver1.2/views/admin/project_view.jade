@@ -65,22 +65,22 @@ block content
               //- input(type='file', name='files', onchange='submit()', multiple)
             #gallery-container
               - var pid = '"'+ currentProject._id + '"'
-              .form-inline  
-                .form-group
-                  label(for='downloadLink').sr-only create Download
-                  button(onclick='createDownloadLink(#{pid});')#downloadLink.form-control.btn.btn-default create download link
-          
+              .form-inline.gallery-tools  
                 input(type='checkbox', onclick='selectAll(this)').form-control#checkbox-selectAll 
                 span Select all
                 
                 .form-group
                   select#action-selection.form-control
+                    option -- choose --
                     option(value='delete') delete selection
                     option(value='public') make public
                     option(value='notpublic') make not public
                   button(onclick='handleSelected(#{pid})').form-control.btn.btn-default do
                 .form-group
-                  button(onclick='toggleView()') toggle gallery/list view
+                  button(onclick='toggleView()').btn.btn-default toggle gallery/list view
+                .form-group
+                  label(for='downloadLink').sr-only create Download
+                  button(onclick='createDownloadLink(#{pid});')#downloadLink.form-control.btn.btn-default create download link
               ul.grid.list-unstyled#img-gallery
                 .gutter-sizer
                   each photo in photos
@@ -90,11 +90,13 @@ block content
                       li.grid-item(id=photo._id).img-item
                         .thumbnail.img-thumb
                           input(id='check'+photo._id, name='imgDelete', type='checkbox').imgCheck
-                          img(src= '../../uploads/small/small'+ photo.name)
+                          .div-img  
+                            img(src= '../../uploads/small/small'+ photo.name)
                           .caption.img-caption
-                            p= photo.originalName
+                            .div-photo-name
+                              p= photo.originalName
                             
                             input(id= 'public'+photo._id, name='imgPublic', type='checkbox', onclick='publicState(this,#{pid},#{iid})', checked=photo.filePublic).public-checkbox
                             label(for='public'+photo._id, title='public').glyphicon.glyphicon-eye-open
                             button(onclick='deleteImg(#{pid},#{iid})').form-control.btn.btn-default delete
-                
+                  

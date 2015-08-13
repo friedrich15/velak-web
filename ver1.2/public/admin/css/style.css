@@ -86,11 +86,15 @@ a {
   margin: .1em .7em;
 }
 
-#img-gallery {
+.gallery-tools {
+  padding: .5em .7em;
   background: #efffef;
+  border-bottom: 1px solid #ddd;
+}
+
+#img-gallery {
+  background: #f7fff7;
   padding: .3em;
-
-
 }
 
 .grid {
@@ -131,9 +135,18 @@ a {
   border-bottom: 1px dashed #ddd;
 }
 
-.list-view img {
-  height: 30px;
+.list-view .div-img {
+  width: 5em;
 }
+.list-view img {
+  height: 3em;
+}
+
+.list-view .img-caption .div-photo-name {
+  width: 16em;
+  overflow: hidden;
+}
+
 .list-view > .img-item > *, .list-view > .img-item > * > * {
   float: left;
 }

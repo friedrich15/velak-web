@@ -133,16 +133,16 @@ function handleSelected(pid) {
       break;
     case 'public':
       $('.imgCheck:checked').each(function(){
-        var obj = $(this).siblings('.caption').children('.public-checkbox');
-        var iid = $(this).closest('.grid-item').attr('id');
+        var obj = $(this).siblings('.img-caption').children('.public-checkbox');
+        var iid = $(this).closest('.img-item').attr('id');
         publicState(obj, pid, iid, true);
       });
       break;
     case 'notpublic':
       $('.imgCheck:checked').each(function(){
-        var obj = $(this).siblings('.caption').children('.public-checkbox');
+        var obj = $(this).siblings('.img-caption').children('.public-checkbox');
         console.log(obj);
-        var iid = $(this).closest('.grid-item').attr('id');
+        var iid = $(this).closest('.img-item').attr('id');
         publicState(obj, pid, iid, false);
       });
       break;
