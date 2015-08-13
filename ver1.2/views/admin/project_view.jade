@@ -15,6 +15,8 @@ block content
               a(href='/admin/projects').pjax Projects
             li
               a(href='/admin/docs').pjax Docs
+            li
+              a(href='/admin/trash').pjax.glyphicon.glyphicon-trash
     main
       #loadscreen
       #alert-container
@@ -64,16 +66,23 @@ block content
             #gallery-container
               - var pid = '"'+ currentProject._id + '"'
               button(onclick='createDownloadLink(#{pid});').btn.btn-default create download link
+              input(type='checkbox', onclick='selectAll(this)')#checkbox-selectAll
+              span select all
+              button(onclick='deleteSelected(#{pid})').btn.btn-default delete selected
               .grid
                 .gutter-sizer
                   each photo in photos
-                    .grid-item
-                      .thumbnail
-                        img(src= '../../uploads/small/small'+ photo.name)
-                        .caption
-                          label= photo.originalName
-                          br
-                          input(name='imgPublic', type='checkbox')
-                          span public
-                          button(onclick='deleteImg()').form-control.btn.btn-default delete
+                    if photo.deleted !== true
+                      - var iid = '"'+ photo._id +'"'
+                      - var iname = '"' + photo.originalName + '"'
+                      .grid-item(id=photo._id)
+                        .thumbnail
+                          input(name='imgDelete', type='checkbox').imgCheck
+                          img(src= '../../uploads/small/small'+ photo.name)
+                          .caption
+                            label= photo.originalName
+                            br
+                            input(name='imgPublic', type='checkbox')
+                            span public
+                            button(onclick='deleteImg(#{pid},#{iid})').form-control.btn.btn-default delete
                 

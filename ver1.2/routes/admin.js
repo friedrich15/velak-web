@@ -107,6 +107,23 @@ router.get('/create_link/:id', function(req, res, next) {
     var foldername = project.title;
     makeZipFile(foldername, photos);
   });
+});
+
+router.get('/delete_img/:pid/:iid', function(req, res, next) {
+  Project.findById(req.params.pid, function(err, project) {
+    var photos = project.photo;
+    var iname;
+    for (i=0; i<photos.length; i++) {
+      if (photos[i]._id == req.params.iid) {
+        console.log(photos[i]._id)
+        iname = photos[i].originalName;
+        photos[i].deleted = true;
+      }
+    }
+    project.save(function(){
+      res.send({id: req.params.iid, name: iname});
+    })
+  })
 })
 
 module.exports = router;

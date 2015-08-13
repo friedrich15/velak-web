@@ -120,6 +120,26 @@ function createDownloadLink(id) {
   });
 }
 
+function selectAll(obj) {
+  var isChecked = $(obj).is(':checked');
+  $('.imgCheck').prop('checked', isChecked);
+}
+
+function deleteImg(projectId, imgId) {
+  $.get('/admin/delete_img/' + projectId + '/' + imgId, function(data){
+    $('#' + data.id).hide();
+    console.log(data.name);
+    showAlert('info', data.name + ' moved to bin.');
+  });
+}
+
+function deleteSelected(pid) {
+  $('.imgCheck:checked').each(function() {
+    var iid = $(this).closest('.grid-item').attr('id');
+    deleteImg(pid, iid);
+  });
+}
+
 function checkKey(e){         // ** check if Enter is pressed on inputfield
   console.log(e.charCode);
   if(e.charCode == 13) {
