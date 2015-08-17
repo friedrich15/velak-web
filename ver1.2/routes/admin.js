@@ -82,32 +82,36 @@ router.post('/delete_project', function(req, res, next) {
   });
 });
 
-function makeZipFile(foldername, photos) {
-  var zip = new JSZip;
-
-  var photoZip = zip.folder(foldername);
-// this call will create photos/README
-  photoZip.file(photos[0].originalName, 'public/uploads/'+photos[0].name);
-  console.log(photos[0].name);
-  // for (i=0; i<photos.length; i++){
-  //   photoZip.file('public/uploads/'+photos[i].name);
-  //   console.log(photos[i].name);
-  // }
-
-  var buffer = photoZip.generate({type:"nodebuffer"});
-  var filename = new Date() + '.zip';
-  fs.writeFile(filename, buffer, function(err) {
-    if (err) throw err;
-  });
-}
+// function makeZipFile(foldername, photos) {
+//   var zip = new JSZip;
+//
+//   var photoZip = zip.folder(foldername);
+// // this call will create photos/README
+//   photoZip.file(photos[0].originalName, 'public/uploads/'+photos[0].name);
+//   console.log(photos[0].name);
+//   // for (i=0; i<photos.length; i++){
+//   //   photoZip.file('public/uploads/'+photos[i].name);
+//   //   console.log(photos[i].name);
+//   // }
+//
+//   var buffer = photoZip.generate({type:"nodebuffer"});
+//   var filename = new Date() + '.zip';
+//   fs.writeFile(filename, buffer, function(err) {
+//     if (err) throw err;
+//   });
+// }
 
 router.get('/create_link/:id', function(req, res, next) {
   Project.findById(req.params.id, function(err, project) {
-    var photos = project.photo;
-    var foldername = project.title;
-    makeZipFile(foldername, photos);
+    var rndm = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
+    var link = '/photolink/'+ req.params.id + '/' + rndm;
+    project.photoLink = link;
+    project.save(function(err){
+      res.send({link: link});
+    })
   });
 });
+
 
 router.get('/delete_img/:pid/:iid', function(req, res, next) {
   Project.findById(req.params.pid, function(err, project) {

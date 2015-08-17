@@ -22,6 +22,9 @@ body {
 a {
   color: #00B7FF;
 }
+a:hover {
+  text-decoration: none;
+}
 
 #alert-container {
   position: fixed;
@@ -90,6 +93,20 @@ a {
   padding: .5em .7em;
   background: #efffef;
   border-bottom: 1px solid #ddd;
+}
+
+.photolink {
+  margin-left: .4em;
+  color: #999;
+  background: #fcfcfc;
+  border: 1px dotted #ddd;
+  border-radius: 2px;
+  font-size: .8em;
+  padding: .5em;
+  cursor: pointer;
+}
+.span-photolink:hover {
+  color: #222;
 }
 
 #img-gallery {

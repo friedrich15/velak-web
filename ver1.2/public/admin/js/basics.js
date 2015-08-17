@@ -115,8 +115,11 @@ function deleteProject(id, obj){
 
 function createDownloadLink(id) {
 
-  $.get( '/admin/create_link/' + id, function(){
-
+  $.get( '/admin/create_link/' + id, function(data){
+    $('#downloadLink').attr('disabled', true);
+    $('.photolink').attr('hidden', false);
+    $('.photolink').attr('href', data.link);
+    $('.photolink').text(data.link);
   });
 }
 

@@ -33,6 +33,7 @@ var mongoose = require('mongoose'),
       category            : String,
       photo               : [Photo],
       audio               : [Audio],
+      photoLink           : String,
       visible             : Boolean,
       deleted             : Boolean
     });

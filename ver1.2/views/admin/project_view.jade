@@ -79,8 +79,9 @@ block content
                 .form-group
                   button(onclick='toggleView()').toggle-view.btn.btn-default.glyphicon.glyphicon-th-list
                 .form-group
-                  label(for='downloadLink').sr-only create Download
-                  button(onclick='createDownloadLink(#{pid});')#downloadLink.form-control.btn.btn-default create download link
+              
+                  button(onclick='createDownloadLink(#{pid});', disabled=((!currentProject.photoLink)?false:true))#downloadLink.form-control.btn.btn-default create download link
+                  a(target='_blank', href=currentProject.photoLink, hidden=((currentProject.photoLink)?false:true)).photolink= currentProject.photoLink
               ul.grid.list-unstyled#img-gallery
                 .gutter-sizer
                   each photo in photos
