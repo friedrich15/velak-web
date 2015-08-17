@@ -77,7 +77,7 @@ block content
                     option(value='notpublic') make not public
                   button(onclick='handleSelected(#{pid})').form-control.btn.btn-default do
                 .form-group
-                  button(onclick='toggleView()').btn.btn-default toggle gallery/list view
+                  button(onclick='toggleView()').toggle-view.btn.btn-default.glyphicon.glyphicon-th-list
                 .form-group
                   label(for='downloadLink').sr-only create Download
                   button(onclick='createDownloadLink(#{pid});')#downloadLink.form-control.btn.btn-default create download link

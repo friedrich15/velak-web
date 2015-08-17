@@ -185,6 +185,7 @@ function deleteSelected(pid) {
 }
 
 function toggleView() {
+  $('.toggle-view').toggleClass('glyphicon-th-list glyphicon-th', 300)
   $('#img-gallery').toggleClass('list-view grid');
   $('.img-item').toggleClass('grid-item');
   $('.img-thumb').toggleClass('thumbnail form-inline');

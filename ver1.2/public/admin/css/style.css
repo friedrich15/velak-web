@@ -97,6 +97,8 @@ a {
   padding: .3em;
 }
 
+
+
 .grid {
   display: inline-block;
 }
@@ -106,13 +108,15 @@ a {
   width: 18em;
   margin: .1em;
   opacity: .9;
+  text-align: center;
 }
 .grid-item:hover {
   opacity: 1;
 }
 .grid-item img {
-  width: 100%;
-  height: 100%;
+  height: 15em;
+  max-width: 17em;
+  border-radius: 2px;
 }
 
 .public-checkbox {
@@ -133,6 +137,9 @@ a {
 .list-view .img-item {
   padding: .3em;
   border-bottom: 1px dashed #ddd;
+}
+.list-view .img-item:hover {
+  background: #efffef;
 }
 
 .list-view .div-img {
