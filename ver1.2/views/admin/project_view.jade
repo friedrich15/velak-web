@@ -77,27 +77,27 @@ block content
                     option(value='notpublic') make not public
                   button(onclick='handleSelected(#{pid})').form-control.btn.btn-default do
                 .form-group
-                  button(onclick='toggleView()').toggle-view.btn.btn-default.glyphicon.glyphicon-th-list
+                  button(onclick='toggleView()').toggle-view.btn.btn-default.glyphicon.glyphicon-th-large
                 .form-group
               
                   button(onclick='createDownloadLink(#{pid});', disabled=((!currentProject.photoLink)?false:true))#downloadLink.form-control.btn.btn-default create download link
                   a(target='_blank', href=currentProject.photoLink, hidden=((currentProject.photoLink)?false:true)).photolink= currentProject.photoLink
-              ul.grid.list-unstyled#img-gallery
+              ul.list-view.list-unstyled#img-gallery
                 .gutter-sizer
                   each photo in photos
                     if photo.deleted !== true
-                      - var iid = '"'+ photo._id +'"'
+                      - var iid = '"'+ photo.name +'"'
                       - var iname = '"' + photo.originalName + '"'
-                      li.grid-item(id=photo._id).img-item
-                        .thumbnail.img-thumb
-                          input(id='check'+photo._id, name='imgDelete', type='checkbox').imgCheck
-                          .div-img  
+                      li(id=photo.name).img-item
+                        .form-inline.img-thumb
+                          input(id='check'+photo.name, name='imgDelete', type='checkbox').imgCheck.form-group
+                          .div-img.form-group  
                             img(src= '../../uploads/small/small'+ photo.name)
-                          .caption.img-caption
-                            .div-photo-name
+                          .form-group.form-inline.img-caption
+                            .div-photo-name.form-group
                               p= photo.originalName
                             
-                            input(id= 'public'+photo._id, name='imgPublic', type='checkbox', onclick='publicState(this,#{pid},#{iid})', checked=photo.filePublic).public-checkbox
-                            label(for='public'+photo._id, title='public').glyphicon.glyphicon-eye-open
-                            button(onclick='deleteImg(#{pid},#{iid})').form-control.btn.btn-default delete
+                            input(id= 'public'+photo.name, name='imgPublic', type='checkbox', onclick='publicState(this,#{pid},#{iid})', checked=photo.filePublic).form-group.public-checkbox
+                            label(for='public'+photo.name, title='public').glyphicon.glyphicon-eye-open.form-group
+                            button(onclick='deleteImg(#{pid},#{iid})').form-control.btn.btn-default.form-group delete
                   

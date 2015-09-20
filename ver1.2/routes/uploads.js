@@ -38,8 +38,9 @@ router.post('/photo_upload/:id', upload.single('file'), function(req, res, next)
       filePath      : file.path,
       filePublic    : true,
       deleted       : false
-    }));
+    }, function(){res.send(Photo)}));
     project.save();
+
   });
   res.redirect('/admin/projects');
 });

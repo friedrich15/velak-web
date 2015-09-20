@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h2= project.name
+  each photo in photos
+    if photo.deleted !== true
+      img(src= '/uploads/' + photo.name, width='800')

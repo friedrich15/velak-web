@@ -116,10 +116,8 @@ function deleteProject(id, obj){
 function createDownloadLink(id) {
 
   $.get( '/admin/create_link/' + id, function(data){
+    $('.photolink').attr('href', data.link).text(data.link).show();
     $('#downloadLink').attr('disabled', true);
-    $('.photolink').attr('hidden', false);
-    $('.photolink').attr('href', data.link);
-    $('.photolink').text(data.link);
   });
 }
 
@@ -188,13 +186,13 @@ function deleteSelected(pid) {
 }
 
 function toggleView() {
-  $('.toggle-view').toggleClass('glyphicon-th-list glyphicon-th', 300)
   $('#img-gallery').toggleClass('list-view grid');
   $('.img-item').toggleClass('grid-item');
   $('.img-thumb').toggleClass('thumbnail form-inline');
   $('.img-thumb').children('*').toggleClass('form-group');
   $('.img-caption').toggleClass('caption form-inline');
   $('.img-caption').children('*').toggleClass('form-group');
+  $('.toggle-view').toggleClass('glyphicon-th-list glyphicon-th-large')
 }
 
 function checkKey(e){         // ** check if Enter is pressed on inputfield
@@ -210,3 +208,30 @@ function showAlert(type, alert_text) {        // ** trigger Alert
     html: alert_text
   }).appendTo('#alert-container').fadeIn(500).delay(3000).fadeOut(1000);
 }
+
+Dropzone.options.photoUpload = {
+  init: function() {
+    this.on(
+      "queuecomplete", function(file, res) {
+        showAlert('success', 'All files uploaded successfully! Please reload page to see them!')
+      }),
+      "totaluploadprogress", function(uploadprogress) {
+        console.log(uploadprogress);
+      };
+  }
+};
+
+// - var iid = '"'+ photo._id +'"'
+// - var iname = '"' + photo.originalName + '"'
+// li.grid-item(id=photo._id).img-item
+//   .thumbnail.img-thumb
+//     input(id='check'+photo._id, name='imgDelete', type='checkbox').imgCheck
+//     .div-img
+//       img(src= '../../uploads/small/small'+ photo.name)
+//     .caption.img-caption
+//       .div-photo-name
+//         p= photo.originalName
+//
+//       input(id= 'public'+photo._id, name='imgPublic', type='checkbox', onclick='publicState(this,#{pid},#{iid})', checked=photo.filePublic).public-checkbox
+//       label(for='public'+photo._id, title='public').glyphicon.glyphicon-eye-open
+//       button(onclick='deleteImg(#{pid},#{iid})').form-control.btn.btn-default delete

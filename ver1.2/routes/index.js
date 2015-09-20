@@ -14,6 +14,7 @@ router.get('/photolink/:id/:rndm', function(req, res, next) {
 
     res.render('photoview', {
       title: project.name + ' | Photos',
+      project: project,
       photos: project.photo
     });
   });

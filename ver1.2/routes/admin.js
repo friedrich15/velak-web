@@ -118,8 +118,8 @@ router.get('/delete_img/:pid/:iid', function(req, res, next) {
     var photos = project.photo;
     var iname;
     for (i=0; i<photos.length; i++) {
-      if (photos[i]._id == req.params.iid) {
-        console.log(photos[i]._id)
+      if (photos[i].name == req.params.iid) {
+        console.log(photos[i].name)
         iname = photos[i].originalName;
         photos[i].deleted = true;
       }
@@ -135,7 +135,7 @@ router.get('/public_state/:pid/:iid/:state', function(req, res, next) {
     var photos = project.photo;
     var iname;
     for (i=0; i<photos.length; i++) {
-      if (photos[i]._id == req.params.iid) {
+      if (photos[i].name == req.params.iid) {
         console.log(photos[i]);
         photos[i].filePublic = req.params.state;
         console.log(photos[i]);
