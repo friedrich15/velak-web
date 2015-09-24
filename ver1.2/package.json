@@ -17,6 +17,8 @@
     "multer": "~1.0",
     "fs": "~0.0.2",
     "gm": "~1.18",
-    "jszip": "~2.5"
+    "jszip": "~2.5",
+    "imagemagick": "~0.1",
+    "image-size": "~0.3"
   }
 }

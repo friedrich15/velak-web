@@ -6,7 +6,8 @@ var Photo  = mongoose.model('Photo');
 var multer = require('multer');
 var upload = multer({dest: 'public/uploads/'});
 var fs = require('fs');
-var gm = require('gm');
+var sizeOf = require('image-size');
+var im = require('imagemagick');
 
 function resizeImage(file, img, width) {
   width = width/2;
@@ -21,13 +22,27 @@ router.post('/photo_upload/:id', upload.single('file'), function(req, res, next)
   Project.findById(req.params.id, function(err, project) {
     var file = req.file;
     var actualFile = 'public/uploads/'+file.filename;
-    gm('public/uploads/'+file.filename)
-    .size(function (err, size) {
-      if (!err) {
-        resizeImage(file, actualFile, size.width);
-      }
+    var dimensions = sizeOf(actualFile);
+    var width;
+    var height;
+    if (dimensions.width >= dimensions.height){
+      if (dimensions.width <= 800) {width = dimensions.width; height = dimensions.height} else
+      if (dimensions.width > 800) {width = 800; height = Math.round(dimensions.height / (dimensions.width/width))}
 
-
+    } else
+    if (dimensions.height > dimensions.width){
+      if (dimensions.height <= 800) {height = dimensions.height; width = dimensions.width} else
+      if (dimensions.height > 800) {height = 800; width = Math.round(dimensions.width / (dimensions.height/height))}
+    }
+    console.log(height, width);
+    im.resize({
+      srcPath: actualFile,
+      dstPath: 'public/uploads/small/small' + file.filename,
+      width: width,
+      height: height
+    }, function(err, stdout, stderr){
+      if (err) throw err;
+      console.log('resized kittens.jpg to fit within 256x256px');
     });
 
 
