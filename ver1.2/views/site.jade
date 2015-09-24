@@ -16,18 +16,15 @@ block content
         a(href='/export').pjax.menu-link velak-export
       li.li-menu
         a(href='/other').pjax.menu-link other
-  
-  nav#side-menu
-    
-    ul.side-list.list-unstyled.mobile-hidden
-      li.li-side
-        a.side-link newsletter
-      li.li-side  
-        a.side-link about
-      li.li-side  
-        a.side-link FAQ
-      li.li-side  
-        a.side-link contact
-        
-  main#content
-    p hallo leutlingers
+  main
+    - var currentProject
+    nav#side-menu
+      ul.side-list.list-unstyled.mobile-hidden
+        each project in projects
+          if project._id == pId 
+            - currentProject = project
+          li.li-side
+            a(href='/'+site+'/'+project._id).pjax.side-link= project.name
+      p= 'velak-' +site
+  #content
+    p= currentProject.name

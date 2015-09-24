@@ -50,9 +50,9 @@ block content
             label Description:
             textarea(name='description', id='input-description', rows = 8).form-control= currentProject.description
             select(name='category')#category-selector
-              option(value='gala') gala
-              option(value='export') export
-              option(value='other') other
+              option(value='gala', selected=currentProject.category=='gala') gala
+              option(value='export', selected=currentProject.category=='export') export
+              option(value='other', selected=currentProject.category=='other') other
             br
             input(name='visible', type='checkbox', value='visible', checked=currentProject.visible)#project-visible
             | visible
