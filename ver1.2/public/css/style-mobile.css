@@ -2,14 +2,22 @@ body {
   padding: 10px;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 350px) {
   body {
     font-size: 14px;
   }
 }
+@media (max-width: 320px) {
+  body {
+    font-size: 12px;
+  }
+}
+
 #top-menu ul li {
   margin: 0;
-  padding-right: .4em;
+  padding-right: .2em;
+  font-size: 1.2em;
+  font-weight: bold;
 }
 #mobile-menu {
   display: inline-block;
@@ -30,7 +38,7 @@ body {
 }
 
 .logo-style {
-  display: none;
+  font-size: 1em;
 }
 
 
@@ -50,10 +58,10 @@ body {
 }
 
 #side-menu li {
-  padding: .3em 0;
+  padding: .4em 0;
 	text-align: left
 	width: 100%;
-
+  font-size: 1.2em;
 }
 .show-menu {
   opacity: 1;
