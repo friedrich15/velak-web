@@ -1,0 +1,38 @@
+body {
+  padding: 10px;
+}
+
+#mobile-menu {
+  display: inline-block;
+
+}
+#mobile-menu img {
+  width: 30px;
+}
+
+#side-menu {
+  float: left;
+}
+#top-menu {
+  float: left;
+}
+
+#side-menu ul, #side-menu:active ul {
+    background-color: #111;
+		display: none;
+    position: absolute;
+		width: 50%;
+	}
+
+	#side-menu li {
+
+		text-align: left
+		width: 100%;
+
+	}
+
+	#side-menu:hover ul {
+
+		display: block;
+
+	}

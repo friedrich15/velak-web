@@ -1,5 +1,29 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  nav#side-menu
+    a#mobile-menu
+      img(src='/img/menu-icon-white.png')
+    ul.side-list.list-unstyled
+      li.li-side
+        a.side-link newsletter
+      li.li-side  
+        a.side-link about
+      li.li-side  
+        a.side-link FAQ
+      li.li-side  
+        a.side-link contact
+
+  nav#top-menu    
+    
+    ul.menu-list.list-inline
+      
+      li  
+        a(href='/').logo-style velak
+      li.li-menu
+        a(onclick='load_content(this, "gala")', class=(cat=='gala' ? 'active':'')).menu-link velak-gala
+      li.li-menu
+        a(onclick='load_content(this, "export")', class=(cat=='export' ? 'active':'')).menu-link velak-export
+      li.li-menu
+        a(onclick='load_content(this, "other")', class=(cat=='other' ? 'active':'')).menu-link other
+  

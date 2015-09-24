@@ -1,7 +1,11 @@
 doctype html
 html
   head
+    meta(name="viewport", content="width=device-width, initial-scale=1")
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', media='(max-width: 600px)', href='/css/style-mobile.css')
+    link(rel='stylesheet', media='(min-width: 600px)', href='/css/style-desktop.css')
   body
     block content
