@@ -3,28 +3,27 @@ extends layout
 block content
 
   nav#top-menu    
-    
     ul.menu-list.list-inline
       li
         a#mobile-menu.notactive(onclick='showSideMenu()')
           img(src='/img/menu-icon-white.png')
       li.logo
         a(href='/').pjax.logo-style velak
-      li.li-menu
+      li(class=(site=='gala'?'active':'')).li-menu
         a(href='/gala').pjax.menu-link velak-gala
-      li.li-menu
+      li(class=(site=='export'?'active':'')).li-menu
         a(href='/export').pjax.menu-link velak-export
-      li.li-menu
+      li(class=(site=='other'?'active':'')).li-menu
         a(href='/other').pjax.menu-link other
+  //- - var currentProject = 'hausi'
   main
-    - var currentProject
+    
     nav#side-menu
       ul.side-list.list-unstyled.mobile-hidden
         each project in projects
-          if project._id == pId 
-            - currentProject = project
+          
           li.li-side
             a(href='/'+site+'/'+project._id).pjax.side-link= project.name
       p= 'velak-' +site
   #content
-    p= currentProject.name
+    

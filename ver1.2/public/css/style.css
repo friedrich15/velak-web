@@ -31,3 +31,23 @@ li.active a{
   text-decoration: none;
   color: #ccc;
 }
+
+#content {
+  text-align: center;
+}
+
+.img-container {
+  width: 100%;
+  max-width: 800px;
+}
+.img-container img {
+  width: 100%;
+}
+
+main {
+  opacity: 1;
+  -webkit-transition: opacity .3s;
+}
+main.loading {
+  opacity: 0;
+}

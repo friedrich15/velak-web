@@ -10,40 +10,88 @@ router.get('/', function(req, res, next) {
       title: 'velak',
       projects: projects
     });
-  ;});
-});
-router.get('/gala/:id*?', function(req, res, next) {
-  console.log('gala');
-  Project.find({category: 'gala'}).sort('position').exec(function(err, projects){
-    res.render('site', {
-      title: 'velak',
-      site: 'gala',
-      pId: req.params.id,
-      projects: projects
-    });
-  ;});
+  });
 });
 
-router.get('/export', function(req, res, next) {
-  console.log('export');
-  Project.find({category: 'export'}).sort('position').exec(function(err, projects){
-    res.render('site', {
-      title: 'velak',
-      site: 'export',
-      projects: projects
-    });
-  ;});
+router.get('/:cat', function(req, res, next) {
+  var cat = req.params.cat;
+  Project.find({$and: [{category: cat}, {visible: true}, {deleted: false}]}).sort('position').exec(function(err, projects){
+    if (projects.length<1) res.send(cat + ' does not exist.');
+    else {
+      res.render('site', {
+        title: 'velak',
+        site: cat,
+        projects: projects
+      });
+    }
+  });
 });
 
-router.get('/other', function(req, res, next) {
-  console.log('other');
-  Project.find({category: 'other'}).sort('position').exec(function(err, projects){
-    res.render('other', {
-      title: 'velak',
-      projects: projects
-    });
-  ;});
+router.get('/:cat/:id', function(req, res, next) {
+  var cat = req.params.cat;
+  var id = req.params.id;
+  Project.find({$and: [{category: cat}, {visible: true}, {deleted: false}]}).sort('position').exec(function(err, projects){
+    if (projects.length<1) res.send(cat + ' does not exist.');
+    else {
+      for (var i in projects) {
+        if (projects[i]._id == id) {
+          var currentProject = projects[i];
+        };
+      };
+      console.log(currentProject.name);
+      res.render('project', {
+        title: 'velak',
+        site: cat,
+
+        currentProject: currentProject,
+        projects: projects
+      });
+    }
+  });
 });
+
+
+// router.get('/gala', function(req, res, next) {
+//   Project.find({category: 'gala'}).sort('position').exec(function(err, projects){
+//     res.render('project', {
+//       title: 'velak',
+//       site: 'gala',
+//       projects: projects
+//     });
+//   });
+// });
+// router.get('/gala/:id', function(req, res, next) {
+//   console.log(req.params.id);
+//   Project.find({category: 'gala'}).sort('position').exec(function(err, projects){
+//     res.render('site', {
+//       title: 'velak',
+//       site: 'gala',
+//       pId: req.params.id,
+//       projects: projects
+//     });
+//   });
+// });
+//
+// router.get('/export', function(req, res, next) {
+//   console.log('export');
+//   Project.find({category: 'export'}).sort('position').exec(function(err, projects){
+//     res.render('site', {
+//       title: 'velak',
+//       site: 'export',
+//       projects: projects
+//     });
+//   });
+// });
+//
+// router.get('/other', function(req, res, next) {
+//   console.log('other');
+//   Project.find({category: 'other'}).sort('position').exec(function(err, projects){
+//     res.render('other', {
+//       title: 'velak',
+//       projects: projects
+//     });
+//   });
+// });
 
 
 // PHOTOLINK

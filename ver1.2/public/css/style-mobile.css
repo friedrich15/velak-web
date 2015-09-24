@@ -55,8 +55,10 @@ body {
 	width: 100%;
 
 }
-
 .show-menu {
   opacity: 1;
+}
 
+.img-container {
+  margin-top: .2em;
 }
