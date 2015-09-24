@@ -1,24 +1,14 @@
 extends layout
 
 block content
-  nav#side-menu
-    a#mobile-menu
-      img(src='/img/menu-icon-white.png')
-    ul.side-list.list-unstyled
-      li.li-side
-        a.side-link newsletter
-      li.li-side  
-        a.side-link about
-      li.li-side  
-        a.side-link FAQ
-      li.li-side  
-        a.side-link contact
 
   nav#top-menu    
     
     ul.menu-list.list-inline
-      
-      li  
+      li
+        a#mobile-menu.notactive(onclick='showSideMenu()')
+          img(src='/img/menu-icon-white.png')
+      li.logo
         a(href='/').logo-style velak
       li.li-menu
         a(onclick='load_content(this, "gala")', class=(cat=='gala' ? 'active':'')).menu-link velak-gala
@@ -27,3 +17,17 @@ block content
       li.li-menu
         a(onclick='load_content(this, "other")', class=(cat=='other' ? 'active':'')).menu-link other
   
+  nav#side-menu
+    
+    ul.side-list.list-unstyled.mobile-hidden
+      li.li-side
+        a.side-link newsletter
+      li.li-side  
+        a.side-link about
+      li.li-side  
+        a.side-link FAQ
+      li.li-side  
+        a.side-link contact
+        
+  #content
+    p hallo leutlingers

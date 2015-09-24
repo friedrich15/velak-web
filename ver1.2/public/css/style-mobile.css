@@ -2,37 +2,61 @@ body {
   padding: 10px;
 }
 
+@media (max-width: 360px) {
+  body {
+    font-size: 14px;
+  }
+}
+#top-menu ul li {
+  margin: 0;
+  padding-right: .4em;
+}
 #mobile-menu {
   display: inline-block;
-
+  border-top-left-radius: 4px;
 }
 #mobile-menu img {
-  width: 30px;
+  width: 3em;
+  opacity: .7;
+  padding: .2em .6em 0 .6em;
+}
+.notactive {
+  opacity: .7;
+  background-color: 0;
+}
+.isactive {
+  opacity: 1;
+  background: #222;
 }
 
-#side-menu {
-  float: left;
-}
-#top-menu {
-  float: left;
+.logo-style {
+  display: none;
 }
 
-#side-menu ul, #side-menu:active ul {
-    background-color: #111;
-		display: none;
-    position: absolute;
-		width: 50%;
-	}
 
-	#side-menu li {
 
-		text-align: left
-		width: 100%;
+#side-menu ul {
+  background-color: #222;
+  position: absolute;
+	width: 50%;
+  padding: .6em;
+  border-radius: 4px;
+  border-top-left-radius: 0;
+}
 
-	}
 
-	#side-menu:hover ul {
+.mobile-hidden{
+  opacity: 0;
+}
 
-		display: block;
+#side-menu li {
+  padding: .3em 0;
+	text-align: left
+	width: 100%;
 
-	}
+}
+
+.show-menu {
+  opacity: 1;
+
+}
