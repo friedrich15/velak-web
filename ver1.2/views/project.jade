@@ -10,11 +10,11 @@ block content
       li.logo
         a(href='/').pjax.logo-style velak
       li(class=(site=='gala'?'active':'')).li-menu
-        a(href='/site/gala').pjax.menu-link velak-gala
+        a(href='/gala').pjax.menu-link velak-gala
       li(class=(site=='export'?'active':'')).li-menu
-        a(href='/site/export').pjax.menu-link velak-export
+        a(href='/export').pjax.menu-link velak-export
       li(class=(site=='other'?'active':'')).li-menu
-        a(href='/site/other').pjax.menu-link other
+        a(href='/other').pjax.menu-link other
   //- - var currentProject = 'hausi'
   main
     
@@ -23,7 +23,11 @@ block content
         each project in projects
           
           li.li-side
-            a(href='/site/'+site+'/'+project._id).pjax.side-link= project.name
+            a(href='/'+site+'/'+project._id).pjax.side-link= project.name
       p= 'velak-' +site
-  #content
-    
+    #content
+      p= currentProject.name
+      p= currentProject.description
+      each photo in currentProject.photo
+        .img-container
+          img(src= '/uploads/small/small' +photo.name, onerror="this.style.display='none'")

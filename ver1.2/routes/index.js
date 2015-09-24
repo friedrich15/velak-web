@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/:cat', function(req, res, next) {
+router.get('/site/:cat', function(req, res, next) {
   var cat = req.params.cat;
   Project.find({$and: [{category: cat}, {visible: true}, {deleted: false}]}).sort('position').exec(function(err, projects){
     if (projects.length<1) res.send(cat + ' does not exist.');
@@ -27,7 +27,7 @@ router.get('/:cat', function(req, res, next) {
   });
 });
 
-router.get('/:cat/:id', function(req, res, next) {
+router.get('/site/:cat/:id', function(req, res, next) {
   var cat = req.params.cat;
   var id = req.params.id;
   Project.find({$and: [{category: cat}, {visible: true}, {deleted: false}]}).sort('position').exec(function(err, projects){
