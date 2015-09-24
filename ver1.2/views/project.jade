@@ -23,7 +23,7 @@ block content
         each project in projects
           
           li.li-side
-            a(href='/'+site+'/'+project._id).pjax.side-link= project.name
+            a(href='/site/'+site+'/'+project._id).pjax.side-link= project.name
       p= 'velak-' +site
     #content
       p= currentProject.name
