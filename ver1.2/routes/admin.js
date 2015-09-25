@@ -186,8 +186,11 @@ router.post('/photosort', function (req, res, next) {
       }
 
     }
-    project.save();
+    project.save(function(err){
+      res.send('success');
+    });
   })
+
 })
 
 module.exports = router;

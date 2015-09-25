@@ -16,7 +16,7 @@ $(document).ready(function(){
       type: 'post',
       data: dataObj
     }).done(function() {
-      // location.reload();
+      location.reload();
     });
   });
   $('.gutter-sizer').on('sortupdate', function(event, ui){
@@ -35,6 +35,7 @@ $(document).ready(function(){
       type: 'post',
       data: dataObj
     }).done(function() {
+      // console.log('don');
       // location.reload();
     });
   });
