@@ -91,6 +91,7 @@ function finishedLoading(responseHtml, bonus) {
 
   convertLinks(mainElement);
   append_hover();
+  sort_it_out();
 
   $('main').removeClass('loading');
   $('.dropzone').dropzone();

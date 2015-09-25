@@ -1,8 +1,7 @@
 $(document).ready(function(){
   append_hover();
-  $('.sortable').sortable();
-  $('.sortable').disableSelection();
-
+  sort_it_out();
+  
   $('#project-list').on('sortupdate', function(event, ui){
     var ul = ui.item.parent();
     var dataObj = { };
@@ -19,7 +18,26 @@ $(document).ready(function(){
     }).done(function() {
       // location.reload();
     });
-  })
+  });
+  $('.gutter-sizer').on('sortupdate', function(event, ui){
+    var ul = ui.item.parent();
+    var id = ul.data('projectId')
+    var dataObj = { };
+    dataObj['id'] = id;
+    ul.children('li').each(function(i) {
+      var li = $(this);
+      console.log(li.data('photoId'));
+      photoId = li.data('photoId');
+      dataObj['position' + photoId] = i;
+    });
+    $.ajax({
+      url: '/admin/photosort',
+      type: 'post',
+      data: dataObj
+    }).done(function() {
+      // location.reload();
+    });
+  });
 });
 
 var $container = jQuery('.grid');
@@ -31,6 +49,17 @@ $container.masonry({
 
 });
 
+function sort_it_out() {
+  $('.sortable').sortable();
+  $('.sortable').disableSelection();
+  $(".gutter-sizer li").sort(sort_li) // sort elements
+    .appendTo('.gutter-sizer'); // append again to the list
+                  // sort function callback
+    function sort_li(a, b){
+      return ($(b).data('position')) < ($(a).data('position')) ? 1 : -1;
+    }
+
+}
 
 function append_hover() {
   $( "li.li-project" ).hover(

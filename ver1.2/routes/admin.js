@@ -176,4 +176,17 @@ router.post('/projectsort', function ( req, res, next) {
   });
 });
 
+router.post('/photosort', function (req, res, next) {
+  Project.findById(req.body.id, function(err, project) {
+    for (var i in project.photo) {
+      if (project.photo[i].deleted == false){
+        project.photo[i].position = req.body['position' + project.photo[i].name];
+        console.log(project.photo[i]);
+      }
+
+    }
+    project.save();
+  })
+})
+
 module.exports = router;

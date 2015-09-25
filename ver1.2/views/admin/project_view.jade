@@ -83,12 +83,12 @@ block content
                   button(onclick='createDownloadLink(#{pid});', disabled=((!currentProject.photoLink)?false:true))#downloadLink.form-control.btn.btn-default create download link
                   a(target='_blank', href=currentProject.photoLink, hidden=((currentProject.photoLink)?false:true)).photolink= currentProject.photoLink
               ul.list-view.list-unstyled#img-gallery
-                .gutter-sizer.sortable
+                .gutter-sizer(data-project-id= currentProject.id).sortable
                   each photo in photos
                     if photo.deleted !== true
                       - var iid = '"'+ photo.name +'"'
                       - var iname = '"' + photo.originalName + '"'
-                      li(id=photo.name).ui-state-default.img-item
+                      li(id=photo.name, data-photo-id= photo.name, data-position= photo.position).ui-state-default.img-item
                         .form-inline.img-thumb
                           input(id='check'+photo.name, name='imgDelete', type='checkbox').imgCheck.form-group
                           .div-img.form-group  
