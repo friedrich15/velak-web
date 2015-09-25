@@ -1,7 +1,7 @@
 $(document).ready(function(){
   append_hover();
   sort_it_out();
-  
+
   $('#project-list').on('sortupdate', function(event, ui){
     var ul = ui.item.parent();
     var dataObj = { };

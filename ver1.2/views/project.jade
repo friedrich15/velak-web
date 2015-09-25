@@ -28,6 +28,9 @@ block content
     #content
       p= currentProject.name
       p= currentProject.description
-      each photo in currentProject.photo
-        .img-container
-          img(src= '/uploads/small/small' +photo.name, onerror="this.style.display='none'")
+      ul#photo-list.list-unstyled
+        each photo in currentProject.photo
+          if photo.deleted != true && photo.filePublic == true  
+            li(data-position=photo.position)
+              .img-container
+                img(src= '/uploads/small/small' +photo.name, onerror="this.style.display='none'")

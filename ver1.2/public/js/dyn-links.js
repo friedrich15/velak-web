@@ -89,6 +89,7 @@ function finishedLoading(responseHtml, bonus) {
   var mainElement = document.querySelector("main");
   mainElement.innerHTML = responseHtml.querySelector("main").innerHTML;
 
+  sort_it();
   convertLinks(mainElement);
 
   $('main').removeClass('loading');
