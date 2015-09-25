@@ -1,6 +1,6 @@
 admin:
   TODO: photo descriptions //DONE!
-  TODO: photos + projects sortable (drag+drop)
+  TODO: photos + projects sortable (drag+drop) //DONE!
   TODO: recycle bin
   FIXME: show photos in list after upload (without reload)
 

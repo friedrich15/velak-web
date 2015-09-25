@@ -41,6 +41,7 @@ router.post('/save_project', function(req, res, next){
     description: '',
     photo: [],
     audio: [],
+    category: 'gala',
     visible: true,
     deleted: false
   }).save(function(err, project){
