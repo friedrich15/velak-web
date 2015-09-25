@@ -145,7 +145,7 @@ router.get('/public_state/:pid/:iid/:state', function(req, res, next) {
       res.send('public = ' + req.params.state);
     });
   });
-})
+});
 
 router.post('/save_photo_description', function(req, res, next){
   Project.findById(req.body.id, function(err, project) {
@@ -162,7 +162,18 @@ router.post('/save_photo_description', function(req, res, next){
       res.send('success');
     });
   });
+});
 
+router.post('/projectsort', function ( req, res, next) {
+  Project.find().exec(function (err, projects){
+    projects.forEach(function(project){
+
+      project.position = req.body['position' + project.id];
+      project.save();
+      console.log(project.position);
+    });
+    res.send("success");
+  });
 });
 
 module.exports = router;

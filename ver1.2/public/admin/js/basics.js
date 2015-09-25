@@ -2,6 +2,24 @@ $(document).ready(function(){
   append_hover();
   $('.sortable').sortable();
   $('.sortable').disableSelection();
+
+  $('#project-list').on('sortupdate', function(event, ui){
+    var ul = ui.item.parent();
+    var dataObj = { };
+    ul.children('li').each(function(i) {
+      var li = $(this);
+      projectId = li.data('projectId');
+      dataObj['position' + projectId] = i;
+    });
+    console.log(dataObj);
+    $.ajax({
+      url: '/admin/projectsort',
+      type: 'post',
+      data: dataObj
+    }).done(function() {
+      // location.reload();
+    });
+  })
 });
 
 var $container = jQuery('.grid');
