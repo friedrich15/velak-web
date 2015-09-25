@@ -1,6 +1,7 @@
 $(document).ready(function(){
   append_hover();
-
+  $('.sortable').sortable();
+  $('.sortable').disableSelection();
 });
 
 var $container = jQuery('.grid');

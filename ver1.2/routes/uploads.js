@@ -51,6 +51,7 @@ router.post('/photo_upload/:id', upload.single('file'), function(req, res, next)
       originalName  : file.originalname,
       fileSize      : file.size,
       filePath      : file.path,
+      inProject     : req.params.id,
       filePublic    : true,
       deleted       : false
     }, function(){res.send(Photo)}));
@@ -59,5 +60,7 @@ router.post('/photo_upload/:id', upload.single('file'), function(req, res, next)
   });
   res.redirect('/admin/projects');
 });
+
+
 
 module.exports = router;

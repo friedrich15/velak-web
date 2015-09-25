@@ -147,4 +147,22 @@ router.get('/public_state/:pid/:iid/:state', function(req, res, next) {
   });
 })
 
+router.post('/save_photo_description', function(req, res, next){
+  Project.findById(req.body.id, function(err, project) {
+    var photo;
+    for (var i in project.photo){
+      if (project.photo[i].name == req.body.photo){
+        photo = project.photo[i];
+      }
+    }
+    console.log(photo);
+    photo.description = req.body.text;
+    project.save(function(err){
+      if (err) console.log(err);
+      res.send('success');
+    });
+  });
+
+});
+
 module.exports = router;

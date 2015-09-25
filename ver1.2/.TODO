@@ -1,0 +1,8 @@
+admin:
+  TODO: photo descriptions //DONE!
+  TODO: photos + projects sortable (drag+drop)
+  TODO: recycle bin
+  FIXME: show photos in list after upload (without reload)
+
+main page:
+  FIXME: mobile menu color (active)

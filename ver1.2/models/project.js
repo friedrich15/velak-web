@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
       description   : String,
       position      : Number,
       filePath      : String,
+      inProject     : String,
       filePublic    : Boolean,
       deleted       : Boolean
     }),

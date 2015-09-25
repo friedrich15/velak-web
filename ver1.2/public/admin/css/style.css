@@ -109,6 +109,15 @@ a:hover {
   color: #222;
 }
 
+.photo-description {
+  background-color: #fff;
+  -webkit-transition: background-color 1.5s;
+}
+.save-success{
+  background-color: #56fa60;
+  -webkit-transition: background-color 0.1s;
+}
+
 #img-gallery {
   background: #f7fff7;
   padding: .3em;

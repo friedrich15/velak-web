@@ -27,7 +27,7 @@ block content
             button(onclick='addProject()').btn.btn-default Add
         #div-projectList
           p projects
-          ul#project-list.list-unstyled
+          ul#project-list.sortable.list-unstyled
             each project in projects  
               if project.deleted == false  
                 li(name= project._id, class=(project.id == currentProject.id ? 'active-link':'')).li-project
@@ -58,7 +58,7 @@ block content
             | visible
             br
             button(onclick='updateProject()').btn.btn-default save
-          #photo-container(role='tabpanel').tab-pane
+          #photo-container(role='tabpanel').tab-pane  
             a(onclick='$("#photo-upload").toggle(100)') show/hide photo-upload
           
             form(action='/uploads/photo_upload/' + currentProject._id, method='post', enctype='multipart/form-data')#photo-upload.dropzone
@@ -83,12 +83,12 @@ block content
                   button(onclick='createDownloadLink(#{pid});', disabled=((!currentProject.photoLink)?false:true))#downloadLink.form-control.btn.btn-default create download link
                   a(target='_blank', href=currentProject.photoLink, hidden=((currentProject.photoLink)?false:true)).photolink= currentProject.photoLink
               ul.list-view.list-unstyled#img-gallery
-                .gutter-sizer
+                .gutter-sizer.sortable
                   each photo in photos
                     if photo.deleted !== true
                       - var iid = '"'+ photo.name +'"'
                       - var iname = '"' + photo.originalName + '"'
-                      li(id=photo.name).img-item
+                      li(id=photo.name).ui-state-default.img-item
                         .form-inline.img-thumb
                           input(id='check'+photo.name, name='imgDelete', type='checkbox').imgCheck.form-group
                           .div-img.form-group  
@@ -96,7 +96,7 @@ block content
                           .form-group.form-inline.img-caption
                             .div-photo-name.form-group
                               p= photo.originalName
-                            
+                            textarea(placeholder='add description', rows='1', onkeyup='savePhotoDescription(this, #{pid}, #{iid})').photo-description.form-group.form-control= photo.description
                             input(id= 'public'+photo.name, name='imgPublic', type='checkbox', onclick='publicState(this,#{pid},#{iid})', checked=photo.filePublic).form-group.public-checkbox
                             label(for='public'+photo.name, title='public').glyphicon.glyphicon-eye-open.form-group
                             button(onclick='deleteImg(#{pid},#{iid})').form-control.btn.btn-default.form-group delete
