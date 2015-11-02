@@ -51,6 +51,8 @@ router.post('/photo_upload/:id', upload.single('file'), function(req, res, next)
       originalName  : file.originalname,
       fileSize      : file.size,
       filePath      : file.path,
+      relativeWidth     : width,
+      relativeHeight    : height,
       inProject     : req.params.id,
       filePublic    : true,
       deleted       : false

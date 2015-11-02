@@ -8,13 +8,13 @@ block content
         a#mobile-menu.notactive(onclick='showSideMenu()')
           img(src='/img/menu-icon-white.png')
       li.logo
-        a(href='/').pjax.logo-style velak
+        a(href='/', onclick='hideSideMenu()').pjax.logo-style velak
       li(class=(site=='gala'?'active':'')).li-menu
-        a(href='/site/gala').pjax.menu-link gala
+        a(href='/site/gala', onclick='hideSideMenu()').pjax.menu-link gala
       li(class=(site=='export'?'active':'')).li-menu
-        a(href='/site/export').pjax.menu-link export
+        a(href='/site/export', onclick='hideSideMenu()').pjax.menu-link export
       li(class=(site=='other'?'active':'')).li-menu
-        a(href='/site/other').pjax.menu-link other
+        a(href='/site/other', onclick='hideSideMenu()').pjax.menu-link other
   //- - var currentProject = 'hausi'
   main
     
@@ -23,7 +23,7 @@ block content
         each project in projects
           
           li.li-side
-            a(href='/site/'+site+'/'+project._id).pjax.side-link= project.name
+            a(href='/site/'+site+'/'+project._id, onclick='hideSideMenu()').pjax.side-link= project.name
       p= 'velak-' +site
   #content
     

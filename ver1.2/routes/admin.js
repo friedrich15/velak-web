@@ -55,9 +55,11 @@ router.post('/save_project', function(req, res, next){
 });
 
 router.post('/update_project', function(req, res, next) {
+  console.log(req.body.date);
   Project.findById(req.body.id, function(err, project) {
     project.name        = req.body.name;
     project.title       = req.body.title;
+    project.date        = req.body.date;
     project.description = req.body.description;
     project.category    = req.body.category;
     project.visible     = req.body.visible;

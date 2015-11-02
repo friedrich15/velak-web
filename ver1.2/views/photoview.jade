@@ -2,6 +2,11 @@ extends layout
 
 block content
   h2= project.name
-  each photo in photos
-    if photo.deleted !== true
-      img(src= '/uploads/' + photo.name, width='800')
+  a(onclick='zipImages()') Download All
+  .grid  
+    each photo in photos
+      if photo.deleted !== true
+        .grid-item
+          a(href='/uploads/' + photo.name, download= photo.originalName)
+          img(src= '/uploads/' + photo.name).image
+    

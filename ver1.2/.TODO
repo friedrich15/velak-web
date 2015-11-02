@@ -1,9 +1,15 @@
 admin:
-  TODO: photo descriptions //DONE!
-  TODO: photos + projects sortable (drag+drop) //DONE!
   TODO: recycle bin
   FIXME: show photos in list after upload (without reload)
   TODO: make 'media' view loadable
+  TODO: download photos with original filename
+  
+done:
+  TODO: photo descriptions //DONE!
+  TODO: photos + projects sortable (drag+drop) //DONE!
+  FIXME: cancel delete //DONE!
+  TODO: project date //DONE!
+
 
 main page:
   FIXME: mobile menu color (active)

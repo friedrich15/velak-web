@@ -47,6 +47,8 @@ block content
             input(type='text', name='name', id='input-name', value= currentProject.name).form-control
             label Title:
             input(type='text', name='title' id='input-title', value= currentProject.title).form-control
+            label Date:
+            input(type='datetime-local', name='date' id='input-date', value= currentProject.date).form-control
             label Description:
             textarea(name='description', id='input-description', rows = 8).form-control= currentProject.description
             select(name='category')#category-selector

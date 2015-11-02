@@ -76,11 +76,12 @@ function append_hover() {
 function updateProject() {
   var title = $('#input-title').val();
   var name = $('#input-name').val();
+  var date = $('#input-date').val();
   var description = $('#input-description').val();
   var id = $('.active-link').attr('name');
   var category = $( '#category-selector option:selected' ).text();
   var visible = $('#project-visible').is(':checked');
-  console.log(visible);
+  console.log(date);
   $.ajax({
     type: 'POST',
     url: '/admin/update_project',
@@ -88,6 +89,7 @@ function updateProject() {
       'id': id,
       'title': title,
       'name': name,
+      'date': date,
       'description': description,
       'category': category,
       'visible': visible
@@ -213,7 +215,9 @@ function deleteImg(projectId, imgId, confirmed) {
 
   if (!confirmed){
     confirmed = confirm('Delete image?');
-    deleteImg(projectId, imgId, confirmed);
+    if (confirmed==true){
+      deleteImg(projectId, imgId, confirmed);
+    }
   }
   else {
     $.get('/admin/delete_img/' + projectId + '/' + imgId, function(data){
@@ -227,7 +231,8 @@ function deleteSelected(pid) {
   if (confirm('Really delete all selected images?')){
     var confirmed = true;
     $('.imgCheck:checked').each(function() {
-      var iid = $(this).closest('.grid-item').attr('id');
+      var iid = $(this).closest('.img-item').attr('id');
+      console.log(iid);
       deleteImg(pid, iid, confirmed);
       $('#checkbox-selectAll').prop('checked', false);
     });
