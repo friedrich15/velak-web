@@ -262,16 +262,29 @@ function showAlert(type, alert_text) {        // ** trigger Alert
     html: alert_text
   }).appendTo('#alert-container').fadeIn(500).delay(3000).fadeOut(1000);
 }
-
+var upload_error = false;
+var error_message;
 Dropzone.options.photoUpload = {
+
   init: function() {
+    this.on('error', function(file, res){
+      upload_error = true;
+      error_message = res;
+
+    });
+    this.on(
+      "success", function(file, res) {
+        showAlert('success', file.name + ' has been uploaded successfully! Please reload page to see them!')
+      });
     this.on(
       "queuecomplete", function(file, res) {
-        showAlert('success', 'All files uploaded successfully! Please reload page to see them!')
-      }),
-      "totaluploadprogress", function(uploadprogress) {
-        console.log(uploadprogress);
-      };
+        if (upload_error == false){
+          document.location.reload(true);
+        }
+        else {
+          showAlert('danger', 'Something went wrong: ' + error_message);
+        }
+      });
   }
 };
 

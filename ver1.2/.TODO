@@ -3,7 +3,11 @@ admin:
   FIXME: show photos in list after upload (without reload)
   TODO: make 'media' view loadable
   TODO: download photos with original filename
-  
+  FIXME: fileupload success info
+
+trash:
+  FIXME: empty photo trash
+
 done:
   TODO: photo descriptions //DONE!
   TODO: photos + projects sortable (drag+drop) //DONE!

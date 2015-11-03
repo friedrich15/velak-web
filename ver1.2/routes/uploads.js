@@ -20,6 +20,7 @@ function resizeImage(file, img, width) {
 
 router.post('/photo_upload/:id', upload.single('file'), function(req, res, next) {
   Project.findById(req.params.id, function(err, project) {
+
     var file = req.file;
     var actualFile = 'public/uploads/'+file.filename;
     var dimensions = sizeOf(actualFile);
@@ -57,7 +58,10 @@ router.post('/photo_upload/:id', upload.single('file'), function(req, res, next)
       filePublic    : true,
       deleted       : false
     }));
-    project.save(function(err){res.send(Photo)});
+    project.save(function(err){
+      if (err)res.send(err);
+      if (!err)res.send(Photo);
+    });
 
   });
   res.redirect('/admin/projects');
