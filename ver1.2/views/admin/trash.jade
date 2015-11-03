@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  #content
+    header
+      nav.navbar.navbar-default
+        .navbar-header
+          button(type='button', class='navbar-toggle collapsed', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+            span(class='sr-only') Toggle navigation
+            span(class='icon-bar')
+          a(href='#').navbar-brand Home
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a(href='/admin/projects').pjax Projects
+            li
+              a(href='/admin/docs').pjax Docs
+            li.active
+              a(href='/admin/trash').pjax.glyphicon.glyphicon-trash
+    main
+      h1 TRASH
+      h2 projects
+      
+      if projects.length == 0
+        p no deleted projects
+      else
+        a(href='/admin/empty_del_projects', onclick='return confirm("Are you sure you want to permanently remove those items?")') empty project trash
+        ul.list-unstyled
+          each project in projects
+            li
+              p= project.name
+      h2 photos
+      if photos.length == 0
+        p no deleted photos
+      else
+        a(href='/admin/empty_del_photos', onclick='return confirm("Are you sure you want to permanently remove those items?")') empty photo trash
+        br
+        .grid
+          each photo in photos
+            if photo.originalName !== undefined  
+              .grid-item
+                //- a(href='/uploads/' + image.name, download= image.originalName)
+                img(src= '/uploads/small/small' + photo.name).image
+                p= photo.originalName

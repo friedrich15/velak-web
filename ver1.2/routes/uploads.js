@@ -56,8 +56,8 @@ router.post('/photo_upload/:id', upload.single('file'), function(req, res, next)
       inProject     : req.params.id,
       filePublic    : true,
       deleted       : false
-    }, function(){res.send(Photo)}));
-    project.save();
+    }));
+    project.save(function(err){res.send(Photo)});
 
   });
   res.redirect('/admin/projects');

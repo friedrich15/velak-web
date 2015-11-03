@@ -39,8 +39,6 @@ router.post('/save_project', function(req, res, next){
     name: req.body.name,
     title: req.body.name,
     description: '',
-    photo: [],
-    audio: [],
     category: 'gala',
     visible: true,
     deleted: false
@@ -194,5 +192,56 @@ router.post('/photosort', function (req, res, next) {
   })
 
 })
+
+router.get('/trash', function(req, res, next) {
+  var del_projects = [];
+  var del_photos = [];
+
+  Project.find().exec(function(err, projects){
+    projects.forEach(function(project) {
+      if (project.deleted==true) {
+        del_projects.push(project);
+      }
+      else {
+        for (var i in project.photo) {
+          if (project.photo[i].deleted==true) {
+            del_photos.push(project.photo[i])
+          }
+        }
+      }
+    });
+    res.render('admin/trash', {
+      title: 'trash',
+      projects: del_projects,
+      photos: del_photos
+    });
+  });
+});
+
+router.get('/empty_del_projects', function(req, res, next) {
+  Project.remove({deleted: true}, function(err, projects){
+    if (!err) {
+      res.redirect('/admin/trash');
+    }
+  });
+});
+
+router.get('/empty_del_photos', function(req, res, next) {
+  Project.find().exec(function(err, projects){
+    projects.forEach(function(project) {
+      var photo_id
+      for (var i in project.photo){
+        if (project.photo[i].deleted == true){
+          photo_id = project.photo[i]._id;
+          project.photo[i].remove();
+          project.save();
+        }
+      }
+
+    });
+    res.redirect('/admin/trash');
+  })
+});
+
 
 module.exports = router;

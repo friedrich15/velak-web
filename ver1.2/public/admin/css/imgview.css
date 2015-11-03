@@ -9,8 +9,8 @@ html, body {
 }
 
 .grid-item {
-  width: 33.2%;
-  margin: 0 1px 1px 0;
+  width: 33%;
+  margin: 1px;
 }
 
 img {
