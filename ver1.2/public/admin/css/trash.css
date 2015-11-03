@@ -1,0 +1,11 @@
+.trash-style {
+  padding-left: 1em;
+}
+
+.trash-container {
+  padding: 1em;
+  margin: 1em;
+  background: #efe;
+  border-radius: .3em;
+  box-shadow: 0 0 .3em #aca;
+}
