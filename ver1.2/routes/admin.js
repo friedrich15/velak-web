@@ -218,6 +218,30 @@ router.get('/trash', function(req, res, next) {
   });
 });
 
+router.get('/retrieve_project/:id', function(req, res, next) {
+  Project.findById(req.params.id, function(err, project) {
+    project.deleted = false;
+    project.save(function(err){
+      if (!err){
+        res.redirect('/admin/trash');
+      }
+    });
+  });
+});
+
+router.get('/retrieve_photo/:project_id/:photo_id', function(req, res, next) {
+  Project.findById(req.params.project_id, function(err, project){
+    console.log(project.photo.id(req.params.photo_id));
+    var photo = project.photo.id(req.params.photo_id);
+    photo.deleted = false;
+    project.save(function(err){
+      if (!err){
+        res.redirect('/admin/trash');
+      }
+    })
+  })
+})
+
 router.get('/empty_del_projects', function(req, res, next) {
   Project.remove({deleted: true}, function(err, projects){
     if (!err) {
