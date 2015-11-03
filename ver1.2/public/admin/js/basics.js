@@ -1,4 +1,10 @@
 $(document).ready(function(){
+
+  if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+  return $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+    return location.hash = $(e.target).attr('href').substr(1);
+  });
+
   append_hover();
   sort_it_out();
 
