@@ -53,14 +53,17 @@ a:hover {
 #project-menu {
   float: left;
   width: 20%;
-  padding: 1em;
+  padding-left:.6em;
 }
 
 #div-projectList {
-  padding-left: 1.5em;
-  padding-right: .5em;
-  text-indent: -.4em;
+  padding-left: .1em;
+  /*text-indent: -.4em;*/
   word-wrap: break-word;
+}
+
+#project-list {
+  margin-left: 1em;
 }
 
 .pLink {
@@ -89,26 +92,33 @@ a:hover {
 
 
 .filter-checkbox {
+  position: absolute;
+  left: -999999px;
   opacity: 0;
 }
 
 .filter-checkbox:not(:checked) + .filter-label {
   background-color: #fff;
+  border: 1px dotted #eee;
 }
 
 .filters {
-  padding: 1em;
+  padding: 1em 0;
+  text-align: center;
+  background: #fafafa;
   margin-bottom: .6em;
-  border-bottom: 1px dotted #aaa;
+  border-bottom: 1px dotted #eee;
 }
 .filter-label {
-  padding: .2em;
+  padding: .3em .4em;
   text-indent: 0;
-  margin: .1em;
+  margin: 0 .1em;
+  border: 1px solid #fff;
   border-radius: .2em;
   color: #666;
   font-weight: normal;
   cursor: pointer;
+
 }
 .gala-label {
   background-color: #aaf;
@@ -134,9 +144,11 @@ a:hover {
 
 
 #project-content {
-  float: left;
-  padding: 1em;
-  width: 77%;
+  float: right;
+  padding-right: .6em;
+  padding-left: .3em;
+  border-left: 1px dotted #eee;
+  width: 80%;
 }
 #info-container {
   width: 30em;
