@@ -80,7 +80,11 @@ function append_hover() {
       $( this ).children(".deleteLink").hide();
     }
   );
+}
 
+function filterItems(category) {
+  var items = $('.is-in-'+category);
+  items.toggle();
 }
 
 function updateProject() {

@@ -19,6 +19,15 @@ body {
 
 }
 
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 a {
   color: #00B7FF;
 }
@@ -43,7 +52,7 @@ a:hover {
 
 #project-menu {
   float: left;
-  width: 16%;
+  width: 20%;
   padding: 1em;
 }
 
@@ -54,13 +63,10 @@ a:hover {
   word-wrap: break-word;
 }
 
-.active-link a {
-  color: #6d6;
+.pLink {
+  padding: 0 .2em .2em .2em;
 }
 
-.pLink {
-  color: #ccc;
-}
 .pLink:hover {
   text-decoration: none;
 }
@@ -73,6 +79,57 @@ a:hover {
   cursor: pointer;
   display: none;
   word-wrap: normal;
+}
+
+.active-link a {
+  background: #eee;
+  border-radius: .2em;
+}
+
+
+
+.filter-checkbox {
+  opacity: 0;
+}
+
+.filter-checkbox:not(:checked) + .filter-label {
+  background-color: #fff;
+}
+
+.filters {
+  padding: 1em;
+  margin-bottom: .6em;
+  border-bottom: 1px dotted #aaa;
+}
+.filter-label {
+  padding: .2em;
+  text-indent: 0;
+  margin: .1em;
+  border-radius: .2em;
+  color: #666;
+  font-weight: normal;
+  cursor: pointer;
+}
+.gala-label {
+  background-color: #aaf;
+}
+.export-label {
+  background-color: #afa;
+}
+.other-label {
+  background-color: #faa;
+}
+
+
+
+.is-in-gala {
+  color: #44f;
+}
+.is-in-export {
+  color: #4f4;
+}
+.is-in-other {
+  color: #f44;
 }
 
 
