@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Types.ObjectId;
 var Project  = mongoose.model('Project');
 var fs = require('fs');
 var JSZip = require("jszip");
@@ -196,6 +197,7 @@ router.post('/photosort', function (req, res, next) {
 router.get('/trash', function(req, res, next) {
   var del_projects = [];
   var del_photos = [];
+  var del_photo_ids = [];
 
   Project.find().exec(function(err, projects){
     projects.forEach(function(project) {
@@ -205,7 +207,8 @@ router.get('/trash', function(req, res, next) {
       else {
         for (var i in project.photo) {
           if (project.photo[i].deleted==true) {
-            del_photos.push(project.photo[i])
+            del_photos.push(project.photo[i]);
+            del_photo_ids.push(project.photo[i].id);
           }
         }
       }
@@ -213,7 +216,8 @@ router.get('/trash', function(req, res, next) {
     res.render('admin/trash', {
       title: 'trash',
       projects: del_projects,
-      photos: del_photos
+      photos: del_photos,
+      photo_ids: del_photo_ids
     });
   });
 });
@@ -250,20 +254,19 @@ router.get('/empty_del_projects', function(req, res, next) {
   });
 });
 
-router.get('/empty_del_photos', function(req, res, next) {
-  Project.find().exec(function(err, projects){
-    projects.forEach(function(project) {
-      var photo_id
-      for (var i in project.photo){
-        if (project.photo[i].deleted == true){
-          photo_id = project.photo[i]._id;
-          project.photo[i].remove();
-          project.save();
-        }
-      }
+router.get('/empty_del_photos/:id', function(req, res, next) {
+  var id = req.params.id;
 
-    });
-    res.redirect('/admin/trash');
+  Project.findOne({'photo._id': ObjectId(id)}, function(err, project){
+
+    project.photo.id(id).remove();
+    project.save(function(err){
+      if (err) res.send('err');
+      if (!err) {
+        res.send(id);
+        // console.log(id);
+      }
+    })
   })
 });
 

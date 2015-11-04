@@ -1,10 +1,7 @@
 $(document).ready(function(){
 
-  if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
-  return $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-    return location.hash = $(e.target).attr('href').substr(1);
-  });
 
+  make_tabs_loadable();
   append_hover();
   sort_it_out();
 
@@ -55,6 +52,13 @@ $container.masonry({
   itemSelector: '.grid-item'
 
 });
+
+function make_tabs_loadable(){
+  if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+  return $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+    return location.hash = $(e.target).attr('href').substr(1);
+  });
+}
 
 function sort_it_out() {
   $('.sortable').sortable();
@@ -228,7 +232,7 @@ function deleteImg(projectId, imgId, confirmed) {
   else {
     $.get('/admin/delete_img/' + projectId + '/' + imgId, function(data){
       $('#' + data.id).hide();
-      showAlert('info', data.name + ' moved to bin.');
+      showAlert('info', data.name + ' moved to trash.');
     });
   }
 }
@@ -280,7 +284,7 @@ Dropzone.options.photoUpload = {
     });
     this.on(
       "success", function(file, res) {
-        showAlert('success', file.name + ' has been uploaded successfully! Please reload page to see them!')
+        showAlert('success', file.name + ' has been uploaded successfully!')
       });
     this.on(
       "queuecomplete", function(file, res) {

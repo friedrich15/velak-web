@@ -1,18 +1,31 @@
+******************************* ADMIN *********************************
+
 admin:
-  TODO: recycle bin
-  FIXME: show photos in list after upload (without reload)
-  TODO: make 'media' view loadable
+
   TODO: download photos with original filename
+  (TODO): backbutton on info/media tabs
 
 trash:
-  FIXME: empty photo trash
+  -
 
+
+
+***************************** MAIN PAGE *******************************
+
+mobile:
+  FIXME: mobile menu color (active)
+
+
+
+
+******************************* DONE **********************************
 done:
   TODO: photo descriptions //DONE!
   TODO: photos + projects sortable (drag+drop) //DONE!
   FIXME: cancel delete //DONE!
   TODO: project date //DONE!
   FIXME: fileupload success info //DONE!
-
-main page:
-  FIXME: mobile menu color (active)
+  FIXME: show photos in list after upload //DONE!
+  TODO: make 'media' view loadable //DONE!
+  FIXME: empty photo trash //DONE!
+  TODO: recycle bin //DONE!

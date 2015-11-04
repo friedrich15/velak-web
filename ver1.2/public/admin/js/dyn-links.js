@@ -90,6 +90,8 @@ function finishedLoading(responseHtml, bonus) {
   mainElement.innerHTML = responseHtml.querySelector("main").innerHTML;
 
   convertLinks(mainElement);
+  make_tabs_loadable();
+  hit_masonry();
   append_hover();
   sort_it_out();
 

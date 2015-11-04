@@ -17,32 +17,33 @@ block content
               a(href='/admin/docs').pjax Docs
             li.active
               a(href='/admin/trash').pjax.glyphicon.glyphicon-trash
-    main.trash-style
-      h1 TRASH
-      p Click on projects or photos to retrieve them. Or remove them permanently by empting the trash.
-      h2 projects
-      
-      if projects.length == 0
-        p no deleted projects
-      else
-        a(href='/admin/empty_del_projects', onclick='return confirm("Are you sure you want to permanently remove those items?")').btn.btn-danger empty project trash
+    main
+      .trash-style
+        .infobox
+          h1 TRASH
+          p Click on projects or photos to retrieve them. Or remove them permanently by empting the trash.
+        h2.trash-header projects
+        if (projects.length != 0)
+          a(href='/admin/empty_del_projects', onclick='return confirm("Are you sure you want to permanently remove those projects?")').btn.btn-danger empty project trash
         .trash-container  
+          h3(class=(projects.length!=0 ? 'hidden': ''))#project-trash-empty.trashempty project trash is empty
           ul.list-unstyled
             each project in projects
               li
                 a(href='/admin/retrieve_project/'+project._id, onclick='return confirm("Do you want to retrieve this project?")')= project.name
-      h2 photos
-      if photos.length == 0
-        p no deleted photos
-      else
-        a(href='/admin/empty_del_photos', onclick='return confirm("Are you sure you want to permanently remove those items?")').btn.btn-danger empty photo trash
+                span.project-info= project.date
+        h2.trash-header photos
+  
+        if (photos.length!=0)
+          a(onclick='prepare_to_remove(this)', data-photos= photo_ids)#empty_photo_btn.btn.btn-danger empty photo trash
         br
         .trash-container
-          .grid
+          h3(class=photo_ids.length!=0 ? 'hidden': '')#photo-trash-empty.trashempty photo trash is empty
+          .grid#trash-grid
             each photo in photos
               if photo.originalName !== undefined  
-                .grid-item
+                .trash-item(id= photo._id)
                   //- a(href='/uploads/' + image.name, download= image.originalName)
                   a(href='/admin/retrieve_photo/'+photo.inProject+'/'+photo._id, onclick='return confirm("Do you want to retrieve this photo?")')
                     img(src= '/uploads/small/small' + photo.name).image
-                    p= photo.originalName
+                    span.photo-info= photo.originalName
