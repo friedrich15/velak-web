@@ -47,6 +47,7 @@ function checkAuth(req, res, next) {
   }
 }
 
+app.all('/admin', checkAuth);
 app.all('/admin/*', checkAuth);
 
 app.use('/', routes);

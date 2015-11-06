@@ -1,18 +1,14 @@
 extends layout
 
 block content
-  if (!user)
-    a(href="/admin/login") Login
-    br
-    a(href="/admin/register") Register
-  if (user)
+  #content
     header
       nav.navbar.navbar-default
         .navbar-header
           button(type='button', class='navbar-toggle collapsed', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
             span(class='sr-only') Toggle navigation
             span(class='icon-bar')
-          a(href='#').navbar-brand Home
+          a(href='#').navbar-brand velak
         .collapse.navbar-collapse
           ul.nav.navbar-nav
             li
@@ -21,12 +17,16 @@ block content
               a(href='/admin/docs').pjax Docs
             li
               a(href='/admin/trash').pjax.glyphicon.glyphicon-trash
-          .navbar-right
-            a(href='/admin/users').navbar-text user list
-            a(href='/admin/register').navbar-text add user          
-            span.navbar-text logged in as #{user.username}
-            a(href="/admin/logout").navbar-text
-              span.glyphicon.glyphicon-log-out
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='/admin/users').pjax user list
+            li
+              a(href='/admin/register').pjax add user
+            li
+              span.navbar-text logged in as #{user.username}
+            li  
+              a(href="/admin/logout")
+                span.glyphicon.glyphicon-log-out
     main
       .my-content
         h1 Documents

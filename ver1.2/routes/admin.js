@@ -11,6 +11,8 @@ var JSZip = require("jszip");
 router.get('/users', function(req, res, next) {
   Account.find().exec(function(err, accounts) {
     res.render('admin/users', {
+      title: 'velak',
+      user: req.user,
       users: accounts
     });
   });
@@ -25,7 +27,10 @@ router.get('/delete_user/:id', function(req, res, next) {
 });
 
 router.get('/register', function(req, res) {
-  res.render('admin/register', { });
+  res.render('admin/register', {
+    title: 'velak',
+    user: req.user
+  });
 });
 
 router.post('/register', function(req, res) {
@@ -43,13 +48,13 @@ router.post('/register', function(req, res) {
 
 router.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('/admin/projects');
+  res.redirect('/login');
 });
 
 router.get('/projects', function(req, res, next) {
   Project.find().sort('position').exec( function ( err, projects, count ){
     res.render('admin/projects', {
-      title: 'velak | projects',
+      title: 'velak',
       user: req.user,
       projects: projects
     });
@@ -58,7 +63,7 @@ router.get('/projects', function(req, res, next) {
 
 router.get('/docs', function(req, res, next) {
   res.render('admin/docs', {
-    title: 'velak | documents',
+    title: 'velak',
     user: req.user
   });
 });
@@ -67,7 +72,7 @@ router.get('/project/:id', function(req, res, next) {
   Project.find().sort('position').exec( function ( err, projects, count ){
     Project.findById(req.params.id, function(err, project){
       res.render('admin/project_view', {
-        title: 'velak | projects',
+        title: 'velak',
         user: req.user,
         projects: projects,
         currentProject: project,
@@ -256,7 +261,7 @@ router.get('/trash', function(req, res, next) {
       }
     });
     res.render('admin/trash', {
-      title: 'trash',
+      title: 'velak',
       user: req.user,
       projects: del_projects,
       photos: del_photos,

@@ -1,14 +1,41 @@
 extends layout
 
 block content
-  .container
-    h1 add user
-    form(role='form', action="/admin/register",method="post", style='max-width: 300px;')
-      .form-group
-          input.form-control(type='text', name="username", placeholder='Enter Username')
-      .form-group
-        input.form-control(type='password', name="password", placeholder='Password')
-      button.btn.btn-default(type='submit') Submit
-      &nbsp;
-      a(href='/')
-        button.btn.btn-primary(type="button") Cancel
+  #content
+    header
+      nav.navbar.navbar-default
+        .navbar-header
+          button(type='button', class='navbar-toggle collapsed', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+            span(class='sr-only') Toggle navigation
+            span(class='icon-bar')
+          a(href='#').navbar-brand velak
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a(href='/admin/projects').pjax Projects
+            li
+              a(href='/admin/docs').pjax Docs
+            li
+              a(href='/admin/trash').pjax.glyphicon.glyphicon-trash
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='/admin/users').pjax user list
+            li.active
+              a(href='/admin/register').pjax add user
+            li
+              span.navbar-text logged in as #{user.username}
+            li  
+              a(href="/admin/logout")
+                span.glyphicon.glyphicon-log-out
+    main
+      .container
+        h1 add user
+        form(role='form', action="/admin/register",method="post", style='max-width: 200px;')
+          .form-group
+              input.form-control(type='text', name="username", placeholder='Enter Username')
+          .form-group
+            input.form-control(type='password', name="password", placeholder='Password')
+          button.btn.btn-default(type='submit') Submit
+          &nbsp;
+          a(href='/admin/projects')
+            button.btn.btn-primary(type="button") Cancel
