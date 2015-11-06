@@ -7,6 +7,7 @@ body {
 }
 .loading #loadscreen {
   display: block;
+  opacity: .2;
 }
 
 #loadscreen {
@@ -15,8 +16,8 @@ body {
   position: fixed;
   height:     100%;
   width:      100%;
-  background: rgba( 255, 255, 255, .8 );
-
+  background: #fff;
+  opacity: 0;
 }
 
 .noselect {
@@ -84,9 +85,13 @@ a:hover {
   word-wrap: normal;
 }
 
-.active-link a {
-  background: #eee;
-  border-radius: .2em;
+.active-link {
+  background: #f7f7ff;
+  padding-left: .2em;
+  border-top-left-radius: .4em;
+  border-bottom-left-radius: .4em;
+  border: 1px dotted #ddd;
+  border-right: none;
 }
 
 
@@ -144,10 +149,11 @@ a:hover {
 
 
 #project-content {
+  background: #f7f7ff;
   float: right;
   padding-right: .6em;
   padding-left: .3em;
-  border-left: 1px dotted #eee;
+  /*border-left: 1px dotted #eee;*/
   width: 80%;
 }
 #info-container {
