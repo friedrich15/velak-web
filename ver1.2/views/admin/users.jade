@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  table.table.table-striped
+    tr
+      th name
+      th id
+      th delete
+    each user in users
+      tr
+        td
+          p= user.username
+        td
+          p= user._id
+        td  
+          a(href='/admin/delete_user/' + user._id, onclick='return confirm("really delete?")')  x

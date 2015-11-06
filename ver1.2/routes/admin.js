@@ -1,4 +1,6 @@
 var express = require('express');
+var passport = require('passport');
+var Account = require('../models/account');
 var router = express.Router();
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId;
@@ -6,11 +8,49 @@ var Project  = mongoose.model('Project');
 var fs = require('fs');
 var JSZip = require("jszip");
 
+router.get('/users', function(req, res, next) {
+  Account.find().exec(function(err, accounts) {
+    res.render('admin/users', {
+      users: accounts
+    });
+  });
+});
+
+router.get('/delete_user/:id', function(req, res, next) {
+  Account.remove({_id: req.params.id}, function(err, account) {
+
+    if (!err) res.redirect('/admin/users');
+
+  });
+});
+
+router.get('/register', function(req, res) {
+  res.render('admin/register', { });
+});
+
+router.post('/register', function(req, res) {
+  Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+    if (err) {
+      return res.render('admin/register', { account : account });
+    }
+
+    passport.authenticate('local')(req, res, function () {
+      res.redirect('/admin/projects');
+    });
+  });
+});
+
+
+router.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/admin/projects');
+});
 
 router.get('/projects', function(req, res, next) {
   Project.find().sort('position').exec( function ( err, projects, count ){
     res.render('admin/projects', {
       title: 'velak | projects',
+      user: req.user,
       projects: projects
     });
   });
@@ -18,7 +58,8 @@ router.get('/projects', function(req, res, next) {
 
 router.get('/docs', function(req, res, next) {
   res.render('admin/docs', {
-    title: 'velak | documents'
+    title: 'velak | documents',
+    user: req.user
   });
 });
 
@@ -27,6 +68,7 @@ router.get('/project/:id', function(req, res, next) {
     Project.findById(req.params.id, function(err, project){
       res.render('admin/project_view', {
         title: 'velak | projects',
+        user: req.user,
         projects: projects,
         currentProject: project,
         photos: project.photo
@@ -215,6 +257,7 @@ router.get('/trash', function(req, res, next) {
     });
     res.render('admin/trash', {
       title: 'trash',
+      user: req.user,
       projects: del_projects,
       photos: del_photos,
       photo_ids: del_photo_ids

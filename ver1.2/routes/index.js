@@ -1,9 +1,21 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var passport = require('passport');
+var Account = require('../models/account');
 var Project  = mongoose.model('Project');
 var fs = require('fs');
 var JSZip = require("jszip");
+
+
+router.get('/login', function(req, res) {
+  res.render('login', { user : req.user });
+});
+
+router.post('/login', passport.authenticate('local'), function(req, res) {
+  res.redirect('/admin/projects');
+});
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
