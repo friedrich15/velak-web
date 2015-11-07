@@ -5,6 +5,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId;
 var Project  = mongoose.model('Project');
+var marked = require('marked');
 var fs = require('fs');
 var JSZip = require("jszip");
 
@@ -103,12 +104,13 @@ router.post('/save_project', function(req, res, next){
 router.post('/update_project', function(req, res, next) {
   console.log(req.body.date);
   Project.findById(req.body.id, function(err, project) {
-    project.name        = req.body.name;
-    project.title       = req.body.title;
-    project.date        = req.body.date;
-    project.description = req.body.description;
-    project.category    = req.body.category;
-    project.visible     = req.body.visible;
+    project.name              = req.body.name;
+    project.title             = req.body.title;
+    project.date              = req.body.date;
+    project.description       = marked(req.body.description);
+    project.descriptionSource = req.body.description;
+    project.category          = req.body.category;
+    project.visible           = req.body.visible;
     project.save(function(err, project){
       if (err) {res.send(err)}
       else {

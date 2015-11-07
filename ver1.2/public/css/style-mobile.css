@@ -53,6 +53,9 @@ body {
   border-top-left-radius: 0;
 }
 
+#content {
+  background-color: #000;
+}
 
 .mobile-hidden{
   opacity: 0;

@@ -10,6 +10,11 @@ body {
   opacity: .2;
 }
 
+.navbar {
+  margin-bottom: 1em;
+}
+
+
 #loadscreen {
   display:    none;
   z-index:    1000;
