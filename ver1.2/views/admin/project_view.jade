@@ -67,7 +67,7 @@ block content
             label Date:
             input(type='datetime-local', name='date' id='input-date', value= currentProject.date).form-control
             label Description:
-            textarea(name='description', id='input-description', rows = 8).form-control= currentProject.description
+            textarea(name='description', id='input-description', rows = 8).form-control= currentProject.descriptionSource
             select(name='category')#category-selector
               option(value='gala', selected=currentProject.category=='gala') gala
               option(value='export', selected=currentProject.category=='export') export
