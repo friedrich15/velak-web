@@ -21,7 +21,7 @@ block content
     nav#side-menu
       ul.side-list.list-unstyled.mobile-hidden
         each project in projects      
-          li(class=(project==projects[0]?'active':''), data-project-id=project.id, id='li'+project.id).li-side
+          li(class=(project==projects[0]?'active now-last':''), data-project-id=project.id, id='li'+project.id).li-side
             a(href='/site/'+site+'/'+project._id, onclick='hideSideMenu()').pjax.side-link= project.name
 
     #content

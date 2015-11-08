@@ -16,9 +16,9 @@ body {
 #side-menu {
   height: 20em;
   width: 8em;
-  background: #444;
   position: fixed;
   float: left;
+  padding: 1em;
 }
 
 #content {

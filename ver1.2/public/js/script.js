@@ -5,6 +5,10 @@ $(document).ready(function(){
 
 });
 
+$(window).on('beforeunload', function() {
+    $(window).scrollTop(0);
+});
+
 function sort_it() {
   $("#photo-list li").sort(sort_li) // sort elements
     .appendTo('#photo-list'); // append again to the list
