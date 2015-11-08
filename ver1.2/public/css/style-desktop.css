@@ -13,6 +13,19 @@ body {
   text-align: center;
 }
 
+#side-menu {
+  height: 20em;
+  width: 8em;
+  background: #444;
+  position: fixed;
+  float: left;
+}
+
+#content {
+  margin-left: 8em;
+  overflow: hidden;
+}
+
 .info-box {
   width: 50%;
   margin: 0 auto;
@@ -24,14 +37,14 @@ body {
   /*box-shadow: 0 0 1em #aaa;*/
 }
 
-#photo-list {
+.photo-list {
   -moz-column-count: 3;
   -moz-column-gap: 0px;
   -webkit-column-count: 3;
   -webkit-column-gap: 0px;
   column-count: 3;
   column-gap: 0px;
-  width: 95%;
+  /*width: 95%;*/
   margin: 0 auto;
 }
 

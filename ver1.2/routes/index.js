@@ -30,6 +30,15 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/loadmore/:id', function(req, res, next){
+  Project.findById(req.params.id, function(err, project){
+    console.log(project);
+    res.render('project-content', {
+      project: project
+    });
+  })
+})
+
 router.get('/site/:cat', function(req, res, next) {
   var cat = req.params.cat;
   Project.find({$and: [{category: cat}, {visible: true}, {deleted: false}]}).sort('position').exec(function(err, projects){

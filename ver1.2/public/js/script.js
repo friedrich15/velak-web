@@ -1,5 +1,8 @@
 $(document).ready(function(){
+
+
   sort_it();
+
 });
 
 function sort_it() {

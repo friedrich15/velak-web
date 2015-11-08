@@ -20,10 +20,24 @@ block content
     
     nav#side-menu
       ul.side-list.list-unstyled.mobile-hidden
-        each project in projects
-          
-          li.li-side
+        each project in projects      
+          li(class=(project==projects[0]?'active':''), data-project-id=project.id, id='li'+project.id).li-side
             a(href='/site/'+site+'/'+project._id, onclick='hideSideMenu()').pjax.side-link= project.name
-      p= 'velak-' +site
-  #content
-    
+
+    #content
+      #project-content  
+        .project-container(id=projects[0]._id)
+          .info-box
+            h2= projects[0].title
+            p!= projects[0].description
+          ul.photo-list.list-unstyled
+            each photo in projects[0].photo
+              if photo.deleted != true && photo.filePublic == true  
+                li(data-position=photo.position)
+                  .img-container
+                    img(src= '/uploads/small/small' +photo.name, onerror="this.style.display='none'")
+                    if photo.description
+                      p.photo-description= photo.description
+      #loadmore
+        img(src='/img/LoaderDots.gif')
+      

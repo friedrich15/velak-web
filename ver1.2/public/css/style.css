@@ -36,6 +36,14 @@ li.active a{
   text-align: center;
 }
 
+.project-container {
+  margin-bottom: 2em;
+}
+
+#loadmore {
+  display: none;
+}
+
 .img-container {
   width: 100%;
   max-width: 800px;
