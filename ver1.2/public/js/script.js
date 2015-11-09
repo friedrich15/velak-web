@@ -1,8 +1,13 @@
 $(document).ready(function(){
 
 
+
   sort_it();
 
+});
+
+$(window).load(function(){
+  letItScroll();
 });
 
 $(window).on('beforeunload', function() {

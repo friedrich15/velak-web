@@ -91,6 +91,7 @@ function finishedLoading(responseHtml, bonus) {
 
   sort_it();
   convertLinks(mainElement);
+  letItScroll();
 
   $('main').removeClass('loading');
 

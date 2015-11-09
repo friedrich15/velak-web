@@ -12,6 +12,11 @@ trash:
 
 ***************************** MAIN PAGE *******************************
 
+all:
+  infinite scroll:
+    TODO: load projects above when scrolling up
+    FIXME: when starting from any but first project in list
+
 mobile:
   FIXME: mobile menu color (active)
 

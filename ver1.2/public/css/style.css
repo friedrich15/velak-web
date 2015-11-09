@@ -43,6 +43,19 @@ li.active a{
 #loadmore {
   display: none;
 }
+#goToTop {
+  display: none;
+}
+
+.photo-list {
+  opacity: 0;
+  transition: opacity .5s;
+  -webkit-transition: opacity .5s;
+}
+.photo-list.visible {
+  opacity: 1;
+}
+
 
 .img-container {
   width: 100%;
