@@ -152,6 +152,12 @@ a:hover {
   color: #f44;
 }
 
+.li-home {
+  border-bottom: 1px dashed #ddd;
+}
+.li-home a {
+  color: #444;
+}
 
 #project-content {
   background: #f7f7ff;

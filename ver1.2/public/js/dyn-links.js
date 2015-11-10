@@ -1,5 +1,5 @@
-$(document).ready(function(){
-
+$(window).load(function(){
+  console.log('convert');
   convertLinks();
 });
 function convertLinks(documentRoot) {
@@ -92,6 +92,7 @@ function finishedLoading(responseHtml, bonus) {
   sort_it();
   convertLinks(mainElement);
   letItScroll();
+  getFutureProjects();
 
   $('main').removeClass('loading');
 

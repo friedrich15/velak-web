@@ -13,7 +13,6 @@ function letItScroll(){
     project[id] = true;
 
   });
-  console.log(projectArray);
 
 
   $('.project-container').imagesLoaded(function(){
@@ -99,8 +98,8 @@ function letItScroll(){
       }
     }
     if(scrollTop == 0) {
-      if ($('#li'+currentProject).is(':first-child')){
-        console.log(currentProject);
+      if ($('#li'+currentProject).hasClass('initial')){
+        console.log(currentProject, positionList);
       }
       else {
         // var projectId = $('.li-side.now-last').next().data('project-id');

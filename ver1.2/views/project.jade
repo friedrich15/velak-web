@@ -8,7 +8,7 @@ block content
         a#mobile-menu.notactive(onclick='showSideMenu()')
           img(src='/img/menu-icon-white.png')
       li.logo
-        a(href='/').pjax.logo-style velak
+        a(href='/')#home-link.pjax.logo-style velak
       li(class=(site=='gala'?'active':'')).li-menu
         a(href='/site/gala').pjax.menu-link gala
       li(class=(site=='export'?'active':'')).li-menu
@@ -21,7 +21,7 @@ block content
     nav#side-menu
       ul.side-list.list-unstyled.mobile-hidden
         each project in projects          
-          li(class=(project._id==currentProject._id ? 'active now-last':''), data-project-id=project.id, id='li'+project.id).li-side
+          li(class=(project._id==currentProject._id ? 'active now-last initial':''), data-project-id=project.id, id='li'+project.id).li-side
             a(href='/site/'+site+'/'+project._id).pjax.side-link= project.name
 
     #content

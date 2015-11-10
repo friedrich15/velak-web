@@ -9,7 +9,7 @@ block content
           img(src='/img/menu-icon-white.png')
       li.logo
         a(href='/', onclick='hideSideMenu()').pjax.logo-style velak
-      li(class=(site=='gala'?'active':'')).li-menu
+      li(class=(site=='gala'?'active':''))#home-link.li-menu
         a(href='/site/gala', onclick='hideSideMenu()').pjax.menu-link gala
       li(class=(site=='export'?'active':'')).li-menu
         a(href='/site/export', onclick='hideSideMenu()').pjax.menu-link export
@@ -21,7 +21,7 @@ block content
     nav#side-menu
       ul.side-list.list-unstyled.mobile-hidden
         each project in projects      
-          li(class=(project==projects[0]?'active now-last':''), data-project-id=project.id, id='li'+project.id).li-side
+          li(class=(project._id==projects[0]._id?'active now-last initial':''), data-project-id=project.id, id='li'+project.id).li-side
             a(href='/site/'+site+'/'+project._id, onclick='hideSideMenu()').pjax.side-link= project.name
 
     #content

@@ -1,0 +1,7 @@
+each project in projects
+  if project.visible == true && project.deleted != true
+    .project-container
+      .info-box
+        h1= project.title
+        p= project.dateHtml
+        p!= project.description

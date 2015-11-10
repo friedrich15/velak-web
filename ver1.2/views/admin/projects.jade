@@ -45,7 +45,10 @@ block content
           
           ul#project-list.list-unstyled
             each project in projects  
-              if project.deleted == false  
+              if project.name == 'homepage'
+                li(name= project._id).li-project.li-home
+                  a(href='/admin/project/' + project._id, class= 'is-in-' + project.category).pjax.pLink= project.name
+              else if project.deleted == false  
                 li(name= project._id).li-project
                   a(href='/admin/project/' + project._id, class= 'is-in-' + project.category).pjax.pLink= project.name
                   a(id=project._id, onclick='deleteProject(this.id, this)').deleteLink

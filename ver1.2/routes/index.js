@@ -6,6 +6,7 @@ var Account = require('../models/account');
 var Project  = mongoose.model('Project');
 var fs = require('fs');
 var JSZip = require("jszip");
+var moment = require('moment');
 
 
 router.get('/login', function(req, res) {
@@ -22,9 +23,20 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  Project.find().sort('position').exec(function(err, projects){
+  Project.findOne({name: 'homepage'}, function(err, project){
     res.render('index', {
       title: 'velak',
+      project: project
+    });
+  });
+});
+
+router.post('/futureprojects', function(req, res, next) {
+  var now = moment().valueOf();
+  console.log(now);
+  Project.find({'date': {$gt: now}}).sort('date').exec(function(err, projects){
+    console.log(projects);
+    res.render('future-projects', {
       projects: projects
     });
   });

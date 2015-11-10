@@ -9,7 +9,7 @@ block content
         a#mobile-menu.notactive(onclick='showSideMenu()')
           img(src='/img/menu-icon-white.png')
       li.logo
-        a(href='/').pjax.logo-style velak
+        a(href='/')#home-link.pjax.logo-style velak
       li.li-menu
         a(href='/site/gala').pjax.menu-link gala
       li.li-menu
@@ -32,4 +32,8 @@ block content
       
   
     #content
-      p hallo leutlingers
+      #homepage
+        .info-box
+          h1= project.title
+          p!= project.description
+      #future-projects

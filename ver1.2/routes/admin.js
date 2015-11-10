@@ -8,6 +8,7 @@ var Project  = mongoose.model('Project');
 var marked = require('marked');
 var fs = require('fs');
 var JSZip = require("jszip");
+var moment = require('moment');
 
 router.get('/users', function(req, res, next) {
   Account.find().exec(function(err, accounts) {
@@ -102,14 +103,23 @@ router.post('/save_project', function(req, res, next){
 });
 
 router.post('/update_project', function(req, res, next) {
-  console.log(req.body.date);
+  var date = moment(req.body.date).valueOf();
+  var dateHtml = moment(date).format('MMMM Do YYYY');
+  if (req.body.name == 'homepage'){
+    var category = 'home';
+  }
+  else { var category = req.body.category}
+  console.log(dateHtml);
   Project.findById(req.body.id, function(err, project) {
     project.name              = req.body.name;
     project.title             = req.body.title;
-    project.date              = req.body.date;
+    project.dateInput         = req.body.date;
+    project.dateHtml          = dateHtml;
+    project.date              = date;
+    project.time              = req.body.time;
     project.description       = marked(req.body.description);
     project.descriptionSource = req.body.description;
-    project.category          = req.body.category;
+    project.category          = category;
     project.visible           = req.body.visible;
     project.save(function(err, project){
       if (err) {res.send(err)}

@@ -46,7 +46,10 @@ block content
             
           ul#project-list.sortable.list-unstyled
             each project in projects  
-              if project.deleted == false  
+              if project.name == 'homepage'
+                li(name= project._id, class=(project.id == currentProject.id ? 'active-link':'')).li-project.li-home
+                  a(href='/admin/project/' + project._id).pjax.pLink= project.name
+              else if project.deleted == false  
                 li(data-project-id= project.id, name= project._id, class=(project.id == currentProject.id ? 'active-link':'')).li-project
                   a(href='/admin/project/' + project._id, class= 'is-in-' + project.category).pjax.pLink= project.name
                   a(id=project._id, onclick='deleteProject(this.id, this)').deleteLink
@@ -65,7 +68,9 @@ block content
             label Title:
             input(type='text', name='title' id='input-title', value= currentProject.title).form-control
             label Date:
-            input(type='datetime-local', name='date' id='input-date', value= currentProject.date).form-control
+            input(type='date', name='date' id='input-date', value= currentProject.dateInput).form-control
+            label Time:
+            input(type='time', name='time' id='input-time', value= currentProject.time).form-control
             label Description:
             textarea(name='description', id='input-description', rows = 8).form-control= currentProject.descriptionSource
             select(name='category')#category-selector
