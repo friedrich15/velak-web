@@ -10,6 +10,10 @@ var fs = require('fs');
 var JSZip = require("jszip");
 var moment = require('moment');
 
+marked.setOptions({
+  sanitize: true
+});
+
 router.get('/users', function(req, res, next) {
   Account.find().exec(function(err, accounts) {
     res.render('admin/users', {

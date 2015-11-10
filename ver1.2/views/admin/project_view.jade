@@ -67,16 +67,22 @@ block content
             input(type='text', name='name', id='input-name', value= currentProject.name).form-control
             label Title:
             input(type='text', name='title' id='input-title', value= currentProject.title).form-control
-            label Date:
-            input(type='date', name='date' id='input-date', value= currentProject.dateInput).form-control
-            label Time:
-            input(type='time', name='time' id='input-time', value= currentProject.time).form-control
-            label Description:
+            if currentProject.category != 'home'  
+              label Date:
+              input(type='date', name='date' id='input-date', value= currentProject.dateInput).form-control
+              label Time:
+              input(type='time', name='time' id='input-time', value= currentProject.time).form-control
+            label Description: 
+            p(style='color: #aaa;')
+              span (use 
+              a(href='http://daringfireball.net/projects/markdown/syntax', target='_blank', style='color: #777;') markdown
+              span  to format)
             textarea(name='description', id='input-description', rows = 8).form-control= currentProject.descriptionSource
-            select(name='category')#category-selector
-              option(value='gala', selected=currentProject.category=='gala') gala
-              option(value='export', selected=currentProject.category=='export') export
-              option(value='other', selected=currentProject.category=='other') other
+            if currentProject.category != 'home'  
+              select(name='category')#category-selector
+                option(value='gala', selected=currentProject.category=='gala') gala
+                option(value='export', selected=currentProject.category=='export') export
+                option(value='other', selected=currentProject.category=='other') other
             br
             input(name='visible', type='checkbox', value='visible', checked=currentProject.visible)#project-visible
             | visible
