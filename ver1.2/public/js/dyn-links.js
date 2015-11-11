@@ -1,5 +1,4 @@
 $(window).load(function(){
-  console.log('convert');
   convertLinks();
 });
 function convertLinks(documentRoot) {
@@ -10,7 +9,7 @@ function convertLinks(documentRoot) {
   for (var i = 0; i < links.length; i++) {
     var link = links[i];
     var href = $(link).attr('href');
-    console.log(href);
+    console.log(location.hash);
     if (href.indexOf('http://') !== 0) {
 
 

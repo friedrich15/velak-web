@@ -14,8 +14,8 @@ trash:
 
 all:
   infinite scroll:
-    TODO: load projects above when scrolling up
-    FIXME: when starting from any but first project in list
+    TODO: load projects above when scrolling up (?)
+    FIXME: interference of tab and filter hashes
 
 mobile:
   FIXME: mobile menu color (active)
@@ -35,3 +35,5 @@ done:
   FIXME: empty photo trash //DONE!
   TODO: recycle bin //DONE!
   TODO: project list: category filters //DONE!
+
+  FIXME: when starting from any but first project in list //DONE!

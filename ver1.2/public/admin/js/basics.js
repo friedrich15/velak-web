@@ -2,9 +2,14 @@ $(document).ready(function(){
 
 
   make_tabs_loadable();
+  check_filters_onload();
   append_hover();
   sort_it_out();
+  make_sortable();
 
+});
+
+function make_sortable(){
   $('#project-list').on('sortupdate', function(event, ui){
     var ul = ui.item.parent();
     var dataObj = { };
@@ -42,7 +47,7 @@ $(document).ready(function(){
       // location.reload();
     });
   });
-});
+}
 
 var $container = jQuery('.grid');
 
@@ -53,13 +58,6 @@ $container.masonry({
 
 });
 
-function make_tabs_loadable(){
-  if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
-  return $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-    return location.hash = $(e.target).attr('href').substr(1);
-  });
-}
-
 function sort_it_out() {
   $('.sortable').sortable();
   $('.sortable').disableSelection();
@@ -69,7 +67,6 @@ function sort_it_out() {
     function sort_li(a, b){
       return ($(b).data('position')) < ($(a).data('position')) ? 1 : -1;
     }
-
 }
 
 function append_hover() {
@@ -82,9 +79,46 @@ function append_hover() {
   );
 }
 
-function filterItems(category) {
+function make_tabs_loadable(){
+  if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+  return $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+    return location.hash = $(e.target).attr('href').substr(1);
+  });
+}
+
+function check_filters_onload(reload) {
+  if (location.hash.indexOf('?')){
+    var hash = window.location.hash.substring(1);
+    var info = (location.hash.indexOf('info-container')>=0)?'info-container':'';
+    var photo = (location.hash.indexOf('photo-container')>=0)?'photo-container':'';
+    var hashArray = hash.split('&no-');
+    console.log(info, photo);
+    location.hash = info + photo;
+    for (var i=0; i < hashArray.length; i++) {
+
+      if (hashArray[i] != '' && hashArray[i] != 'info-container' && hashArray[i] != 'photo-container') {
+        $('#'+hashArray[i]+'-checkbox').prop('checked', false);
+        filterItems(hashArray[i]);
+      }
+    }
+  }
+}
+
+function filterItems(category, reload) {
   var items = $('.is-in-'+category);
+  var hash = '&no-'+category;
   items.toggle();
+  if (!$('#'+category+'-checkbox').is(':checked')){
+    window.location.hash += hash;
+  }
+  else {
+    var newhash = window.location.hash.replace(hash, '');
+    window.location.hash = newhash;
+  }
+  if (reload) {
+    console.log(reload);
+    location.reload();
+  }
 }
 
 function updateProject() {

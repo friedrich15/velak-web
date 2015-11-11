@@ -9,8 +9,7 @@ function convertLinks(documentRoot) {
   var links = documentRoot.querySelectorAll("a.pjax");
   for (var i = 0; i < links.length; i++) {
     var link = links[i];
-    var href = $(link).attr('href');
-    console.log(href);
+    var href = $(link).attr('href') + location.hash;
     if (href.indexOf('http://') !== 0) {
 
 
@@ -46,9 +45,7 @@ function loadPage(href, bonus) {
 
     if (link.attr('href')==href) {
       link.parent().addClass('active')
-    }
-    else {
-      link.parent().removeClass('active')
+      link.parent().siblings().removeClass('active')
     }
   }
 
@@ -91,9 +88,12 @@ function finishedLoading(responseHtml, bonus) {
 
   convertLinks(mainElement);
   make_tabs_loadable();
+  check_filters_onload();
   hit_masonry();
   append_hover();
   sort_it_out();
+  make_sortable();
+
 
   $('main').removeClass('loading');
   $('.dropzone').dropzone();

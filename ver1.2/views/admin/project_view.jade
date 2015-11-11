@@ -37,11 +37,11 @@ block content
             button(onclick='addProject()').btn.btn-default Add
         #div-projectList
           .filters  
-            input(type='checkbox', checked='checked', onclick='filterItems("gala")')#gala-checkbox.filter-checkbox
+            input(type='checkbox', checked='checked', onclick='filterItems("gala", true)')#gala-checkbox.filter-checkbox
             label(for='gala-checkbox').filter-label.gala-label.noselect gala
-            input(type='checkbox', checked='checked', onclick='filterItems("export")')#export-checkbox.filter-checkbox
+            input(type='checkbox', checked='checked', onclick='filterItems("export", true)')#export-checkbox.filter-checkbox
             label(for='export-checkbox').filter-label.export-label.noselect export
-            input(type='checkbox', checked='checked', onclick='filterItems("other")')#other-checkbox.filter-checkbox
+            input(type='checkbox', checked='checked', onclick='filterItems("other", true)')#other-checkbox.filter-checkbox
             label(for='other-checkbox').filter-label.other-label.noselect other
             
           ul#project-list.sortable.list-unstyled
@@ -58,9 +58,9 @@ block content
       #project-content
         ul(role='tablist').nav.nav-tabs#tab-menu
           li(role="presentation").active
-            a(href='#info-container', data-toggle='tab', aria-controls='info-container', role='tab') main info
+            a(href='#info-container', data-toggle='tab', aria-controls='info-container', role='tab').tab-link main info
           li(role='presentation')
-            a(href='#photo-container', data-toggle='tab', aria-controls='photo-container', role='tab') media
+            a(href='#photo-container', data-toggle='tab', aria-controls='photo-container', role='tab').tab-link media
         .tab-content
           #info-container(role='tabpanel').tab-pane.active
             label Name:
@@ -77,7 +77,7 @@ block content
               span (use 
               a(href='http://daringfireball.net/projects/markdown/syntax', target='_blank', style='color: #777;') markdown
               span  to format)
-            textarea(name='description', id='input-description', rows = 8).form-control= currentProject.descriptionSource
+            textarea(name='description', id='input-description', rows = 12).form-control= currentProject.descriptionSource
             if currentProject.category != 'home'  
               select(name='category')#category-selector
                 option(value='gala', selected=currentProject.category=='gala') gala
