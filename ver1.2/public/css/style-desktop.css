@@ -1,71 +1,110 @@
 body {
   width: 100%;
   background: #fff;
-  font: 16px "Verdana", sans-serif;
+  font: 14px Verdana, sans-serif;
 }
 
 #mobile-menu {
   display: none;
 }
 
+
 #top-menu {
-  margin: 0 auto;
+  margin: 0 1em;
+  position: fixed;
+  z-index: 1000;
+  background: #fff;
+  width: 100%;
+}
+
+#mobile-li {
+  display: none;
+}
+
+#top-menu ul {
+  margin-left: 1em;
+  /*border: 1px solid #aaa;*/
+  /*background: #eee;*/
+  width: 30em;
+  text-align: center;
+}
+.logo {
+  margin-right: 2em;
+  color: #000;
+}
+.li-menu {
+  border: 1px solid #ccc;
+  padding: 0.5em 1em;
+  margin: .6em .3em;
+  width: 7em;
   text-align: center;
 }
 
 #side-menu {
+  margin-top: 4em;
   height: 20em;
-  width: 8em;
+  width: 9em;
   position: fixed;
   float: left;
   padding: 1em;
 }
+/*
+#side-menu ul li {
+  border: 1px solid #ccc;
+}*/
 
 #content {
-  margin-left: 8em;
+  padding-top: 5em;
+  margin-left: 9em;
   overflow: hidden;
 }
 
 .info-box {
-  width: 50%;
-  margin: 0 auto;
+  width: 60%;
+  margin: 0;
   background-color: #222;
   /*border: .2em solid #aaa;*/
-  padding: 1em;
+  padding: 6em 4em;
   color: #ddd;
   margin-bottom: 1em;
+  font-weight: normal;
   /*box-shadow: 0 0 1em #aaa;*/
+}
+.info-box h2 {
+  font-size: 1.5em;
+  font-weight: normal;
 }
 
 .photo-list {
-  -moz-column-count: 3;
+  -moz-column-count: 2;
   -moz-column-gap: 0px;
-  -webkit-column-count: 3;
+  -webkit-column-count: 2;
   -webkit-column-gap: 0px;
-  column-count: 3;
+  column-count: 2;
   column-gap: 0px;
   /*width: 95%;*/
   margin: 0 auto;
 }
 
 .img-container {
-  margin: 3px;
+  margin: .5em 0;
   position: relative;
+  padding: 0 .5em 0 0;
 }
 
-.img-container:hover > .photo-description {
+/*.img-container:hover > .photo-description {
   opacity: .8;
-}
+}*/
 
 .photo-description {
-  position: absolute;
+  /*position: absolute;*/
   bottom: 0;
   left: 0;
   background-color: #fff;
   color: #555;
-  opacity: 0;
-  font-size: 1.4em;
+  opacity: 1;
+  font-size: .8em;
   text-align: left;
-  padding: .2em;
+  /*padding: .2em;*/
   cursor: default;
 }

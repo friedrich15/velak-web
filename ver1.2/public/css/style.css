@@ -1,6 +1,6 @@
 body {
   background-color: #000;
-  font: 16px Verdana, Helvetica, Arial, sans-serif;
+  font: 14px Verdana, Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -18,7 +18,7 @@ a:hover {
 }
 
 .logo-style {
-  color: #aaa;
+  color: #000;
   font-size: 1.5em;
   /*letter-spacing: .05em;*/
 }
