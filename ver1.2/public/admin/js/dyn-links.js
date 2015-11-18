@@ -93,7 +93,7 @@ function finishedLoading(responseHtml, bonus) {
   append_hover();
   sort_it_out();
   make_sortable();
-
+  $('.colorpick').colorpicker().on('hidePicker.colorpicker', function(e){saveColor(e)});
 
   $('main').removeClass('loading');
   $('.dropzone').dropzone();

@@ -9,6 +9,7 @@ var marked = require('marked');
 var fs = require('fs');
 var JSZip = require("jszip");
 var moment = require('moment');
+var Message = mongoose.model('Message')
 
 marked.setOptions({
   sanitize: true
@@ -23,6 +24,18 @@ router.get('/users', function(req, res, next) {
     });
   });
 });
+
+router.post('/update_user_color', function(req, res, next) {
+  Account.findById(req.body.id, function(err, account){
+    console.log(account);
+    account.color = req.body.color;
+    account.save(function(err){
+      if (!err) {
+        res.send(req.body.color + ' saved!');
+      }
+    })
+  });
+})
 
 router.get('/delete_user/:id', function(req, res, next) {
   Account.remove({_id: req.params.id}, function(err, account) {
@@ -64,13 +77,6 @@ router.get('/projects', function(req, res, next) {
       user: req.user,
       projects: projects
     });
-  });
-});
-
-router.get('/docs', function(req, res, next) {
-  res.render('admin/docs', {
-    title: 'velak',
-    user: req.user
   });
 });
 
@@ -256,6 +262,53 @@ router.post('/photosort', function (req, res, next) {
   })
 
 })
+                                          // DOCS
+
+router.get('/docs', function(req, res, next) {
+  Message.find(function(err, messages){
+    res.render('admin/docs', {
+      title: 'velak',
+      messages: messages,
+      user: req.user
+    });
+  });
+
+});
+
+router.post('/save_chat_msg', function(req, res, next) {
+  var timestamp = moment().valueOf();
+  var timeHtml = moment().format('MMMM Do YYYY, h:mm:ss a');
+
+  Account.findById(req.body.id, function(err, account) {
+    console.log(req.body.msg);
+    new Message({
+      text : req.body.msg,
+      timestamp : timestamp,
+      timeHtml : timeHtml,
+      byUser : account.username,
+      byUserId : account._id,
+      byUserColor : account.color
+    }).save(function(err) {
+      console.log(err);
+      if (!err) {
+        Message.find().exec(function(err, messages){
+          console.log(messages);
+          res.render('admin/messages', {messages: messages, user: req.user})
+        });
+      }
+    });
+  });
+});
+
+router.get('/delete_msg/:id', function(req, res, next) {
+  Message.findById(req.params.id, function(err, message) {
+    message.remove(function(){
+      res.send('success');
+    })
+  })
+})
+
+                                          // TRASH
 
 router.get('/trash', function(req, res, next) {
   var del_projects = [];

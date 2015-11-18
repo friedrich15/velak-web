@@ -1,0 +1,76 @@
+/*.docs-content {
+  width: 100%;
+}*/
+
+.docs-main {
+  overflow: hidden;
+  background-color: #afa;
+}
+
+.docs-chat {
+  position: fixed;
+  width: 23em;
+  background: #eee;
+  border-left: 1px solid #eee;
+  float: right;
+  height: 100%;
+  right: 0;
+}
+
+.chat {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: table;
+}
+.chat-content {
+  background-color: #eee;
+
+  display: table-row;
+}
+
+.chat-text-container {
+  width: 100%;
+  height: 100%;
+  padding: .3em;
+}
+.chat-text {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: .2em;
+  border: 1px dashed #eee;
+}
+
+.msg-box {
+  border: 2px solid black;
+  border-radius: .3em;
+  margin: .2em;
+  padding: .2em;
+  font-size: .8em;
+  background-color: #fafafa;
+}
+.msg-box p {
+  margin: 0;
+}
+
+.delete-msg {
+  position: absolute;
+  right: 1em;
+  cursor: pointer;
+}
+
+.msg-time {
+  color: #ddd;
+  margin-left: 1em;
+}
+.msg-time:hover {
+  color: #555;
+}
+.chat-input {
+  height: 110px;
+  display: table-row;
+}
+.chat-input .input-group {
+  padding: 0 1em;
+}

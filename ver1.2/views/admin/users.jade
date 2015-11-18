@@ -32,12 +32,21 @@ block content
           tr
             th name
             th id
+            th color
             th delete
           each user in users
-            tr
+            tr(data-userid= user.id).userid
               td
                 p= user.username
               td
                 p= user._id
-              td  
-                a(href='/admin/delete_user/' + user._id, onclick='return confirm("really delete?")')  x
+              td
+                .input-group.colorpick
+                  input(type='text', value= user.color).form-control
+                  .input-group-addon(style='background-color: '+ user.color)
+                    
+              td
+                if user.username == 'admin'
+                  p ADMIN cannot be deleted
+                else
+                  a(href='/admin/delete_user/' + user._id, onclick='return confirm("really delete?")')  x

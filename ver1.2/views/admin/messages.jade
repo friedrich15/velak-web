@@ -1,0 +1,9 @@
+ul#messages.list-unstyled  
+  each msg in messages
+    li
+      .msg-box(style='border-color:'+msg.byUserColor)
+        if msg.byUserId == user._id
+          a(id= msg._id, onclick='removeMsg(this.id, this)').delete-msg delete
+        p(style='color:'+msg.byUserColor).msg-user= msg.byUser
+          span.msg-time= msg.timeHtml
+        p= msg.text
