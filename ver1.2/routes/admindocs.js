@@ -7,7 +7,7 @@ var multer = require('multer');
 var moment = require('moment');
 var Message = mongoose.model('Message');
 
-var uploaddocs = multer({dest:'uploads/docs/'});
+var uploaddocs = multer({dest:'public/admin/uploads/docs/'});
 
 // router.get('/', function(req, res, next) {
 //   Post.find().sort('position').exec( function ( err, posts, count ){
@@ -19,10 +19,10 @@ var uploaddocs = multer({dest:'uploads/docs/'});
 // });
 
 router.get('/', function(req, res, next) {
-  Message.find().sort('timestamp').exec(function(err, messages){
+  Post.find().sort('-timestamp').exec(function(err, posts){
     res.render('admin/docs', {
       title: 'velak',
-      // posts: posts
+      posts: posts,
       // messages: messages,
       user: req.user
     });
@@ -37,7 +37,7 @@ function load_messages(callback) {
     callback(result);
   });
 }
-
+                                          //  CHAT
 router.get('/get_chat_msgs', function(req, res, next) {
   var messages;
   load_messages(function(result){
@@ -83,12 +83,17 @@ router.get('/delete_msg/:id', function(req, res, next) {
   })
 })
 
+                                        //  POSTS
+
 router.post('/add_post', function(req, res, next) {
   var name = req.body.name;
-  console.log(name);
+  var timestamp = moment().valueOf();
+  var timeHtml = moment().format('MMMM Do YYYY, h:mm:ss a');
   if (name !== undefined){
     new Post({
-      name: name
+      name: name,
+      timestamp : timestamp,
+      timeHtml : timeHtml,
     }).save(function(){
       res.redirect('/admin/docs');
     });
@@ -113,8 +118,6 @@ router.post('/doc_upload/:id', uploaddocs.array('files'), function(req, res, nex
           fileSize :      file.filesize,
           filePath :      file.path
         }));
-
-
       };
       post.save(function(){
         res.redirect('/admin/docs');
@@ -122,5 +125,14 @@ router.post('/doc_upload/:id', uploaddocs.array('files'), function(req, res, nex
     });
   });
 });
+
+router.get('/delete_post/:id', function(req, res, next) {
+  Post.findById(req.params.id, function(err, post) {
+    post.deleted=true
+    post.save(function(){
+      res.redirect('/admin/docs');
+    })
+  })
+})
 
 module.exports = router;

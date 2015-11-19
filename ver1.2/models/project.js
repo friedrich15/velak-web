@@ -65,6 +65,8 @@ var mongoose = require('mongoose'),
       descriptionVersion  : [String],
       category            : String,
       docs                : [Doc],
+      timestamp           : String,
+      timeHtml            : String,
       visible             : Boolean,
       deleted             : Boolean
     });

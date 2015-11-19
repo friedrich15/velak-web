@@ -24,11 +24,7 @@
 	background: rgba(255,0,0,0.4);
 }
 
-#docs-main {
-  overflow: hidden;
-  background-color: #afa;
-}
-
+                          /*CHAT*/
 #docs-chat {
   position: fixed;
   width: 23em;
@@ -111,4 +107,99 @@
 }
 #chat-input .input-group {
   padding: 0 1em;
+}
+                                /*DOCS*/
+#docs-main {
+  overflow: hidden;
+  margin-right: 23em;
+}
+
+.content-container {
+  margin: 1em;
+}
+
+.post-container {
+  width: 20em;
+  margin-bottom: 1em;
+}
+
+.post-content-container {
+  position: relative;
+}
+
+.delete-post {
+  position: absolute;
+  right: 0;
+  font-size: .8em;
+}
+
+.post-title {
+  color: #55aaff;
+  cursor: pointer;
+  margin-left: 2em;
+  margin-bottom: 0;
+}
+.post-title span {
+  margin-left: 3em;
+  color: #aaa;
+  font-size: .8em;
+}
+
+.post-content {
+  /*display: none;*/
+  padding: 1em;
+  background-color: #eefffa;
+  border-radius: .4em;
+}
+
+.doc-upload {
+  width: 4em;
+  height: 4em;
+  padding: 0;
+  border: 2px solid #eee;
+  border-radius: .3em;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+.doc-upload span {
+  font-size: 1.9em;
+  margin: 0;
+  color: #ddd;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: 1px;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.doc-upload:hover {
+  background-color: #eafaff;
+  box-shadow: 0 0 .8em #eee;
+}
+
+
+.file-container {
+  text-align: center;
+  padding: 1em;
+  background: #f3fffa;
+  border-radius: .5em;
+  cursor: pointer;
+}
+.file-container:hover {
+  background: #eafffa;
+  box-shadow: 0 0 .8em #eee;
+}
+
+.file-icon  {
+  margin: 0 auto;
+  width: 4em;
+  height: 4em;
+  border: 2px solid #eee;
+  border-radius: .3em;
+
+}
+.file-container a {
+  font-size: 10px;
 }
