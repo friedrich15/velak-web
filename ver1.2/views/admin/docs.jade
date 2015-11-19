@@ -72,8 +72,9 @@ block content
                                 a(href= '/admin/uploads/docs/'+ doc.name, download= doc.originalName)
                                   .file-container
                                     .file-icon
-                                      p= doc.fileExtension
-                                    a
+                                      img(src='/admin/img/icons/'+doc.fileExtension+'.png', onerror='this.src="/admin/img/icons/unknown.png"')
+                                      //- p= doc.fileExtension
+                                    a.filename
                                       span= doc.originalName
                             li
                               form(action='/admin/docs/doc_upload/'+post._id, method='post', enctype='multipart/form-data')
