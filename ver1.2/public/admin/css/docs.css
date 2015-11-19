@@ -148,7 +148,9 @@
   background-color: #fff;
   border: 1px dashed #aaeeff;
   border-radius: .4em;
+  box-shadow: 0 0 .4em #ccc;
 }
+
 
 .doc-upload {
   width: 4em;
@@ -163,7 +165,7 @@
 .doc-upload span {
   font-size: 1.9em;
   margin: 0;
-  color: #ddd;
+  color: #ccc;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -173,15 +175,18 @@
   transform: translate(-50%, -50%);
 }
 .doc-upload:hover {
-  background-color: #eafaff;
-  box-shadow: 0 0 .8em #eee;
+  background-color: #aaeefa;
+  border-color: #bbb;
 }
-
+.doc-upload:hover span {
+  color: #999;
+}
 
 .file-container {
   text-align: center;
   padding: .6em;
   background: #eafffa;
+  border: 1px solid #cceaee;
   border-radius: .5em;
   cursor: pointer;
 }
