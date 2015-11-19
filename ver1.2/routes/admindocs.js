@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var Account = require('../models/account');
 var Post  = mongoose.model('Post');
 var Doc  = mongoose.model('Doc');
 var multer = require('multer');
@@ -55,6 +56,7 @@ router.post('/save_chat_msg', function(req, res, next) {
   var timeHtml = moment().format('MMMM Do YYYY, h:mm:ss a');
 
   Account.findById(req.body.id, function(err, account) {
+
     new Message({
       text : req.body.msg,
       timestamp : timestamp,
@@ -64,9 +66,17 @@ router.post('/save_chat_msg', function(req, res, next) {
       byUserColor : account.color,
       byUserColorLight : account.colorLight
     }).save(function(err) {
-      console.log(err);
+
       if (!err) {
-        load_messages();
+        var messages;
+        load_messages(function(result){
+
+          messages = result
+          res.render('admin/messages', {
+            messages: messages,
+            user: req.user
+          })
+        })
       }
     });
   });
