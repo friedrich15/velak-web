@@ -36,12 +36,15 @@ block content
             button(onclick='addProject()').btn.btn-default Add
         #div-projectList
           .filters  
+            input(type='checkbox', checked='checked', onclick='filterItems("home")')#home-checkbox.filter-checkbox
+            label(for='home-checkbox').filter-label.home-label.noselect home
             input(type='checkbox', checked='checked', onclick='filterItems("gala")')#gala-checkbox.filter-checkbox
             label(for='gala-checkbox').filter-label.gala-label.noselect gala
             input(type='checkbox', checked='checked', onclick='filterItems("export")')#export-checkbox.filter-checkbox
             label(for='export-checkbox').filter-label.export-label.noselect export
             input(type='checkbox', checked='checked', onclick='filterItems("other")')#other-checkbox.filter-checkbox
             label(for='other-checkbox').filter-label.other-label.noselect other
+            
           
           ul#project-list.sortable.list-unstyled
             each project in projects  

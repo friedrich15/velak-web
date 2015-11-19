@@ -9,7 +9,7 @@ var marked = require('marked');
 var fs = require('fs');
 var JSZip = require("jszip");
 var moment = require('moment');
-var Message = mongoose.model('Message')
+var Message = mongoose.model('Message');
 
 marked.setOptions({
   sanitize: true
@@ -116,7 +116,7 @@ router.post('/update_project', function(req, res, next) {
   var date = moment(req.body.date).valueOf();
   var dateHtml = moment(date).format('MMMM Do YYYY');
   if (req.body.name == 'homepage'){
-    var category = 'home';
+    var category = 'homepage';
   }
   else { var category = req.body.category}
   console.log(dateHtml);
@@ -264,50 +264,7 @@ router.post('/photosort', function (req, res, next) {
 })
                                           // DOCS
 
-router.get('/docs', function(req, res, next) {
-  Message.find().sort('timestamp').exec(function(err, messages){
-    res.render('admin/docs', {
-      title: 'velak',
-      messages: messages,
-      user: req.user
-    });
-  });
 
-});
-
-router.post('/save_chat_msg', function(req, res, next) {
-  var timestamp = moment().valueOf();
-  var timeHtml = moment().format('MMMM Do YYYY, h:mm:ss a');
-
-  Account.findById(req.body.id, function(err, account) {
-    console.log(req.body.msg);
-    new Message({
-      text : req.body.msg,
-      timestamp : timestamp,
-      timeHtml : timeHtml,
-      byUser : account.username,
-      byUserId : account._id,
-      byUserColor : account.color,
-      byUserColorLight : account.colorLight
-    }).save(function(err) {
-      console.log(err);
-      if (!err) {
-        Message.find().sort('timestamp').exec(function(err, messages){
-          console.log(messages);
-          res.render('admin/messages', {messages: messages, user: req.user})
-        });
-      }
-    });
-  });
-});
-
-router.get('/delete_msg/:id', function(req, res, next) {
-  Message.findById(req.params.id, function(err, message) {
-    message.remove(function(){
-      res.send('success');
-    })
-  })
-})
 
                                           // TRASH
 

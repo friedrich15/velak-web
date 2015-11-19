@@ -46,6 +46,7 @@ function loadPage(href, bonus) {
     if (link.attr('href')==href) {
       link.parent().addClass('active')
       link.parent().siblings().removeClass('active')
+      link.closest('ul').siblings().children().removeClass('active')
     }
   }
 
@@ -94,6 +95,11 @@ function finishedLoading(responseHtml, bonus) {
   sort_it_out();
   make_sortable();
   $('.colorpick').colorpicker({format: 'hex'}).on('hidePicker.colorpicker', function(e){saveColor(e)});
+
+  if ($('#docs-content').length > 0) {
+    chatScrollToBottom();
+    getChatMsgs();
+  }
 
   $('main').removeClass('loading');
   $('.dropzone').dropzone();

@@ -1,0 +1,126 @@
+var express = require('express');
+var router = express.Router();
+var mongoose = require('mongoose');
+var Post  = mongoose.model('Post');
+var Doc  = mongoose.model('Doc');
+var multer = require('multer');
+var moment = require('moment');
+var Message = mongoose.model('Message');
+
+var uploaddocs = multer({dest:'uploads/docs/'});
+
+// router.get('/', function(req, res, next) {
+//   Post.find().sort('position').exec( function ( err, posts, count ){
+//     res.render('admin/docs', {
+//       title: 'velak | docs',
+//       posts: posts
+//     });
+//   });
+// });
+
+router.get('/', function(req, res, next) {
+  Message.find().sort('timestamp').exec(function(err, messages){
+    res.render('admin/docs', {
+      title: 'velak',
+      // posts: posts
+      // messages: messages,
+      user: req.user
+    });
+  });
+
+});
+
+function load_messages(callback) {
+  var result;
+  Message.find().sort('timestamp').exec(function(err, messages){
+    result = messages;
+    callback(result);
+  });
+}
+
+router.get('/get_chat_msgs', function(req, res, next) {
+  var messages;
+  load_messages(function(result){
+    messages = result
+    console.log(result);
+    res.render('admin/messages', {
+      messages: messages,
+      user: req.user
+    })
+  })
+  console.log(messages);
+  // ;
+})
+
+router.post('/save_chat_msg', function(req, res, next) {
+  var timestamp = moment().valueOf();
+  var timeHtml = moment().format('MMMM Do YYYY, h:mm:ss a');
+
+  Account.findById(req.body.id, function(err, account) {
+    console.log(req.body.msg);
+    new Message({
+      text : req.body.msg,
+      timestamp : timestamp,
+      timeHtml : timeHtml,
+      byUser : account.username,
+      byUserId : account._id,
+      byUserColor : account.color,
+      byUserColorLight : account.colorLight
+    }).save(function(err) {
+      console.log(err);
+      if (!err) {
+        load_messages();
+      }
+    });
+  });
+});
+
+router.get('/delete_msg/:id', function(req, res, next) {
+  Message.findById(req.params.id, function(err, message) {
+    message.remove(function(){
+      res.send('success');
+    })
+  })
+})
+
+router.post('/add_post', function(req, res, next) {
+  var name = req.body.name;
+  console.log(name);
+  if (name !== undefined){
+    new Post({
+      name: name
+    }).save(function(){
+      res.redirect('/admin/docs');
+    });
+  };
+
+});
+
+router.post('/doc_upload/:id', uploaddocs.array('files'), function(req, res, next) {
+  Post.find().sort('position').exec( function ( err, posts, count ){
+    Post.findById(req.params.id, function(err, post){
+      var files = req.files;
+      console.log(files);
+      // if (!post.docs){post.docs = [];}
+      for (i=0; i<files.length; i++) {
+        var file = files[i];
+        console.log(file.extension);
+        post.docs.push(new Doc({
+          name : file.filename,
+          originalName :  file.originalname,
+          fileType :      file.mimetype,
+          fileExtension:  file.extension,
+          fileSize :      file.filesize,
+          filePath :      file.path
+        }));
+
+
+      };
+      post.save(function(){
+        res.redirect('/admin/docs');
+      });
+    });
+  });
+});
+
+module.exports = router;

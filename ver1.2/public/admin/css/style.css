@@ -144,6 +144,9 @@ a:hover {
 .other-label {
   background-color: #faa;
 }
+.home-label {
+  background-color: #faf;
+}
 
 
 
@@ -155,6 +158,9 @@ a:hover {
 }
 .is-in-other {
   color: #f44;
+}
+.is-in-home {
+  color: #f4f;
 }
 
 .li-home {

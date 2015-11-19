@@ -1,29 +1,39 @@
-$(document).ready(function(){
+$(window).load(function(){
   chatScrollToBottom();
-})
+  getChatMsgs();
+});
+
 
 function chatScrollToBottom() {
   var elem = document.getElementById('chat-text');
   elem.scrollTop = elem.scrollHeight;
 }
 
-function sendChatMsg() {
-  var msg = $('#chat-msg').val();
-  var id = $('#chat-msg').data('user');
-  var data = {
-    'id': id,
-    'msg': msg
-  }
-  console.log(data);
-  $.ajax({
-    type: 'POST',
-    url: '/admin/save_chat_msg',
-    data: data
-  }).done(function(res){
+function getChatMsgs() {
+  $.get('/admin/docs/get_chat_msgs', function(res){
     $('#chat-text').html(res);
-    $('#chat-msg').val('');
-    chatScrollToBottom();
-  })
+  });
+}
+
+function sendChatMsg() {
+  if ($('#chat-msg').val()!='') {
+    var msg = $('#chat-msg').val();
+    var id = $('#chat-msg').data('user');
+    var data = {
+      'id': id,
+      'msg': msg
+    }
+    console.log(data);
+    $.ajax({
+      type: 'POST',
+      url: '/admin/docs/save_chat_msg',
+      data: data
+    }).done(function(res){
+      $('#chat-text').html(res);
+      $('#chat-msg').val('');
+      chatScrollToBottom();
+    })
+  }
 }
 
 function chat_checkKey(e) {
@@ -37,7 +47,7 @@ function chat_checkKey(e) {
 function removeMsg(id, o) {
   if(confirm('really delete?')){
     var obj = $(o).closest('li');
-    $.get('/admin/delete_msg/'+id, function(res){
+    $.get('/admin/docs/delete_msg/'+id, function(res){
       if (res == 'success'){
         $(obj).remove();
       }

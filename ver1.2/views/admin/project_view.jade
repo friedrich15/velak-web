@@ -36,7 +36,9 @@ block content
           span.input-group-btn
             button(onclick='addProject()').btn.btn-default Add
         #div-projectList
-          .filters  
+          .filters
+            input(type='checkbox', checked='checked', onclick='filterItems("home")')#home-checkbox.filter-checkbox
+            label(for='home-checkbox').filter-label.home-label.noselect home
             input(type='checkbox', checked='checked', onclick='filterItems("gala", true)')#gala-checkbox.filter-checkbox
             label(for='gala-checkbox').filter-label.gala-label.noselect gala
             input(type='checkbox', checked='checked', onclick='filterItems("export", true)')#export-checkbox.filter-checkbox
@@ -67,7 +69,7 @@ block content
             input(type='text', name='name', id='input-name', value= currentProject.name).form-control
             label Title:
             input(type='text', name='title' id='input-title', value= currentProject.title).form-control
-            if currentProject.category != 'home'  
+            if currentProject.category != 'homepage'
               label Date:
               input(type='date', name='date' id='input-date', value= currentProject.dateInput).form-control
               label Time:
@@ -78,8 +80,9 @@ block content
               a(href='http://daringfireball.net/projects/markdown/syntax', target='_blank', style='color: #777;') markdown
               span  to format)
             textarea(name='description', id='input-description', rows = 12).form-control= currentProject.descriptionSource
-            if currentProject.category != 'home'  
+            if currentProject.category != 'homepage'  
               select(name='category')#category-selector
+                option(value='home', selected=currentProject.category=='home') home
                 option(value='gala', selected=currentProject.category=='gala') gala
                 option(value='export', selected=currentProject.category=='export') export
                 option(value='other', selected=currentProject.category=='other') other

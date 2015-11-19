@@ -93,7 +93,6 @@ function check_filters_onload(reload) {
     var info = (location.hash.indexOf('info-container')>=0)?'info-container':'';
     var photo = (location.hash.indexOf('photo-container')>=0)?'photo-container':'';
     var hashArray = hash.split('&no-');
-    console.log(info, photo);
     location.hash = info + photo;
     for (var i=0; i < hashArray.length; i++) {
 
