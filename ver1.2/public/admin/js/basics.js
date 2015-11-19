@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  $('.colorpick').colorpicker().on('hidePicker.colorpicker', function(e){saveColor(e)});
+  $('.colorpick').colorpicker({format: 'hex'}).on('hidePicker.colorpicker', function(e){saveColor(e)});
 
   make_tabs_loadable();
   check_filters_onload();

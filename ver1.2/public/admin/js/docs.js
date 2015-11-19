@@ -1,3 +1,12 @@
+$(document).ready(function(){
+  chatScrollToBottom();
+})
+
+function chatScrollToBottom() {
+  var elem = document.getElementById('chat-text');
+  elem.scrollTop = elem.scrollHeight;
+}
+
 function sendChatMsg() {
   var msg = $('#chat-msg').val();
   var id = $('#chat-msg').data('user');
@@ -13,6 +22,7 @@ function sendChatMsg() {
   }).done(function(res){
     $('#chat-text').html(res);
     $('#chat-msg').val('');
+    chatScrollToBottom();
   })
 }
 

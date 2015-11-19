@@ -1,11 +1,14 @@
 function saveColor(e) {
   var obj = e.target.closest('tr');
   var id = $(obj).data('userid');
-  console.log(id);
-  var color = e.color.toHex();
+  var colorhex = e.color.toHex();
+  e.color.setSaturation(.1);
+  var colorLight = e.color.toHex();
+  console.log(colorLight);
   var data = {
     'id': id,
-    'color' : color
+    'color' : colorhex,
+    'colorlight' : colorLight
   };
   $.ajax({
     type: 'POST',
@@ -16,5 +19,6 @@ function saveColor(e) {
     setTimeout(function(){
       $(e.target).closest('tr').removeClass('save-success');
     }, 500);
+    console.log(res);
   })
 }

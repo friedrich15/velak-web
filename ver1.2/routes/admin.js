@@ -27,11 +27,11 @@ router.get('/users', function(req, res, next) {
 
 router.post('/update_user_color', function(req, res, next) {
   Account.findById(req.body.id, function(err, account){
-    console.log(account);
     account.color = req.body.color;
+    account.colorLight = req.body.colorlight;
     account.save(function(err){
       if (!err) {
-        res.send(req.body.color + ' saved!');
+        res.send(req.body.colorlight + ' saved!');
       }
     })
   });
@@ -265,7 +265,7 @@ router.post('/photosort', function (req, res, next) {
                                           // DOCS
 
 router.get('/docs', function(req, res, next) {
-  Message.find(function(err, messages){
+  Message.find().sort('timestamp').exec(function(err, messages){
     res.render('admin/docs', {
       title: 'velak',
       messages: messages,
@@ -287,11 +287,12 @@ router.post('/save_chat_msg', function(req, res, next) {
       timeHtml : timeHtml,
       byUser : account.username,
       byUserId : account._id,
-      byUserColor : account.color
+      byUserColor : account.color,
+      byUserColorLight : account.colorLight
     }).save(function(err) {
       console.log(err);
       if (!err) {
-        Message.find().exec(function(err, messages){
+        Message.find().sort('timestamp').exec(function(err, messages){
           console.log(messages);
           res.render('admin/messages', {messages: messages, user: req.user})
         });

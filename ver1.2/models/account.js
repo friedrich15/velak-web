@@ -8,13 +8,15 @@ var Message = new Schema({
   timeHtml : String,
   byUser : String,
   byUserId : String,
-  byUserColor : String
+  byUserColor : String,
+  byUserColorLight : String
 });
 
 var Account = new Schema({
   username: String,
   password: String,
-  color: String
+  color: String,
+  colorLight: String
 });
 
 Account.plugin(passportLocalMongoose);
