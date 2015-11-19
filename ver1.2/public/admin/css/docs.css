@@ -148,7 +148,8 @@
 .post-content {
   /*display: none;*/
   padding: 1em;
-  background-color: #eefffa;
+  background-color: #fff;
+  border: 1px dashed #aaeeff;
   border-radius: .4em;
 }
 
@@ -200,6 +201,13 @@
   border-radius: .3em;
 
 }
+.file-icon p {
+  color: #cceaf5;
+  text-shadow: 0 0 2px #44aa22;
+  font-size: 1.4em;
+  line-height: 2.5;
+}
+
 .file-container a {
   font-size: 10px;
 }

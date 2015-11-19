@@ -69,10 +69,12 @@ block content
                           ul.list-inline
                             each doc in post.docs
                               li
-                                .file-container
-                                  .file-icon
-                                  a(href= '/admin/uploads/docs/'+ doc.name, download= doc.originalName)
-                                    span= doc.originalName
+                                a(href= '/admin/uploads/docs/'+ doc.name, download= doc.originalName)
+                                  .file-container
+                                    .file-icon
+                                      p= doc.fileExtension
+                                    a
+                                      span= doc.originalName
                             li
                               form(action='/admin/docs/doc_upload/'+post._id, method='post', enctype='multipart/form-data')
                                 label(for='input_'+post._id)

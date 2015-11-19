@@ -42,14 +42,12 @@ router.get('/get_chat_msgs', function(req, res, next) {
   var messages;
   load_messages(function(result){
     messages = result
-    console.log(result);
     res.render('admin/messages', {
       messages: messages,
       user: req.user
     })
   })
-  console.log(messages);
-  // ;
+
 })
 
 router.post('/save_chat_msg', function(req, res, next) {
@@ -57,7 +55,6 @@ router.post('/save_chat_msg', function(req, res, next) {
   var timeHtml = moment().format('MMMM Do YYYY, h:mm:ss a');
 
   Account.findById(req.body.id, function(err, account) {
-    console.log(req.body.msg);
     new Message({
       text : req.body.msg,
       timestamp : timestamp,
@@ -105,16 +102,18 @@ router.post('/doc_upload/:id', uploaddocs.array('files'), function(req, res, nex
   Post.find().sort('position').exec( function ( err, posts, count ){
     Post.findById(req.params.id, function(err, post){
       var files = req.files;
+
       console.log(files);
       // if (!post.docs){post.docs = [];}
       for (i=0; i<files.length; i++) {
         var file = files[i];
-        console.log(file.extension);
+        var extension = file.originalname.split('.').pop();
+        console.log(extension);
         post.docs.push(new Doc({
           name : file.filename,
           originalName :  file.originalname,
           fileType :      file.mimetype,
-          fileExtension:  file.extension,
+          fileExtension:  extension,
           fileSize :      file.filesize,
           filePath :      file.path
         }));
