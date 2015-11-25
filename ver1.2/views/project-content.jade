@@ -9,4 +9,5 @@
           .img-container
             img(src= '/uploads/small/small' +photo.name, onerror="this.style.display='none'")
             if photo.description
-              p.photo-description= photo.description
+              .photo-description
+                p= photo.description
