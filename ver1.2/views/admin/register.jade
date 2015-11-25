@@ -30,11 +30,12 @@ block content
     main
       .container
         h1 add user
-        form(role='form', action="/admin/register",method="post", style='max-width: 200px;')
+        form(role='form', action="/admin/register", method="post", style='max-width: 200px;')#register-form
           .form-group
-              input.form-control(type='text', name="username", placeholder='Enter Username')
+              input.form-control(type='text', name="username", placeholder='Enter Username', onkeypress='removeTag(this)')#username
+              span.name-exists user already exists!
           .form-group
             input.form-control(type='password', name="password", placeholder='Password')
-          button.btn.btn-default(type='submit') Submit
+          button.btn.btn-default(type='submit')#submit-button Submit
           a(href='/admin/projects')
             button.btn.btn-primary(type="button") Cancel

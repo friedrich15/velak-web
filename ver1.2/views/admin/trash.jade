@@ -34,13 +34,13 @@ block content
           p Click on projects or photos to retrieve them. Or remove them permanently by empting the trash.
         h2.trash-header projects
         if (projects.length != 0)
-          a(href='/admin/empty_del_projects', onclick='return confirm("Are you sure you want to permanently remove those projects?")').btn.btn-danger empty project trash
+          a(href='/admin/empty_del/projects', onclick='return confirm("Are you sure you want to permanently remove those projects?")').btn.btn-danger empty project trash
         .trash-container  
           h3(class=(projects.length!=0 ? 'hidden': ''))#project-trash-empty.trashempty project trash is empty
           ul.list-unstyled
             each project in projects
               li
-                a(href='/admin/retrieve_project/'+project._id, onclick='return confirm("Do you want to retrieve this project?")')= project.name
+                a(href='/admin/retrieve/project/'+project._id, onclick='return confirm("Do you want to retrieve this project?")')= project.name
                 span.project-info= project.date
         h2.trash-header photos
   
@@ -57,3 +57,15 @@ block content
                   a(href='/admin/retrieve_photo/'+photo.inProject+'/'+photo._id, onclick='return confirm("Do you want to retrieve this photo?")')
                     img(src= '/uploads/small/small' + photo.name).image
                     span.photo-info= photo.originalName
+        h2.trash-header posts
+  
+        if (posts.length!=0)
+          a(href='/admin/empty_del/posts', onclick='return confirm("Are you sure you want to permanently remove those posts?")').btn.btn-danger empty post trash
+        br
+        .trash-container
+          h3(class=(posts.length!=0 ? 'hidden': ''))#post-trash-empty.trashempty post trash is empty
+          ul.list-unstyled
+            each post in posts
+              li
+                a(href='/admin/retrieve/post/'+post._id, onclick='return confirm("Do you want to retrieve this post?")')= post.name
+                span.post-info= post.date

@@ -10,11 +10,13 @@ var fs = require('fs');
 var JSZip = require("jszip");
 var moment = require('moment');
 var Message = mongoose.model('Message');
+var Post  = mongoose.model('Post');
+var Doc  = mongoose.model('Doc');
 
 marked.setOptions({
   sanitize: true
 });
-
+// *********************************** LOGIN, USER etc. *******************************
 router.get('/users', function(req, res, next) {
   Account.find().exec(function(err, accounts) {
     res.render('admin/users', {
@@ -52,10 +54,19 @@ router.get('/register', function(req, res) {
   });
 });
 
+router.get('/is_name_unique/:name', function(req, res) {
+  Account.find({username : req.params.name}, function(err, user){
+    if (user.length) {
+      res.send(false);
+    }
+    else res.send(true);
+  })
+})
+
 router.post('/register', function(req, res) {
   Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
     if (err) {
-      return res.render('admin/register', { account : account });
+      return res.render('admin/register', { account : account, user: req.user });
     }
 
     passport.authenticate('local')(req, res, function () {
@@ -80,6 +91,8 @@ router.get('/projects', function(req, res, next) {
   });
 });
 
+// ***************************************** PROJECT INFORMATION *************************
+
 router.get('/project/:id', function(req, res, next) {
   Project.find().sort('position').exec( function ( err, projects, count ){
     Project.findById(req.params.id, function(err, project){
@@ -95,11 +108,15 @@ router.get('/project/:id', function(req, res, next) {
 });
 
 router.post('/save_project', function(req, res, next){
+  var cat = 'gala';
+  if (req.body.name == 'homepage'){
+    cat = 'homepage';
+  }
   new Project({
     name: req.body.name,
     title: req.body.name,
     description: '',
-    category: 'gala',
+    category: cat,
     visible: true,
     deleted: false
   }).save(function(err, project){
@@ -153,24 +170,7 @@ router.post('/delete_project', function(req, res, next) {
   });
 });
 
-// function makeZipFile(foldername, photos) {
-//   var zip = new JSZip;
-//
-//   var photoZip = zip.folder(foldername);
-// // this call will create photos/README
-//   photoZip.file(photos[0].originalName, 'public/uploads/'+photos[0].name);
-//   console.log(photos[0].name);
-//   // for (i=0; i<photos.length; i++){
-//   //   photoZip.file('public/uploads/'+photos[i].name);
-//   //   console.log(photos[i].name);
-//   // }
-//
-//   var buffer = photoZip.generate({type:"nodebuffer"});
-//   var filename = new Date() + '.zip';
-//   fs.writeFile(filename, buffer, function(err) {
-//     if (err) throw err;
-//   });
-// }
+// ***************************************** PROJECT PHOTOS ******************************
 
 router.get('/create_link/:id', function(req, res, next) {
   Project.findById(req.params.id, function(err, project) {
@@ -182,7 +182,6 @@ router.get('/create_link/:id', function(req, res, next) {
     })
   });
 });
-
 
 router.get('/delete_img/:pid/:iid', function(req, res, next) {
   Project.findById(req.params.pid, function(err, project) {
@@ -262,18 +261,28 @@ router.post('/photosort', function (req, res, next) {
   })
 
 })
-                                          // DOCS
+// ****************************************** DOCS
+
+// *********************************** see admindocs.js
 
 
-
-                                          // TRASH
+// ****************************************** TRASH **********************************
 
 router.get('/trash', function(req, res, next) {
   var del_projects = [];
   var del_photos = [];
   var del_photo_ids = [];
+  var del_docPosts = [];
+  Post.find().exec(function(err, posts) {
+    posts.forEach(function(post) {
+      if (post.deleted == true) {
+        del_docPosts.push(post);
+      }
+    })
+  });
 
   Project.find().exec(function(err, projects){
+
     projects.forEach(function(project) {
       if (project.deleted==true) {
         del_projects.push(project);
@@ -287,25 +296,39 @@ router.get('/trash', function(req, res, next) {
         }
       }
     });
+
     res.render('admin/trash', {
       title: 'velak',
       user: req.user,
       projects: del_projects,
       photos: del_photos,
-      photo_ids: del_photo_ids
+      photo_ids: del_photo_ids,
+      posts: del_docPosts
     });
   });
 });
 
-router.get('/retrieve_project/:id', function(req, res, next) {
-  Project.findById(req.params.id, function(err, project) {
-    project.deleted = false;
-    project.save(function(err){
-      if (!err){
-        res.redirect('/admin/trash');
-      }
+router.get('/retrieve/:item/:id', function(req, res, next) {
+  if (req.params.item == 'project') {
+    Project.findById(req.params.id, function(err, project) {
+      project.deleted = false;
+      project.save(function(err){
+        if (!err){
+          res.redirect('/admin/trash');
+        }
+      });
     });
-  });
+  }
+  if (req.params.item == 'post') {
+    Post.findById(req.params.id, function(err, post) {
+      post.deleted = false;
+      post.save(function(err){
+        if (!err){
+          res.redirect('/admin/trash');
+        }
+      });
+    });
+  }
 });
 
 router.get('/retrieve_photo/:project_id/:photo_id', function(req, res, next) {
@@ -317,16 +340,25 @@ router.get('/retrieve_photo/:project_id/:photo_id', function(req, res, next) {
       if (!err){
         res.redirect('/admin/trash');
       }
-    })
-  })
-})
-
-router.get('/empty_del_projects', function(req, res, next) {
-  Project.remove({deleted: true}, function(err, projects){
-    if (!err) {
-      res.redirect('/admin/trash');
-    }
+    });
   });
+});
+
+router.get('/empty_del/:items', function(req, res, next) {
+  if (req.params.items == 'projects') {
+    Project.remove({deleted: true}, function(err, projects){
+      if (!err) {
+        res.redirect('/admin/trash');
+      }
+    });
+  };
+  if (req.params.items == 'posts') {
+    Post.remove({deleted: true}, function(err, projects){
+      if (!err) {
+        res.redirect('/admin/trash');
+      }
+    });
+  };
 });
 
 router.get('/empty_del_photos/:id', function(req, res, next) {

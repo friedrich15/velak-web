@@ -51,6 +51,8 @@ block content
               if project.name == 'homepage'
                 li(name= project._id).li-project.li-home
                   a(href='/admin/project/' + project._id, class= 'is-in-' + project.category).pjax.pLink= project.name
+                  a(id=project._id, onclick='deleteProject(this.id, this)').deleteLink
+                    span.glyphicon.glyphicon-remove-circle
               else if project.deleted == false  
                 li(data-project-id= project.id, name= project._id).li-project
                   a(href='/admin/project/' + project._id, class= 'is-in-' + project.category).pjax.pLink= project.name

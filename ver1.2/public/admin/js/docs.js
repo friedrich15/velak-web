@@ -1,13 +1,6 @@
 $(window).load(function(){
-  chatScrollToBottom();
   getChatMsgs();
 });
-
-
-function chatScrollToBottom() {
-  var elem = document.getElementById('chat-text');
-  elem.scrollTop = elem.scrollHeight;
-}
 
 function getChatMsgs() {
   $.get('/admin/docs/get_chat_msgs', function(res){

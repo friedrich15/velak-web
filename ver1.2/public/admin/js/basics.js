@@ -122,6 +122,7 @@ function filterItems(category, reload) {
 }
 
 function updateProject() {
+
   var title = $('#input-title').val();
   var name = $('#input-name').val();
   var date = $('#input-date').val();
@@ -129,28 +130,37 @@ function updateProject() {
   var id = $('.active-link').attr('name');
   var category = $( '#category-selector option:selected' ).text();
   var visible = $('#project-visible').is(':checked');
-  console.log(date);
-  $.ajax({
-    type: 'POST',
-    url: '/admin/update_project',
-    data: {
-      'id': id,
-      'title': title,
-      'name': name,
-      'date': date,
-      'description': description,
-      'category': category,
-      'visible': visible
-    }
-  }).done(function(project){
-    var messageText = 'Saving of "' + project.name + '" successful!';
-    var message = {
-      type : 'success',
-      text : messageText
-    }
-    openPage('/admin/project/'+ project.id, message)
-  })
 
+  if (name == '') {
+    showAlert('danger', 'Cannot save: Set a NAME!');
+    $('#input-name').parent().addClass('has-error');
+  }
+  if (date == '') {
+    showAlert('danger', 'Cannot save: Set a DATE!');
+    $('#input-date').parent().addClass('has-error');
+  }
+  if (name != '' && date != ''){
+    $.ajax({
+      type: 'POST',
+      url: '/admin/update_project',
+      data: {
+        'id': id,
+        'title': title,
+        'name': name,
+        'date': date,
+        'description': description,
+        'category': category,
+        'visible': visible
+      }
+    }).done(function(project){
+      var messageText = 'Saving of "' + project.name + '" successful!';
+      var message = {
+        type : 'success',
+        text : messageText
+      }
+      openPage('/admin/project/'+ project.id, message)
+    })
+  }
 }
 
 function saveProject(name) {

@@ -96,8 +96,7 @@ function finishedLoading(responseHtml, bonus) {
   make_sortable();
   $('.colorpick').colorpicker({format: 'hex'}).on('hidePicker.colorpicker', function(e){saveColor(e)});
 
-  if ($('#docs-content').length > 0) {
-    chatScrollToBottom();
+  if ($('#docs-content')) {
     getChatMsgs();
   }
 

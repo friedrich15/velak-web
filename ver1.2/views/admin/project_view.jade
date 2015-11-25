@@ -65,15 +65,19 @@ block content
             a(href='#photo-container', data-toggle='tab', aria-controls='photo-container', role='tab').tab-link media
         .tab-content
           #info-container(role='tabpanel').tab-pane.active
-            label Name:
-            input(type='text', name='name', id='input-name', value= currentProject.name).form-control
-            label Title:
-            input(type='text', name='title' id='input-title', value= currentProject.title).form-control
-            if currentProject.category != 'homepage'
-              label Date:
-              input(type='date', name='date' id='input-date', value= currentProject.dateInput).form-control
-              label Time:
-              input(type='time', name='time' id='input-time', value= currentProject.time).form-control
+            .form-group  
+              label Name:
+              input(type='text', name='name', id='input-name', value= currentProject.name).form-control
+            .form-group  
+              label Title:
+              input(type='text', name='title' id='input-title', value= currentProject.title).form-control
+            if currentProject.category != 'homepage' && currentProject.category != 'home'
+              .form-group  
+                label Date:
+                input(type='date', name='date' id='input-date', value= currentProject.dateInput).form-control
+              .form-group
+                label Time:
+                input(type='time', name='time' id='input-time', value= currentProject.time).form-control
             label Description: 
             p(style='color: #aaa;')
               span (use 
@@ -124,7 +128,7 @@ block content
                       li(id=photo.name, data-photo-id= photo.name, data-position= photo.position).ui-state-default.img-item
                         .form-inline.img-thumb
                           input(id='check'+photo.name, name='imgDelete', type='checkbox').imgCheck.form-group
-                          .div-img.form-group  
+                          .div-img.form-group
                             img(src= '../../uploads/small/small'+ photo.name)
                           .form-group.form-inline.img-caption
                             .div-photo-name.form-group

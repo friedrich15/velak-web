@@ -22,3 +22,32 @@ function saveColor(e) {
     console.log(res);
   })
 }
+
+function isNameUnique(callback) {
+  var name = $('#username').val();
+  $.get('/admin/is_name_unique/'+name, function(res) {
+    // console.log(res);
+    callback(res);
+
+  });
+}
+
+$(document).on('submit', '#register-form', function(event) {
+  event.preventDefault();
+  var obj = this;
+  isNameUnique(function(result){
+    if (result===true){
+      obj.submit();
+    }
+    else {
+      $('#username').addClass('name-error')
+      $('.name-exists').show();
+    }
+  })
+})
+
+function removeTag(obj) {
+  console.log('asd');
+  $(obj).removeClass('name-error');
+  $('.name-exists').hide();
+}

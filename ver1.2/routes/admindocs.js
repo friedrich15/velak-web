@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
 
 function load_messages(callback) {
   var result;
-  Message.find().sort('timestamp').exec(function(err, messages){
+  Message.find().sort('-timestamp').exec(function(err, messages){
     result = messages;
     callback(result);
   });

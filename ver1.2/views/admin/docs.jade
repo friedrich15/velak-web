@@ -32,6 +32,12 @@ block content
       #docs-content
         #docs-chat
           #chat  
+            p notifications
+            #chat-input
+              .input-group
+                input(type='text', data-user= user.id, onkeypress='chat_checkKey(event)').form-control#chat-msg
+                span.input-group-btn
+                  button(type='button', onclick='sendChatMsg()').btn.btn-default send
             #chat-content
               #chat-text-container
                 #chat-text
@@ -44,11 +50,7 @@ block content
                     //-       p.msg-user= msg.byUser
                     //-         span.msg-time= msg.timeHtml
                     //-       p= msg.text
-            #chat-input
-              .input-group
-                input(type='text', data-user= user.id, onkeypress='chat_checkKey(event)').form-control#chat-msg
-                span.input-group-btn
-                  button(type='button', onclick='sendChatMsg()').btn.btn-default send
+            
         #docs-main
           .content-container
             .post-container  

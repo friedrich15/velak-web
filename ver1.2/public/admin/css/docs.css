@@ -21,12 +21,13 @@
 	background: rgba(255,0,0,0.4);
 }
 
+
                           /*CHAT*/
 #docs-chat {
   position: fixed;
   width: 23em;
-  background: #eee;
-  box-shadow: 0 0 .6em #ccc;
+  background: #fafafa;
+  border-left: 1px solid #ddd;
   float: right;
   height: 100%;
   right: 0;
@@ -36,10 +37,26 @@
   width: 100%;
   height: 100%;
   margin: 0;
-  border: 1px solid #ddd;
+  /*border: 1px solid #ddd;*/
   display: table;
 }
+
+#chat p {
+  text-align: center;
+  margin-top: .4em;
+  color: #666;
+}
+
+#chat-input {
+  height: 40px;
+  display: table-row;
+}
+#chat-input .input-group {
+  padding: .2em 1em;
+}
+
 #chat-content {
+  text-align: left;
   background-color: #fff;
   display: table-row;
   height: 100%;
@@ -54,7 +71,7 @@
 #chat-text {
   position: absolute;
   top: .5em;
-  bottom: .5em;
+  bottom: 3.5em;
   left: .3em;
   right: .3em;
   /*width: 100%;*/
@@ -70,7 +87,7 @@
   border: 2px solid #aaa;
   border-radius: .3em;
   margin: .2em;
-  padding: .2em;
+  padding: .5em;
   font-size: .8em;
   background-color: #f6f6f6;
 }
@@ -98,13 +115,7 @@
 .msg-time:hover {
   color: #555;
 }
-#chat-input {
-  height: 110px;
-  display: table-row;
-}
-#chat-input .input-group {
-  padding: 0 1em;
-}
+
                                 /*DOCS*/
 #docs-main {
   overflow: hidden;
