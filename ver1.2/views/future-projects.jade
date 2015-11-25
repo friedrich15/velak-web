@@ -2,7 +2,7 @@ h3 coming up:
 each project in projects
   if project.visible == true && project.deleted != true
     a(href='/site/'+project.category+'/'+project._id).project-container
-      .info-box
+      .info-box(class=project.category)
         h1= project.title
         p= project.dateHtml
         p!= project.description

@@ -39,6 +39,16 @@ body {
   width: 7em;
   text-align: center;
 }
+.li-menu.gala {
+  border-color: #aaf;
+}
+.li-menu.export {
+  border-color: #afa;
+}
+.li-menu.other {
+  border-color: #faf;
+}
+
 .li-menu:hover {
   background-color: #eee;
 
@@ -46,13 +56,14 @@ body {
 .li-menu:hover a {
   color: #333;
 }
-.li-menu.active {
-  background-color: #eee;
-  border-color: #777;
-  /*box-shadow: 0 0 .2em #aaa;*/
+.gala.active {
+  background-color: #eef;
 }
-.li-menu.active a {
-  color: #333;
+.export.active {
+  background-color: #efe;
+}
+.other.active {
+  background-color: #fef;
 }
 .menu-link {
   width: 100%;
@@ -74,8 +85,7 @@ body {
 #side-menu ul li {
   /*border: 1px solid #ccc;*/
   /*margin-bottom: .2em;*/
-  padding: 1px .1em;
-  line-height: 1.1em;
+  padding: 0 .1em;
 }
 
 #content {
@@ -88,19 +98,30 @@ body {
   width: 60%;
   margin: 0;
   background-color: #000;
-  /*border: .8em solid #a4f;*/
+  border: 1.3em solid #ccc;
   padding: 6em 4em;
-  color: #666;
+  color: #fff;
   letter-spacing: .2em;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   font-weight: normal;
-  line-height: 1.5em;
   /*box-shadow: 0 0 1em #333;*/
 }
+.info-box.home {
+  border-color: #ccc;
+}
+.info-box.gala {
+  border-color: #aaf;
+}
+.info-box.export {
+  border-color: #afa;
+}
+.info-box.other {
+  border-color: #faf;
+}
+
 .info-box h2 {
   font-size: 1.5em;
   font-weight: normal;
-  margin-bottom: 1em;
 }
 
 .photo-list {

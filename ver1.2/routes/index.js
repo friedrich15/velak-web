@@ -23,11 +23,15 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  Project.findOne({name: 'homepage'}, function(err, project){
-    res.render('index', {
-      title: 'velak',
-      project: project
-    });
+  Project.find({category: 'home'}, function(err, projects){
+    Project.findOne({name: 'homepage'}, function(err, homepage){
+      res.render('index', {
+        title: 'velak',
+        homepage: homepage,
+        projects: projects
+      });
+    })
+
   });
 });
 

@@ -2,7 +2,8 @@
 
 admin:
 
-  TODO: find solution for category-tabs 
+
+  TODO: find solution for category-tabs
   TODO: download ALL photos (with original filename)
   (TODO): backbutton on info/media tabs
 
@@ -13,6 +14,8 @@ trash:
 
 ***************************** MAIN PAGE *******************************
 
+    FIXME: no projects - alternative site
+    TODO: extern links: target blank
 all:
   infinite scroll:
     TODO: load projects above when scrolling up (?)

@@ -9,11 +9,11 @@ block content
           img(src='/img/menu-icon-white.png')
       li.logo
         a(href='/')#home-link.pjax.logo-style velak
-      li(class=(site=='gala'?'active':'')).li-menu
+      li(class=(site=='gala'?'active':'')).li-menu.gala
         a(href='/site/gala').pjax.menu-link gala
-      li(class=(site=='export'?'active':'')).li-menu
+      li(class=(site=='export'?'active':'')).li-menu.export
         a(href='/site/export').pjax.menu-link export
-      li(class=(site=='other'?'active':'')).li-menu
+      li(class=(site=='other'?'active':'')).li-menu.other
         a(href='/site/other').pjax.menu-link other
   //- - var currentProject = 'hausi'
   main

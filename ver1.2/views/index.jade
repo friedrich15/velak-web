@@ -10,30 +10,24 @@ block content
           img(src='/img/menu-icon-white.png')
       li.logo
         a(href='/')#home-link.pjax.logo-style velak
-      li.li-menu
+      li.li-menu.gala
         a(href='/site/gala').pjax.menu-link gala
-      li.li-menu
+      li.li-menu.export
         a(href='/site/export').pjax.menu-link export
-      li.li-menu
+      li.li-menu.other
         a(href='/site/other').pjax.menu-link other
   
   main
     nav#side-menu
       
       ul.side-list.list-unstyled.mobile-hidden
-        li.li-side
-          a.side-link newsletter
-        li.li-side  
-          a.side-link about
-        li.li-side  
-          a.side-link FAQ
-        li.li-side  
-          a.side-link contact
-      
+        each project in projects      
+          li(data-project-id=project.id, id='li'+project.id).li-side
+            a(href='/site/home/'+project._id, onclick='hideSideMenu()').pjax.side-link= project.name
   
     #content
       #homepage
-        .info-box
-          h1= project.title
-          p!= project.description
+        .info-box.home
+          h1= homepage.title
+          p!= homepage.description
       #future-projects
