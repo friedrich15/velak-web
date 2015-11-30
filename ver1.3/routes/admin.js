@@ -192,6 +192,7 @@ router.get('/delete_img/:pid/:iid', function(req, res, next) {
         console.log(photos[i].name)
         iname = photos[i].originalName;
         photos[i].deleted = true;
+
       }
     }
     project.save(function(){
@@ -344,6 +345,24 @@ router.get('/retrieve_photo/:project_id/:photo_id', function(req, res, next) {
   });
 });
 
+function delete_photo(id, cb) {
+
+  Project.findOne({'photo._id': ObjectId(id)}, function(err, project){
+    fs.unlink(project.photo.id(id).filePath, function(){
+      fs.unlink('public/uploads/small/small'+project.photo.id(id).name, function(){
+        project.photo.id(id).remove(function(){
+
+          cb('deleted');
+
+
+
+        });
+
+      });
+    });
+  });
+}
+
 router.get('/empty_del/:items', function(req, res, next) {
   if (req.params.items == 'projects') {
     Project.remove({deleted: true}, function(err, projects){
@@ -363,18 +382,12 @@ router.get('/empty_del/:items', function(req, res, next) {
 
 router.get('/empty_del_photos/:id', function(req, res, next) {
   var id = req.params.id;
+  delete_photo(id, function() {
+    res.send(id);
+    console.log('done!');
 
-  Project.findOne({'photo._id': ObjectId(id)}, function(err, project){
-
-    project.photo.id(id).remove();
-    project.save(function(err){
-      if (err) res.send('err');
-      if (!err) {
-        res.send(id);
-        // console.log(id);
-      }
-    })
   })
+
 });
 
 

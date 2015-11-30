@@ -21,7 +21,7 @@ function empty_photo_trash(ids) {
     url: '/admin/empty_del_photos/' + this_id
   }).done(function(res){
     if (res != 'err') {
-
+      console.log('res= '+res);
       if (ids.length!=0){
         $('#'+ res).fadeOut(100);
         empty_photo_trash(ids);
