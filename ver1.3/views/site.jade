@@ -1,0 +1,27 @@
+extends layout
+
+block content
+
+  nav#top-menu    
+    ul.menu-list.list-inline
+      li#mobile-li
+        a#mobile-menu.notactive(onclick='showSideMenu()')
+          img(src='/img/menu-icon-white.png')
+      li.logo
+        a(href='/')#home-link.pjax.logo-style velak
+      li#home-link.li-menu
+        a(href='/site/program', onclick='hideSideMenu()').pjax.menu-link program
+      each link in links
+        li(class=(link.name == site?'active':'')).li-menu
+          a(href='/site/'+link.name, onclick='hideSideMenu()').pjax.menu-link= link.name
+  main
+    
+    nav#side-menu
+      //- ul.side-list.list-unstyled.mobile-hidden
+      //-   each project in projects          
+      //-     li(class=(project._id==currentProject._id ? 'active now-last initial':''), data-project-id=project.id, id='li'+project.id).li-side
+      //-       a(href='/site/'+site+'/'+project._id).pjax.side-link= project.name
+
+    #content
+      p= currentProject.name
+      p!= currentProject.description

@@ -1,0 +1,32 @@
+extends layout
+
+block content
+
+  nav#top-menu    
+    
+    ul.menu-list.list-inline
+      li#mobile-li
+        a#mobile-menu.notactive(onclick='showSideMenu()')
+          img(src='/img/menu-icon-white.png')
+      li.logo
+        a(href='/')#home-link.pjax.logo-style velak
+      li.li-menu.gala
+        a(href='/site/program').pjax.menu-link program
+      each project in projects
+        li.li-menu.export
+          a(href='/site/'+project.name).pjax.menu-link= project.name
+  
+  main
+    nav#side-menu
+      
+      //- ul.side-list.list-unstyled.mobile-hidden
+      //-   each project in projects      
+      //-     li(data-project-id=project.id, id='li'+project.id).li-side
+      //-       a(href='/site/home/'+project._id, onclick='hideSideMenu()').pjax.side-link= project.name
+  
+    #content
+      #homepage
+        .info-box.home
+          h1= homepage.title
+          p!= homepage.description
+      #future-projects

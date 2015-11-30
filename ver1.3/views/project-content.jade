@@ -1,0 +1,13 @@
+.project-container(id=project._id) 
+  .info-box(class=project.category)
+    h2= project.title
+    p!= project.description
+  ul.photo-list.list-unstyled
+    each photo in project.photo
+      if photo.deleted != true && photo.filePublic == true  
+        li(data-position=photo.position)
+          .img-container
+            img(src= '/uploads/small/small' +photo.name, onerror="this.style.display='none'")
+            if photo.description
+              .photo-description
+                p= photo.description
