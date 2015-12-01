@@ -345,43 +345,50 @@ router.get('/retrieve_photo/:project_id/:photo_id', function(req, res, next) {
   });
 });
 
+function fileExists(filePath){
+  try
+  {
+    return fs.statSync(filePath).isFile();
+  }
+  catch (err)
+  {
+    console.log(err);
+    return false;
+  }
+}
+
 function delete_photo(id, cb) {
 
   Project.findOne({'photo._id': ObjectId(id)}, function(err, project){
-    fs.unlink(project.photo.id(id).filePath, function(){
-      fs.unlink('public/uploads/small/small'+project.photo.id(id).name, function(){
-        project.photo.id(id).remove(function(){
+    if (fileExists(project.photo.id(id).filePath)){
+      fs.unlinkSync(project.photo.id(id).filePath);
+    }
+    if (fileExists('public/uploads/small/small'+project.photo.id(id).name)){
 
-          cb('deleted');
-
-
-
-        });
-
-      });
+      fs.unlinkSync('public/uploads/small/small'+project.photo.id(id).name);
+    }
+    project.photo.id(id).remove(function(err){
+      console.log(err);
+      cb('deleted');
     });
+
+
   });
 }
 
-function fileExists(filePath)
-{
-    try
-    {
-        return fs.statSync(filePath).isFile();
-    }
-    catch (err)
-    {
-        return false;
-    }
-}
+
 
 router.get('/empty_del/:items', function(req, res, next) {
   if (req.params.items == 'projects') {
     Project.find({deleted: true}, function(err, projects) {
       for (var i in projects) {
         for (var j in projects[i].photo.toObject()) {
-          fs.unlinkSync(projects[i].photo[j].filePath);
-          fs.unlinkSync('public/uploads/small/small'+projects[i].photo[j].name);
+          if (fileExists(projects[i].photo[j].filePath)){
+            fs.unlinkSync(projects[i].photo[j].filePath);
+          }
+          if (fileExists('public/uploads/small/small'+projects[i].photo[j].name)){
+            fs.unlinkSync('public/uploads/small/small'+projects[i].photo[j].name);
+          }
         }
         projects[i].remove();
       }
