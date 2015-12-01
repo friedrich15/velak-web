@@ -82,6 +82,7 @@ body {
 #content {
   padding-top: 5em;
   margin-left: 9em;
+  margin-right: .4em;
   overflow: hidden;
 }
 

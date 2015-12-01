@@ -363,19 +363,45 @@ function delete_photo(id, cb) {
   });
 }
 
+function fileExists(filePath)
+{
+    try
+    {
+        return fs.statSync(filePath).isFile();
+    }
+    catch (err)
+    {
+        return false;
+    }
+}
+
 router.get('/empty_del/:items', function(req, res, next) {
   if (req.params.items == 'projects') {
-    Project.remove({deleted: true}, function(err, projects){
-      if (!err) {
-        res.redirect('/admin/trash');
+    Project.find({deleted: true}, function(err, projects) {
+      for (var i in projects) {
+        for (var j in projects[i].photo.toObject()) {
+          fs.unlinkSync(projects[i].photo[j].filePath);
+          fs.unlinkSync('public/uploads/small/small'+projects[i].photo[j].name);
+        }
+        projects[i].remove();
       }
-    });
+      res.redirect('/admin/trash')
+    })
   };
   if (req.params.items == 'posts') {
-    Post.remove({deleted: true}, function(err, projects){
-      if (!err) {
-        res.redirect('/admin/trash');
+    Post.find({deleted: true}, function(err, posts){
+      for (var i in posts) {
+        for (var j in posts[i].docs.toObject()) {
+          if (fileExists(posts[i].docs[j].filePath)) {
+            fs.unlinkSync(posts[i].docs[j].filePath);
+          }
+        }
+        posts[i].remove();
       }
+      res.redirect('/admin/trash')
+      // if (!err) {
+      //   res.redirect('/admin/trash');
+      // }
     });
   };
 });
@@ -384,8 +410,6 @@ router.get('/empty_del_photos/:id', function(req, res, next) {
   var id = req.params.id;
   delete_photo(id, function() {
     res.send(id);
-    console.log('done!');
-
   })
 
 });
