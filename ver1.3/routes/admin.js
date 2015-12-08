@@ -10,8 +10,10 @@ var fs = require('fs');
 var JSZip = require("jszip");
 var moment = require('moment');
 var Message = mongoose.model('Message');
-var Post  = mongoose.model('Post');
-var Doc  = mongoose.model('Doc');
+var Track = mongoose.model('Track');
+var multer = require('multer');
+var uploadaudio = multer({dest:'public/uploads/audio/'});
+var id3 = require('id3js');
 
 marked.setOptions({
   sanitize: true
@@ -262,6 +264,53 @@ router.post('/photosort', function (req, res, next) {
   })
 
 })
+
+// ****************************************** AUDIO **********************************
+
+router.get('/audio', function(req, res, next) {
+  Track.find().sort('position').exec(function(err, tracks) {
+    res.render('admin/audio', {
+      title: 'velak',
+      tracks: tracks,
+      user: req.user
+    });
+  })
+
+});
+
+router.post('/audio_upload', uploadaudio.array('files'), function(req, res, next) {
+  var files = req.files;
+  for (i=0; i<files.length; i++) {
+    var file = files[i];
+    var extension = file.originalname.split('.').pop();
+    // id3({ file: file.path, type: id3.OPEN_LOCAL }, function(err, tags) {
+    console.log(file.path);
+    new Track({
+      name          : file.filename,
+      originalName  : file.originalname,
+      fileSize      : file.filesize,
+      // mp3tags       : tags,
+      filePath      : file.path,
+      fileExtension : extension,
+      fileType      : file.mimetype,
+      filePublic    : true,
+      deleted       : false
+    }).save();
+    // });
+
+  }
+  res.redirect('/admin/audio');
+});
+
+router.get('/delete_audio/:id', function(req, res, next) {
+  Track.findById(req.params.id, function(err, track){
+    track.deleted=true;
+    track.save(function(){
+      res.redirect('/admin/audio');
+    })
+  })
+})
+
 // ****************************************** DOCS
 
 // *********************************** see admindocs.js
@@ -345,81 +394,182 @@ router.get('/retrieve_photo/:project_id/:photo_id', function(req, res, next) {
   });
 });
 
-function fileExists(filePath){
-  try
-  {
-    return fs.statSync(filePath).isFile();
+function remove_photo(photo, path, smallpath, cb) {
+
+  try {
+    fs.unlinkSync(path);
+    console.log('hey');
+    fs.unlinkSync(smallpath);
+    cb(photo);
   }
-  catch (err)
-  {
+  catch (err) {
+    cb(photo, err);
+  }
+}
+
+function iterate_ids(ids, cb) {
+  console.log('hello: '+ids);
+  var id = ids.splice(0,1);
+  id = JSON.stringify(id)
+  console.log('hello2: '+ids);
+  console.log('now: '+id);
+  Project.findOne({'photo._id': ObjectId(id)}, function(err, project) {
     console.log(err);
-    return false;
-  }
-}
-
-function delete_photo(id, cb) {
-
-  Project.findOne({'photo._id': ObjectId(id)}, function(err, project){
-    if (fileExists(project.photo.id(id).filePath)){
-      fs.unlinkSync(project.photo.id(id).filePath);
-    }
-    if (fileExists('public/uploads/small/small'+project.photo.id(id).name)){
-
-      fs.unlinkSync('public/uploads/small/small'+project.photo.id(id).name);
-    }
-    project.photo.id(id).remove(function(err){
+    var photo = project.photo.id(ObjectId(id));
+    var path = photo.filePath;
+    var smallpath = 'public/uploads/small/small' + photo.name;
+    remove_photo(photo, path, smallpath, function(my_photo, err){
       console.log(err);
-      cb('deleted');
-    });
-
-
-  });
-}
-
-
-
-router.get('/empty_del/:items', function(req, res, next) {
-  if (req.params.items == 'projects') {
-    Project.find({deleted: true}, function(err, projects) {
-      for (var i in projects) {
-        for (var j in projects[i].photo.toObject()) {
-          if (fileExists(projects[i].photo[j].filePath)){
-            fs.unlinkSync(projects[i].photo[j].filePath);
-          }
-          if (fileExists('public/uploads/small/small'+projects[i].photo[j].name)){
-            fs.unlinkSync('public/uploads/small/small'+projects[i].photo[j].name);
-          }
-        }
-        projects[i].remove();
-      }
-      res.redirect('/admin/trash')
+      my_photo.remove()
     })
-  };
-  if (req.params.items == 'posts') {
-    Post.find({deleted: true}, function(err, posts){
-      for (var i in posts) {
-        for (var j in posts[i].docs.toObject()) {
-          if (fileExists(posts[i].docs[j].filePath)) {
-            fs.unlinkSync(posts[i].docs[j].filePath);
-          }
-        }
-        posts[i].remove();
-      }
-      res.redirect('/admin/trash')
-      // if (!err) {
-      //   res.redirect('/admin/trash');
-      // }
-    });
-  };
-});
-
-router.get('/empty_del_photos/:id', function(req, res, next) {
-  var id = req.params.id;
-  delete_photo(id, function() {
-    res.send(id);
+    project.save();
+    if (ids.length>0) {
+      console.log('nauu');
+      // iterate_ids(ids, cb)
+    }
+    else {
+      cb('no more ids')
+    }
   })
 
-});
 
+}
+
+router.post('/empty_trash/:kind', function(req, res, next) {
+  var ids = JSON.parse(req.body.ids);
+  // console.info(ids);
+  iterate_ids(ids, function(msg){
+    console.log(msg);
+  });
+})
+
+// router.get('/empty_trash/:kind', function(req, res, next) {
+//   var kind = req.params.kind;
+//   if (kind == 'photo') {
+//     Project.find({'photo.deleted': true, 'deleted': false}, function(err, projects){
+//       projects.forEach(function(project) {
+//         // console.log(project.name);
+//         for (var photo in project.photo.toObject()) {
+//
+//           var myphoto = project.photo[photo];
+//           console.log('before: ' + photo);
+//           if (myphoto!= undefined) {
+//             console.log(myphoto.originalName);
+//             // if (myphoto.deleted == true){
+//             //
+//             //   var filepath = myphoto.filePath;
+//             //   var smallpath = 'public/uploads/small/small' + myphoto.name;
+//             //   remove_photo(myphoto, filepath, smallpath, function(myphoto, err) {
+//             //     // console.log(photo.originalName);
+//             //     myphoto.remove();
+//             //
+//             //   })
+//             // }
+//           }
+//         }
+//           // console.log(projects[i].photo[j].name, projects[i].photo[j].deleted);
+//             // var photo = projects[i].photo[j];
+//             //
+//             //
+//         project.save();
+//       });
+//
+//
+//     })
+//   }
+//
+//
+//   // Project.findOne({'photo._id' : ObjectId(id)}, function(err, project) {
+//   //   try {
+//   //     fs.unlink(project.photo._id(id).filePath, function(){
+//   //       project.photo._id(id).remove(function(){
+//   //         res.send(id);
+//   //       })
+//   //     })
+//   //   }
+//   //   catch (err) {
+//   //     project.photo._id(id).remove(function(){
+//   //       res.send(id);
+//   //     })
+//   //   }
+//   // })
+// })
+
+// function fileExists(filePath){
+//   try
+//   {
+//     return fs.statSync(filePath).isFile();
+//   }
+//   catch (err)
+//   {
+//     return false;
+//   }
+// }
+//
+// function delete_photo(id, cb) {
+//
+//   Project.findOne({'photo._id': ObjectId(id)}, function(err, project){
+//     if (fileExists(project.photo.id(id).filePath)){
+//       fs.unlinkSync(project.photo.id(id).filePath);
+//     }
+//     if (fileExists('public/uploads/small/small'+project.photo.id(id).name)){
+//
+//       fs.unlinkSync('public/uploads/small/small'+project.photo.id(id).name);
+//     }
+//     project.photo.id(id).remove(function(err, photo){
+//
+//       console.log(photo);
+//       cb('deleted');
+//     });
+//
+//
+//   });
+// }
+//
+//
+//
+// router.get('/empty_del/:items', function(req, res, next) {
+//   if (req.params.items == 'projects') {
+//     Project.find({deleted: true}, function(err, projects) {
+//       for (var i in projects) {
+//         for (var j in projects[i].photo.toObject()) {
+//           if (fileExists(projects[i].photo[j].filePath)){
+//             fs.unlinkSync(projects[i].photo[j].filePath);
+//           }
+//           if (fileExists('public/uploads/small/small'+projects[i].photo[j].name)){
+//             fs.unlinkSync('public/uploads/small/small'+projects[i].photo[j].name);
+//           }
+//         }
+//         projects[i].remove();
+//       }
+//       res.redirect('/admin/trash')
+//     })
+//   };
+//   if (req.params.items == 'posts') {
+//     Post.find({deleted: true}, function(err, posts){
+//       for (var i in posts) {
+//         for (var j in posts[i].docs.toObject()) {
+//           if (fileExists(posts[i].docs[j].filePath)) {
+//             fs.unlinkSync(posts[i].docs[j].filePath);
+//           }
+//         }
+//         posts[i].remove();
+//       }
+//       res.redirect('/admin/trash')
+//       // if (!err) {
+//       //   res.redirect('/admin/trash');
+//       // }
+//     });
+//   };
+// });
+//
+// router.get('/empty_del_photos/:id', function(req, res, next) {
+//   var id = req.params.id;
+//   delete_photo(id, function(msg) {
+//     res.send(id);
+//   })
+//
+// });
+//
 
 module.exports = router;

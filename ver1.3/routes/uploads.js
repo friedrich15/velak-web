@@ -6,17 +6,12 @@ var Photo  = mongoose.model('Photo');
 var multer = require('multer');
 var upload = multer({dest: 'public/uploads/'});
 var fs = require('fs');
+var mkdirp = require('mkdirp')
 var sizeOf = require('image-size');
 var im = require('imagemagick');
 
-function resizeImage(file, img, width) {
-  width = width/2;
-  gm(img)
-  .resize(width)
-  .write('public/uploads/small/small'+file.filename, function(err){
-    if (err) console.log(err);
-  });
-}
+
+
 
 router.post('/photo_upload/:id', upload.single('file'), function(req, res, next) {
   Project.findById(req.params.id, function(err, project) {
@@ -36,6 +31,7 @@ router.post('/photo_upload/:id', upload.single('file'), function(req, res, next)
       if (dimensions.height > 800) {height = 800; width = Math.round(dimensions.width / (dimensions.height/height))}
     }
     console.log(height, width);
+
     im.resize({
       srcPath: actualFile,
       dstPath: 'public/uploads/small/small' + file.filename,

@@ -1,0 +1,11 @@
+#audio-list {
+  display: table;
+}
+#audio-list li {
+  display: table-row;
+}
+
+.li-cell {
+  display: table-cell;
+  padding-right: 1em;
+}

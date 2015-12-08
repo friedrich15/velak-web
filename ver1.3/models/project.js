@@ -15,12 +15,14 @@ var mongoose = require('mongoose'),
       deleted       : Boolean
     }),
 
-    Audio = new Schema({
+    Track = new Schema({
       name          : String,
       originalName  : String,
       fileSize      : Number,
-      description   : String,
+      mp3tags       : Array,
       position      : Number,
+      fileExtension : String,
+      fileType      : String,
       filePath      : String,
       filePublic    : Boolean,
       deleted       : Boolean
@@ -39,7 +41,7 @@ var mongoose = require('mongoose'),
       descriptionVersion  : [String],
       category            : String,
       photo               : [Photo],
-      audio               : [Audio],
+      audio               : [Track],
       photoLink           : String,
       visible             : Boolean,
       deleted             : Boolean
@@ -75,6 +77,6 @@ mongoose.model('Post', Post);
 mongoose.model('Doc', Doc);
 mongoose.model('Project', Project);
 mongoose.model('Photo', Photo);
-mongoose.model('Audio', Audio);
+mongoose.model('Track', Track);
 
 mongoose.connect('mongodb://velakAdmin:asd0Admin@localhost/velakdb');
