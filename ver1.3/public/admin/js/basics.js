@@ -14,6 +14,7 @@ function make_sortable(){
   $('#project-list').on('sortupdate', function(event, ui){
     var ul = ui.item.parent();
     var dataObj = { };
+    var projectId;
     ul.children('li').each(function(i) {
       var li = $(this);
       projectId = li.data('projectId');
@@ -25,6 +26,25 @@ function make_sortable(){
       type: 'post',
       data: dataObj
     }).done(function() {
+      // location.reload();
+    });
+  });
+  $('#audio-list').sortable({ cancel: '.li-header' });
+  $('#audio-list').on('sortupdate', function(event, ui){
+    var ul = ui.item.parent();
+    var dataObj = { };
+    var trackId;
+    ul.children('.list-child').each(function(i) {
+      var li = $(this);
+      trackId = li.data('trackId');
+      dataObj['position' + trackId] = i;
+    });
+    console.log(dataObj);
+    $.ajax({
+      url: '/admin/tracksort',
+      type: 'post',
+      data: dataObj
+    }).done(function() {
       location.reload();
     });
   });
@@ -32,6 +52,7 @@ function make_sortable(){
     var ul = ui.item.parent();
     var id = ul.data('projectId')
     var dataObj = { };
+    var photoId;
     dataObj['id'] = id;
     ul.children('li').each(function(i) {
       var li = $(this);

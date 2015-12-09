@@ -142,3 +142,8 @@ body {
   padding: .2em;
   cursor: default;
 }
+
+#audio-player {
+  width: 40%;
+  margin: 0 auto;
+}

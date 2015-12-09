@@ -30,7 +30,6 @@ block content
               a(href="/admin/logout")
                 span.glyphicon.glyphicon-log-out
     main
-      h2 AUDIO
       #audio-upload
         form(action='/admin/audio_upload', method='post', enctype='multipart/form-data')
           label(for='input_audio')
@@ -39,11 +38,28 @@ block content
       #audio-list-container
         ul#audio-list.sortable
           if tracks!=undefined
+            li.li-header
+              .li-cell
+                span filename
+              .li-cell
+                span artist
+              .li-cell
+                span title
+              .li-cell
+                span player
+              .li-cell
+                span delete
             each track in tracks
               if track.deleted !== true  
-                li
+                li(data-track-id=track.id).list-child
                   .li-cell
                     span=track.originalName
+                  each tags in track.mp3tags
+                    
+                    .li-cell
+                      span= tags.artist
+                    .li-cell
+                      span= tags.title
                   .li-cell
                     audio(controls)
                       source(src= '../../uploads/audio/'+track.name, type=track.fileType)

@@ -7,17 +7,30 @@ var ObjectId = mongoose.Types.ObjectId;
 var Project  = mongoose.model('Project');
 var marked = require('marked');
 var fs = require('fs');
+var path = require('path');
 var JSZip = require("jszip");
 var moment = require('moment');
 var Message = mongoose.model('Message');
 var Track = mongoose.model('Track');
 var multer = require('multer');
-var uploadaudio = multer({dest:'public/uploads/audio/'});
+// var uploadaudio = multer({dest:'public/uploads/audio/'});
 var id3 = require('id3js');
 
 marked.setOptions({
   sanitize: true
 });
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/audio/')
+  },
+  filename: function (req, file, cb) {
+    var rndm = Math.random().toString(36).replace(/[^a-z0-9]+/g, '').substr(0, 15);
+      cb(null,rndm + path.extname(file.originalname));
+  }
+});
+var uploadaudio = multer({ storage: storage });
+
 // *********************************** LOGIN, USER etc. *******************************
 router.get('/users', function(req, res, next) {
   Account.find().exec(function(err, accounts) {
@@ -278,28 +291,49 @@ router.get('/audio', function(req, res, next) {
 
 });
 
-router.post('/audio_upload', uploadaudio.array('files'), function(req, res, next) {
-  var files = req.files;
-  for (i=0; i<files.length; i++) {
-    var file = files[i];
-    var extension = file.originalname.split('.').pop();
-    // id3({ file: file.path, type: id3.OPEN_LOCAL }, function(err, tags) {
-    console.log(file.path);
+function new_track(files, i, cb) {
+  var file = files[i];
+  var extension = file.originalname.split('.').pop();
+  id3({ file: file.path, type: id3.OPEN_LOCAL }, function(err, tags) {
+    // console.log(tags.v1);
     new Track({
       name          : file.filename,
       originalName  : file.originalname,
       fileSize      : file.filesize,
-      // mp3tags       : tags,
+      mp3tags       : tags,
+      artist        : tags.artist,
+      title         : tags.title,
       filePath      : file.path,
       fileExtension : extension,
       fileType      : file.mimetype,
       filePublic    : true,
       deleted       : false
-    }).save();
-    // });
+    }).save(function(){
+      if (i>0) new_track(files, i-1, cb);
+      else return cb('success');
+    });
+  });
+}
 
-  }
-  res.redirect('/admin/audio');
+router.post('/audio_upload', uploadaudio.array('files'), function(req, res, next) {
+  var files = req.files;
+  new_track(files, files.length-1, function(msg){
+    if (msg=='success') {
+      res.redirect('/admin/audio')
+    }
+  })
+});
+
+router.post('/tracksort', function ( req, res, next) {
+  Track.find().exec(function (err, tracks){
+    tracks.forEach(function(track){
+
+      track.position = req.body['position' + track.id];
+      track.save();
+      console.log(track.position);
+    });
+    res.send("success");
+  });
 });
 
 router.get('/delete_audio/:id', function(req, res, next) {

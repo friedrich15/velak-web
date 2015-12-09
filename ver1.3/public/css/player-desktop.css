@@ -1,0 +1,45 @@
+#player-container {
+  font-family: Verdana;
+}
+
+#player {
+  padding: 14px;
+  background-color: #f6f6f6;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+#title {
+  font-weight: bold;
+}
+#artist {
+  font-style: italic;
+}
+#audio {
+  margin-top: 4px;
+  width: 98%;
+}
+
+#track-list {
+  display: table;
+  width: 100%;
+  margin-top: 5px;
+  padding: 0;
+  font-size: 12px;
+  cursor: pointer;
+}
+#track-list li {
+  background: #efe;
+  display: table-row;
+}
+#track-list li:hover {
+  background-color: #dfd;
+}
+.track-cell {
+  display: table-cell;
+  padding: 5px;
+
+  border: 1px solid #fff;
+  border-right: none;
+}

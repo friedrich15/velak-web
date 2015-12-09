@@ -12,6 +12,8 @@ block content
         a(href='/')#home-link.pjax.logo-style velak
       li.li-menu.gala
         a(href='/site/program').pjax.menu-link program
+      li.li-menu
+        a(href='/audio').pjax.menu-link audio
       each project in projects
         li.li-menu.export
           a(href='/site/'+project.name).pjax.menu-link= project.name

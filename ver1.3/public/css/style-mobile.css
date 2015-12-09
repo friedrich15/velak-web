@@ -75,3 +75,7 @@ body {
 .img-container {
   margin-top: .2em;
 }
+
+.audio-info {
+  display: none;
+}

@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var Account = require('../models/account');
 var Project  = mongoose.model('Project');
+var Track  = mongoose.model('Track');
 var fs = require('fs');
 var JSZip = require("jszip");
 var moment = require('moment');
@@ -52,6 +53,26 @@ router.get('/loadmore/:id', function(req, res, next){
     res.render('project-content', {
       project: project
     });
+  })
+})
+
+router.get('/audio', function(req, res, next){
+  Project.find({$and: [{category: 'home'}, {visible: true}, {deleted: false}]}, function(err, links){
+    res.render('audio', {
+      title: 'velak',
+      links: links
+    });
+  })
+})
+
+router.get('/audio/player', function(req, res, next) {
+  console.log('audioplayer');
+  Track.find({deleted: false}).sort('position').exec(function(err, tracks) {
+    console.log(tracks);
+    res.render('player', {
+      title: 'velak player',
+      tracks: tracks
+    })
   })
 })
 

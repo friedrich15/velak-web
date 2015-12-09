@@ -11,6 +11,8 @@ block content
         a(href='/')#home-link.pjax.logo-style velak
       li(class=(site=='program'?'active':''))#home-link.li-menu
         a(href='/site/program', onclick='hideSideMenu()').pjax.menu-link program
+      li.li-menu
+        a(href='/audio').pjax.menu-link audio
       each link in links
         li.li-menu
           a(href='/site/'+link.name, onclick='hideSideMenu()').pjax.menu-link= link.name
