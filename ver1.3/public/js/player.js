@@ -18,8 +18,8 @@ function play_track(obj) {
 
 
   next = $(obj).next();
-  $('.active-track').removeClass('active-track');
-  $(obj).addClass('active-track');
+  $('.active-track').removeClass('active-track playing');
+  $(obj).addClass('active-track playing');
   if (title){
     $('#title').text(title);
   }

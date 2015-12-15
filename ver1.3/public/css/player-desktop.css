@@ -84,7 +84,7 @@
 #track-list .active-track .artist {
   padding-left: 4px;
 }
-#track-list .active-track .artist:before {
+#track-list .playing .artist:before {
   content: url('../img/speaker-sm.png');
   padding-right: 5px;
   width: 6px;
