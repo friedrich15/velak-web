@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  script(type='text/javascript', src='/js/audio.js')
+  nav#top-menu    
+    ul.menu-list.list-inline
+      li#mobile-li
+        a#mobile-menu.notactive(onclick='showSideMenu()')
+          img(src='/img/menu-icon-white.png')
+      li.logo
+        a(href='/', onclick='hideSideMenu()').pjax.logo-style velak
+      li#home-link.li-menu
+        a(href='/site/program', onclick='hideSideMenu()').pjax.menu-link program
+      li.li-menu.active
+        a(href='/audio').pjax.menu-link audio
+      each link in links
+        li.li-menu
+          a(href='/site/'+link.name, onclick='hideSideMenu()').pjax.menu-link= link.name
+  //- - var currentProject = 'hausi'
+  main
+    nav#side-menu
+    #content
+      .audio-info  
+        h2 velak audio player
+        p this is the audioplayer
+        a(href='/audio/player#ext', onclick="window.open('/audio/player#ext', 'newwindow', 'width=400, height=500'); return false;") open external player
+      #audio-player

@@ -1,0 +1,43 @@
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #fafafa;
+}
+
+#header-container {
+  text-align: center;
+}
+
+.grid {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.grid-item {
+  width: 33%;
+  margin: 1px;
+}
+
+.image {
+  max-width: 100%;
+  opacity: 0;
+}
+
+.image-visible {
+  opacity: .9;
+}
+.image-visible:hover {
+  opacity: 1;
+}
+
+
+@media (max-width: 600px) {
+  .grid-item {
+    width: 49.5%;
+  }
+}
+@media (max-width: 350px) {
+  .grid-item {
+    width: 99%;
+  }
+}

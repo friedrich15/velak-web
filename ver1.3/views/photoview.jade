@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  #header-container
+    h2= project.name
+    p= project.date
+    a(onclick='zipImages()').btn.btn-default Download All
+  br
+  #gallery-container
+    .grid  
+      each photo in photos
+        if photo.deleted !== true
+          .grid-item
+            a(href='/uploads/' + photo.name, download= photo.originalName)
+              img(src= '/uploads/' + photo.name).image
+      

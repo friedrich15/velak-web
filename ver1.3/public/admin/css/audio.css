@@ -1,0 +1,28 @@
+#audio-upload {
+  text-align: center;
+  margin-top: 1em;
+}
+
+#audio-list {
+  display: table;
+  margin: 1em auto;
+}
+#audio-list li {
+  display: table-row;
+}
+
+.li-header {
+  font-weight: bold;
+  text-align: center;
+}
+
+.li-cell {
+  display: table-cell;
+  vertical-align: middle;
+  padding-right: 1em;
+  /*border-bottom: 1px solid #e4e4e4;
+  border-right: 1px solid #e4e4e4;*/
+  border: 1px solid #fff;
+  background-color: #efe;
+  padding: .3em;
+}

@@ -1,0 +1,28 @@
+#player-container
+  #player
+    #track-info
+      if tracks[0].artist
+        span#title= tracks[0].title
+        span#artist= tracks[0].artist
+      else
+        span#title= tracks[0].originalName
+        span#artist
+    audio(controls, src='/uploads/audio/'+tracks[0].name)#audio
+  #track-list-container
+    ul#track-list.list-unstyled
+      - var first = true;
+      each track in tracks
+        if track.deleted!==true
+          
+          li(onclick='play_track(this)', data-track= track, class=(first==true ? 'active-track':'')).li-track
+            
+            - first = false;
+            if track.artist
+              span.track-cell.artist= track.artist
+              span.track-cell= track.title
+            else
+              span.track-cell.artist
+              span.track-cell= track.originalName
+  //- SCRIPTS
+  script(type='text/javascript', src='/js/jquery-2.1.4.min.js')
+  script(type='text/javascript', src='/js/player.js')

@@ -1,0 +1,284 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+body {
+  font: 14px Verdana, Helvetica, Arial, sans-serif;
+}
+
+.loading {
+  overflow: hidden;
+}
+.loading #loadscreen {
+  display: block;
+  opacity: .2;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+
+#loadscreen {
+  display:    none;
+  z-index:    1000;
+  position: fixed;
+  height:     100%;
+  width:      100%;
+  background: #fff;
+  opacity: 0;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+a {
+  color: #00B7FF;
+}
+a:hover {
+  text-decoration: none;
+}
+
+#alert-container {
+  position: fixed;
+  z-index: 20000;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.my-alert {
+  cursor: default;
+  display: none;
+  padding: 2em;
+}
+
+#project-menu {
+  float: left;
+  width: 20%;
+  padding-top: 1em;
+  padding-left:.6em;
+}
+
+#div-projectList {
+  padding-left: .1em;
+  /*text-indent: -.4em;*/
+  word-wrap: break-word;
+}
+
+#project-list {
+  margin-left: 1em;
+}
+
+.pLink {
+  padding: 0 .2em .2em .2em;
+}
+
+.pLink:hover {
+  text-decoration: none;
+}
+
+.deleteLink {
+  margin-left: 1em;
+  font-size: .9em;
+  right: .2em;
+  color: red;
+  cursor: pointer;
+  display: none;
+  word-wrap: normal;
+}
+
+.active-link {
+  background: #f7f7ff;
+  padding-left: .2em;
+  border-top-left-radius: .4em;
+  border-bottom-left-radius: .4em;
+  border: 1px dotted #ddd;
+  border-right: none;
+}
+
+
+
+.filter-checkbox {
+  position: absolute;
+  left: -999999px;
+  opacity: 0;
+}
+
+.filter-checkbox:not(:checked) + .filter-label {
+  background-color: #fff;
+  border: 1px dotted #eee;
+}
+
+.filters {
+  padding: 1em 0;
+  text-align: center;
+  background: #fafafa;
+  margin-bottom: .6em;
+  border-bottom: 1px dotted #eee;
+}
+.filter-label {
+  padding: .3em .4em;
+  text-indent: 0;
+  margin: 0 .1em;
+  border: 1px solid #fff;
+  border-radius: .2em;
+  color: #666;
+  font-weight: normal;
+  cursor: pointer;
+
+}
+.gala-label {
+  background-color: #aaf;
+}
+.export-label {
+  background-color: #afa;
+}
+.other-label {
+  background-color: #faa;
+}
+.home-label {
+  background-color: #faf;
+}
+
+
+
+.is-in-gala {
+  color: #44f;
+}
+.is-in-export {
+  color: #4f4;
+}
+.is-in-other {
+  color: #f44;
+}
+.is-in-home {
+  color: #f4f;
+}
+
+.li-home {
+  border-bottom: 1px dashed #ddd;
+}
+.li-home a {
+  color: #444;
+}
+
+#project-content {
+  background: #f7f7ff;
+  float: right;
+  padding-top: 1em;
+  padding-right: .6em;
+  padding-left: .3em;
+  /*border-left: 1px dotted #eee;*/
+  width: 80%;
+}
+#info-container {
+  width: 80%;
+}
+
+.form-inline > * {
+  margin: .1em .7em;
+}
+
+.gallery-tools {
+  padding: .5em .7em;
+  background: #efffef;
+  border-bottom: 1px solid #ddd;
+}
+
+.photolink {
+  margin-left: .4em;
+  color: #999;
+  background: #fcfcfc;
+  border: 1px dotted #ddd;
+  border-radius: 2px;
+  font-size: .8em;
+  padding: .5em;
+  cursor: pointer;
+}
+.span-photolink:hover {
+  color: #222;
+}
+
+.photo-description {
+  background-color: #fff;
+  -webkit-transition: background-color 1.5s;
+}
+.save-success{
+  background-color: #56fa60;
+  -webkit-transition: background-color 0.1s;
+}
+
+#img-gallery {
+  background: #f7fff7;
+  padding: .3em;
+}
+
+
+
+.grid {
+  display: inline-block;
+}
+
+.grid-item {
+  float: left;
+  width: 18em;
+  margin: .1em;
+  opacity: .9;
+  text-align: center;
+}
+.grid-item:hover {
+  opacity: 1;
+}
+.grid-item img {
+  height: 15em;
+  max-width: 17em;
+  border-radius: 2px;
+}
+
+.public-checkbox {
+  display: none;
+  visibility: hidden;
+}
+
+.public-checkbox + label {
+  cursor: pointer;
+  color: #4444ee;
+  opacity: .3;
+  font-size: 1.5em;
+}
+
+.public-checkbox:checked + label {
+  opacity: 1;
+}
+.list-view .img-item {
+  padding: .3em;
+  border-bottom: 1px dashed #ddd;
+}
+.list-view .img-item:hover {
+  background: #efffef;
+}
+
+.list-view .div-img {
+  width: 5em;
+}
+.list-view img {
+  height: 3em;
+}
+
+.list-view .img-caption .div-photo-name {
+  width: 16em;
+  overflow: hidden;
+}
+
+.list-view > .img-item > *, .list-view > .img-item > * > * {
+  float: left;
+}
