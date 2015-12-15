@@ -29,19 +29,33 @@
   padding: 0;
   font-size: 12px;
   cursor: pointer;
+  border-right: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
 }
 #track-list li {
   background: #111;
   display: table-row;
 }
 #track-list li:hover {
-  background-color: #dfd;
+  background-color: #f8fff8;
 }
+#track-list li:hover .track-cell {
+  color: #333;
+}
+
+#track-list .active-track {
+  background: #f8fff8;
+}
+
+.active-track .track-cell {
+  color: #333;
+}
+
 .track-cell {
   display: table-cell;
   padding: 9px 5px;
   color: #ddd;
-  border: 1px solid #000;
+  border: 1px solid #aaa;
   border-right: none;
   border-bottom: none;
 }

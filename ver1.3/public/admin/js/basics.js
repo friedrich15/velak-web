@@ -8,6 +8,11 @@ $(document).ready(function(){
   sort_it_out();
   make_sortable();
 
+  $('#audioupload').on('queuecomplete', function(){
+    location.reload();
+  })
+
+
 });
 
 function make_sortable(){

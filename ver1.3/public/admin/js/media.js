@@ -1,4 +1,5 @@
 var timer;
+
 function saveDescription(obj, projectID, photoName) {
   var text = $(obj).val();
   var data = {'id': projectID, 'text': text, 'photo': photoName};

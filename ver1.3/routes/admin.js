@@ -291,8 +291,7 @@ router.get('/audio', function(req, res, next) {
 
 });
 
-function new_track(files, i, cb) {
-  var file = files[i];
+function new_track(file, cb) {
   var extension = file.originalname.split('.').pop();
   id3({ file: file.path, type: id3.OPEN_LOCAL }, function(err, tags) {
     // console.log(tags.v1);
@@ -309,17 +308,16 @@ function new_track(files, i, cb) {
       filePublic    : true,
       deleted       : false
     }).save(function(){
-      if (i>0) new_track(files, i-1, cb);
-      else return cb('success');
+      return cb('success');
     });
   });
 }
 
-router.post('/audio_upload', uploadaudio.array('files'), function(req, res, next) {
-  var files = req.files;
-  new_track(files, files.length-1, function(msg){
+router.post('/audio_upload', uploadaudio.single('file'), function(req, res, next) {
+  var file = req.file;
+  new_track(file, function(msg){
     if (msg=='success') {
-      res.redirect('/admin/audio')
+      res.send('success');
     }
   })
 });

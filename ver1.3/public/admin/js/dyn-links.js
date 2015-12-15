@@ -100,6 +100,11 @@ function finishedLoading(responseHtml, bonus) {
     getChatMsgs();
   }
 
+  $('#audioupload').on('queuecomplete', function(){
+    location.reload();
+  })
+
+
   $('main').removeClass('loading');
   $('.dropzone').dropzone();
 

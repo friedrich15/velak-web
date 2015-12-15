@@ -31,10 +31,10 @@ block content
                 span.glyphicon.glyphicon-log-out
     main
       #audio-upload
-        form(action='/admin/audio_upload', method='post', enctype='multipart/form-data')
-          label(for='input_audio')
-            .btn.btn-default add audio file(s)
-          input(type='file', id='input_audio', accept='.mp3,.wav,.ogg', name='files', onchange='submit()', multiple).hidden
+        form(action='/admin/audio_upload', method='post', enctype='multipart/form-data')#audioupload.dropzone
+          //- label(for='input_audio')
+          //-   .btn.btn-default add audio file(s)
+          //- input(type='file', id='input_audio', accept='.mp3,.wav,.ogg', name='files', onchange='submit()', multiple).hidden
       #audio-list-container
         ul#audio-list.sortable
           if tracks!=undefined
@@ -61,7 +61,7 @@ block content
                     .li-cell
                       span= tags.title
                   .li-cell
-                    audio(controls)
+                    audio(controls='controls', preload='none')
                       source(src= '../../uploads/audio/'+track.name, type=track.fileType)
                   .li-cell
                     a(href='/admin/delete_audio/' + track._id, onclick='return confirm("really delete?")') delete
