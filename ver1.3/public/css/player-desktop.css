@@ -81,7 +81,7 @@
   color: #000;
   font-style: italic;
 }
-#track-list .active-track .artist {
+#track-list .playing .artist {
   padding-left: 4px;
 }
 #track-list .playing .artist:before {
