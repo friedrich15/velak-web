@@ -14,7 +14,7 @@
       each track in tracks
         if track.deleted!==true
           
-          li(onclick='play_track(this)', data-artist= track.artist, data-title= track.title, data-oname= track.originalName, class=(first==true ? 'active-track':'')).li-track
+          li(onclick='play_track(this)', data-name= track.name, data-artist= track.artist, data-title= track.title, data-oname= track.originalName, class=(first==true ? 'active-track':'')).li-track
             
             - first = false;
             if track.artist

@@ -19,7 +19,7 @@ function play_track(obj) {
   var artist = $(obj).data('artist');
   var title = $(obj).data('title');
   var originalName = $(obj).data('oname');
-  var url = '/uploads/audio/'+track.name;
+  var url = '/uploads/audio/'+$(obj).data('name');
 
 
   next = $(obj).next();
