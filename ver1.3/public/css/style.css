@@ -78,4 +78,5 @@ main.loading {
 }
 #audio-player.loading:after {
   content: url('../img/loading-1.gif');
+  
 }

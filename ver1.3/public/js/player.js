@@ -15,10 +15,10 @@ else {
 
 function play_track(obj) {
   var player = document.getElementById('audio');
-  var track = $(obj).data('track');
-  var artist = track.artist;
-  var title = track.title;
-  var originalName = track.originalName;
+  // var track = $(obj).data('track');
+  var artist = $(obj).data('artist');
+  var title = $(obj).data('title');
+  var originalName = $(obj).data('oname');
   var url = '/uploads/audio/'+track.name;
 
 

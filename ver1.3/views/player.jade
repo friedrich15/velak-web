@@ -7,14 +7,14 @@
       else
         span#title= tracks[0].originalName
         span#artist
-    audio(controls, src='/uploads/audio/'+tracks[0].name)#audio
+    audio(controls, src='/uploads/audio/'+tracks[0].name, preload='none')#audio
   #track-list-container
     ul#track-list.list-unstyled
       - var first = true;
       each track in tracks
         if track.deleted!==true
           
-          li(onclick='play_track(this)', data-track= track, class=(first==true ? 'active-track':'')).li-track
+          li(onclick='play_track(this)', data-artist= track.artist, data-title= track.title, data-oname= track.originalName, class=(first==true ? 'active-track':'')).li-track
             
             - first = false;
             if track.artist
