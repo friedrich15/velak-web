@@ -299,7 +299,7 @@ function new_track(file, cb) {
       name          : file.filename,
       originalName  : file.originalname,
       fileSize      : file.filesize,
-      mp3tags       : tags,
+      // mp3tags       : tags,
       artist        : tags.artist,
       title         : tags.title,
       filePath      : file.path,

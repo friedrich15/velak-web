@@ -1,5 +1,10 @@
 var next;
 
+$(document).ready(function() {
+  $('#audio-player').removeClass('loading');
+  $('#player-container').fadeIn(600);
+})
+
 if (window.location.hash == '#ext') {
   $('#player-container').append("<link rel='stylesheet' href='/css/player-desktop.css'></link>")
   $('#player-container').addClass('external');

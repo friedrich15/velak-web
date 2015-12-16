@@ -72,3 +72,10 @@ main {
 main.loading {
   opacity: 0;
 }
+#audio-player.loading {
+  /*position: relative;*/
+  text-align: center;
+}
+#audio-player.loading:after {
+  content: url('../img/loading-1.gif');
+}
