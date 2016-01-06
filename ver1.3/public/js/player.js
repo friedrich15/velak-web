@@ -36,10 +36,8 @@ function play_track(obj) {
 }
 
 $('#audio').bind('ended', function(){
-  console.log(next);
   if (!next) {
     next = $('#track-list').children().eq(1);
-    console.log(next);
   }
   play_track(next);
 })

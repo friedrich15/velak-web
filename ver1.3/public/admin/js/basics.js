@@ -25,7 +25,6 @@ function make_sortable(){
       projectId = li.data('projectId');
       dataObj['position' + projectId] = i;
     });
-    console.log(dataObj);
     $.ajax({
       url: '/admin/projectsort',
       type: 'post',
@@ -44,7 +43,6 @@ function make_sortable(){
       trackId = li.data('trackId');
       dataObj['position' + trackId] = i;
     });
-    console.log(dataObj);
     $.ajax({
       url: '/admin/tracksort',
       type: 'post',
@@ -61,7 +59,6 @@ function make_sortable(){
     dataObj['id'] = id;
     ul.children('li').each(function(i) {
       var li = $(this);
-      console.log(li.data('photoId'));
       photoId = li.data('photoId');
       dataObj['position' + photoId] = i;
     });
@@ -70,7 +67,6 @@ function make_sortable(){
       type: 'post',
       data: dataObj
     }).done(function() {
-      // console.log('don');
       // location.reload();
     });
   });
@@ -142,7 +138,6 @@ function filterItems(category, reload) {
     window.location.hash = newhash;
   }
   if (reload) {
-    console.log(reload);
     location.reload();
   }
 }
@@ -277,7 +272,6 @@ function handleSelected(pid) {
     case 'notpublic':
       $('.imgCheck:checked').each(function(){
         var obj = $(this).siblings('.img-caption').children('.public-checkbox');
-        console.log(obj);
         var iid = $(this).closest('.img-item').attr('id');
         publicState(obj, pid, iid, false);
       });
@@ -291,7 +285,6 @@ function publicState(obj, pid, iid, isChecked) {
   }
   $.get('/admin/public_state/'+pid+'/'+iid+'/'+isChecked, function(data){
     $(obj).prop('checked', isChecked);
-    console.log('heute, ', isChecked);
   })
 }
 
@@ -316,7 +309,6 @@ function deleteSelected(pid) {
     var confirmed = true;
     $('.imgCheck:checked').each(function() {
       var iid = $(this).closest('.img-item').attr('id');
-      console.log(iid);
       deleteImg(pid, iid, confirmed);
       $('#checkbox-selectAll').prop('checked', false);
     });

@@ -152,7 +152,7 @@ router.post('/update_project', function(req, res, next) {
     var category = 'homepage';
   }
   else { var category = req.body.category}
-  console.log(dateHtml);
+
   Project.findById(req.body.id, function(err, project) {
     project.name              = req.body.name;
     project.title             = req.body.title;
@@ -205,7 +205,7 @@ router.get('/delete_img/:pid/:iid', function(req, res, next) {
     var iname;
     for (i=0; i<photos.length; i++) {
       if (photos[i].name == req.params.iid) {
-        console.log(photos[i].name)
+
         iname = photos[i].originalName;
         photos[i].deleted = true;
 
@@ -223,9 +223,9 @@ router.get('/public_state/:pid/:iid/:state', function(req, res, next) {
     var iname;
     for (i=0; i<photos.length; i++) {
       if (photos[i].name == req.params.iid) {
-        console.log(photos[i]);
+
         photos[i].filePublic = req.params.state;
-        console.log(photos[i]);
+
       }
     }
     project.save(function(){
@@ -242,10 +242,10 @@ router.post('/save_photo_description', function(req, res, next){
         photo = project.photo[i];
       }
     }
-    console.log(photo);
+
     photo.description = req.body.text;
     project.save(function(err){
-      if (err) console.log(err);
+
       res.send('success');
     });
   });
@@ -257,7 +257,7 @@ router.post('/projectsort', function ( req, res, next) {
 
       project.position = req.body['position' + project.id];
       project.save();
-      console.log(project.position);
+
     });
     res.send("success");
   });
@@ -268,7 +268,7 @@ router.post('/photosort', function (req, res, next) {
     for (var i in project.photo) {
       if (project.photo[i].deleted == false){
         project.photo[i].position = req.body['position' + project.photo[i].name];
-        console.log(project.photo[i]);
+
       }
 
     }
@@ -329,7 +329,7 @@ router.post('/tracksort', function ( req, res, next) {
 
       track.position = req.body['position' + track.id];
       track.save();
-      console.log(track.position);
+
     });
     res.send("success");
   });
@@ -361,7 +361,7 @@ router.get('/trash', function(req, res, next) {
     posts.forEach(function(post) {
       if (post.deleted == true) {
         del_docPosts.push(post);
-        console.log(post);
+
       }
     })
   });
@@ -435,7 +435,7 @@ router.get('/retrieve/:item/:id', function(req, res, next) {
 
 router.get('/retrieve_photo/:project_id/:photo_id', function(req, res, next) {
   Project.findById(req.params.project_id, function(err, project){
-    console.log(project.photo.id(req.params.photo_id));
+
     var photo = project.photo.id(req.params.photo_id);
     photo.deleted = false;
     project.save(function(err){
@@ -570,7 +570,6 @@ function delete_photo(id, cb) {
     }
     project.photo.id(id).remove(function(err, photo){
       project.save(function(err) {
-        console.log(photo);
         cb('deleted');
       });
 

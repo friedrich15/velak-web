@@ -38,9 +38,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/futureprojects', function(req, res, next) {
   var now = moment().valueOf();
-  console.log(now);
+
   Project.find({'date': {$gt: now}}).sort('date').exec(function(err, projects){
-    console.log(projects);
     res.render('future-projects', {
       projects: projects
     });
@@ -49,7 +48,6 @@ router.post('/futureprojects', function(req, res, next) {
 
 router.get('/loadmore/:id', function(req, res, next){
   Project.findById(req.params.id, function(err, project){
-    console.log(project);
     res.render('project-content', {
       project: project
     });
@@ -66,9 +64,7 @@ router.get('/audio', function(req, res, next){
 })
 
 router.get('/audio/player', function(req, res, next) {
-  console.log('audioplayer');
   Track.find({deleted: false}).sort('position').exec(function(err, tracks) {
-    console.log(tracks);
     res.render('player', {
       title: 'velak player',
       tracks: tracks
@@ -125,7 +121,6 @@ router.get('/site/:cat/:id', function(req, res, next) {
           };
         };
         Project.find({$and: [{category: 'home'}, {visible: true}, {deleted: false}]}, function(err, links){
-          console.log(currentProject.name);
           res.render('project', {
             title: 'velak',
             site: cat,

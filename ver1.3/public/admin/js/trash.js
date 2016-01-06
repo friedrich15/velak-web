@@ -1,7 +1,6 @@
 function hit_masonry() {
   var $container = $('#trash-grid');
   $container.imagesLoaded( function(){
-    console.log('nau!');
     $container.masonry({
       // options
       itemSelector: '.trash-item'
@@ -15,18 +14,15 @@ $(document).ready(function(){
 
 function empty_photo_trash(ids) {
   var this_id = ids.splice(0,1);
-  console.log(this_id);
   $.ajax({
     type: 'GET',
     url: '/admin/empty_del_photos/' + this_id
   }).done(function(res){
 
     if (res != 'err') {
-      console.log('res= '+res);
       if (ids.length!=0){
         $('#'+ res).fadeOut(100);
         empty_photo_trash(ids);
-        console.log(res);
       }
       else {
         $('#'+ res).hide(function(){
