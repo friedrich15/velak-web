@@ -9,7 +9,7 @@ admin:
 
 trash:
 
-  FIXME: FIX THE TRASH!
+  FIXME: FIX THE TRASH! //DONE
 
   TODO: add deleted docs //DONE
 
@@ -17,7 +17,7 @@ trash:
 
 ***************************** MAIN PAGE *******************************
 
-    AUDIO: li-data should not be whole track 
+    AUDIO: li-data should not be whole track //DONE
 
     FIXME: no projects - alternative site
     TODO: extern links: target blank

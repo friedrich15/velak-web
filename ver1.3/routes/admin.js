@@ -191,7 +191,8 @@ router.post('/delete_project', function(req, res, next) {
 router.get('/create_link/:id', function(req, res, next) {
   Project.findById(req.params.id, function(err, project) {
     var rndm = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
-    var link = '/photolink/'+ req.params.id + '/' + rndm;
+    var link = '../photolink/'+ req.params.id + '/' + rndm;
+    console.log(link);
     project.photoLink = link;
     project.save(function(err){
       res.send({link: link});
