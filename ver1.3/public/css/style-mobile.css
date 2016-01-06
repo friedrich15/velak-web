@@ -3,14 +3,24 @@ body {
   background-color: #000;
 }
 
-@media (max-width: 350px) {
+@media (max-width: 365px) {
   body {
-    font-size: 14px;
+    font-size: 13px;
+  }
+}
+@media (max-width: 340px) {
+  body {
+    font-size: 12px;
   }
 }
 @media (max-width: 320px) {
   body {
-    font-size: 12px;
+    font-size: 11px;
+  }
+}
+@media (max-width: 296px) {
+  body {
+    font-size: 10px;
   }
 }
 
