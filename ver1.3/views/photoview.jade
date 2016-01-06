@@ -3,8 +3,8 @@ extends layout
 block content
   #header-container
     h2= project.name
-    p= project.date
-    a(onclick='zipImages()').btn.btn-default Download All
+    p= project.dateHtml
+    //- a(onclick='zipImages()').btn.btn-default Download All
   br
   #gallery-container
     .grid  
