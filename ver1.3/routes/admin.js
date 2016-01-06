@@ -632,9 +632,12 @@ router.get('/empty_del/:items', function(req, res, next) {
 
 router.get('/empty_del_photos/:id', function(req, res, next) {
   var id = req.params.id;
-  delete_photo(id, function(msg) {
-    res.send(id);
-  })
+  if (id !== null) {
+    delete_photo(id, function(msg) {
+      res.send(id);
+    });
+  }
+
 
 });
 //
