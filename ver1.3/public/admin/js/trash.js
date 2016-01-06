@@ -14,7 +14,7 @@ $(document).ready(function(){
 });
 
 function empty_photo_trash(ids) {
-  this_id = ids.splice(0,1);
+  var this_id = ids.splice(0,1);
   console.log(this_id);
   $.ajax({
     type: 'GET',
