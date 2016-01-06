@@ -637,6 +637,9 @@ router.get('/empty_del_photos/:id', function(req, res, next) {
       res.send(id);
     });
   }
+  else {
+    res.send('err');
+  }
 
 
 });

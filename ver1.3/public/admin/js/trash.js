@@ -40,6 +40,9 @@ function empty_photo_trash(ids) {
 
       // }
     }
+    else {
+      empty_photo_trash(ids);
+    }
   });
 }
 
