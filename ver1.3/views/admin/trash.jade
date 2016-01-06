@@ -33,7 +33,7 @@ block content
       .trash-style
         .infobox
           h1 TRASH
-          p Click on projects or photos to retrieve them. Or remove them permanently by empting the trash.
+          p Click on items to retrieve them. Or remove them permanently by empting the trash.
         h2.trash-header projects
         if (projects.length != 0)
           a(href='/admin/empty_del/projects', onclick='return confirm("Are you sure you want to permanently remove those projects?")').btn.btn-danger empty project trash
