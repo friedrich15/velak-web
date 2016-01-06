@@ -247,7 +247,7 @@ function createDownloadLink(id) {
 
   $.get( '/admin/create_link/' + id, function(data){
     $('.photolink').attr('href', data.link).text(data.link).show();
-    $('#downloadLink').attr('disabled', true);
+    // $('#downloadLink').attr('disabled', true);
   });
 }
 

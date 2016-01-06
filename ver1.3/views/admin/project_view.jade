@@ -119,7 +119,7 @@ block content
                   button(onclick='toggleView()').toggle-view.btn.btn-default.glyphicon.glyphicon-th-large
                 .form-group
               
-                  button(onclick='createDownloadLink(#{pid});', disabled=((!currentProject.photoLink)?false:true))#downloadLink.form-control.btn.btn-default create download link
+                  button(onclick='createDownloadLink(#{pid});')#downloadLink.form-control.btn.btn-default create download link
                   a(target='_blank', href=currentProject.photoLink, hidden=((currentProject.photoLink)?false:true)).photolink= currentProject.photoLink
               ul.list-view.list-unstyled#img-gallery
                 .gutter-sizer(data-project-id= currentProject.id).sortable
