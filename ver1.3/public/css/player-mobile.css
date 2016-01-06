@@ -15,6 +15,7 @@
   font-weight: bold;
 }
 #artist {
+  padding-left: 6px;
   font-style: italic;
 }
 #audio {

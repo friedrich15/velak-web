@@ -1,26 +1,27 @@
 body {
+  font-size: 12px;
   padding: 10px;
   background-color: #000;
 }
 
-@media (max-width: 365px) {
-  body {
-    font-size: 13px;
-  }
-}
-@media (max-width: 340px) {
-  body {
-    font-size: 12px;
-  }
-}
-@media (max-width: 320px) {
+@media (max-width: 370px) {
   body {
     font-size: 11px;
   }
 }
-@media (max-width: 296px) {
+@media (max-width: 344px) {
   body {
     font-size: 10px;
+  }
+}
+@media (max-width: 320px) {
+  body {
+    font-size: 9px;
+  }
+}
+@media (max-width: 296px) {
+  body {
+    font-size: 8px;
   }
 }
 
