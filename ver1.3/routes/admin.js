@@ -194,6 +194,7 @@ router.get('/create_link/:id', function(req, res, next) {
     var link = '/photolink/'+ req.params.id + '/' + rndm;
     console.log(link);
     project.photoLink = link;
+    project.pLinkRandom = rndm;
     project.save(function(err){
       res.send({link: link});
     })

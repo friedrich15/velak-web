@@ -183,12 +183,17 @@ router.get('/site/:cat/:id', function(req, res, next) {
 // PHOTOLINK
 router.get('/photolink/:id/:rndm', function(req, res, next) {
   Project.findById(req.params.id, function(err, project) {
+    if (req.params.rndm == project.pLinkRandom) {
 
-    res.render('photoview', {
-      title: project.name + ' | Photos',
-      project: project,
-      photos: project.photo
-    });
+      res.render('photoview', {
+        title: project.name + ' | Photos',
+        project: project,
+        photos: project.photo
+      });
+    }
+    else {
+      res.send('Page not found.');
+    }
   });
 });
 

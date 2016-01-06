@@ -45,6 +45,7 @@ var mongoose = require('mongoose'),
       photo               : [Photo],
       audio               : [Track],
       photoLink           : String,
+      pLinkRandom         : String,
       visible             : Boolean,
       deleted             : Boolean
     });
