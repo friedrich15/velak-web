@@ -32,7 +32,7 @@ function empty_photo_trash(ids) {
         $('#'+ res).hide(function(){
           $('#photo-trash-empty').removeClass('hidden');
         });
-
+        $('.photo-trash').css('height', '100px');
         $('#empty_photo_btn').hide();
       }
 
@@ -72,6 +72,6 @@ function prepare_to_remove(obj) {
   var ids = $(obj).data('photos');
 
   if (confirm('Are you sure you want to permanently remove those photos?')) {
-    empty_trash('photo', ids);
+    empty_photo_trash(ids);
   }
 }

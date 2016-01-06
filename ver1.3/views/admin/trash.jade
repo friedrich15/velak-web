@@ -49,7 +49,7 @@ block content
         if (photos.length!=0)
           a(onclick='prepare_to_remove(this)', data-photos= photo_ids)#empty_photo_btn.btn.btn-danger empty photo trash
         br
-        .trash-container
+        .trash-container.photo-trash
           h3(class=photo_ids.length!=0 ? 'hidden': '')#photo-trash-empty.trashempty photo trash is empty
           .grid#trash-grid
             each photo in photos
@@ -59,6 +59,18 @@ block content
                   a(href='/admin/retrieve_photo/'+photo.inProject+'/'+photo._id, onclick='return confirm("Do you want to retrieve this photo?")')
                     img(src= '/uploads/small/small' + photo.name).image
                     span.photo-info= photo.originalName
+        h2.trash-header audio
+  
+        if (tracks.length!=0)
+          a(href='/admin/empty_del/audio', onclick='return confirm("Are you sure you want to permanently remove those audiofiles?")').btn.btn-danger empty audio trash
+        br
+        .trash-container
+          h3(class=(tracks.length!=0 ? 'hidden': ''))#audio-trash-empty.trashempty audio trash is empty
+          ul.list-unstyled
+            each track in tracks
+              li
+                a(href='/admin/retrieve/audio/'+track._id, onclick='return confirm("Do you want to retrieve this track?")')= (track.artist ? track.artist + ' - ' + track.title : track.name)
+                span.track-info= track.date
         h2.trash-header posts
   
         if (posts.length!=0)
