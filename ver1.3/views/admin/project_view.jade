@@ -80,6 +80,11 @@ block content
               .form-group
                 label Time:
                 input(type='time', name='time' id='input-time', value= currentProject.time).form-control
+            label Photo Description
+            p(style='color: #aaa;')
+              span (e.g. 'copyright', displayed underneath photo area)
+            input(name='imgdescription', id='input-imgdescription', type='text', value=currentProject.imgdescription).form-control
+            br
             label Description: 
             p(style='color: #aaa;')
               span (use 

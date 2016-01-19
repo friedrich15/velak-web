@@ -152,7 +152,7 @@ router.post('/update_project', function(req, res, next) {
     var category = 'homepage';
   }
   else { var category = req.body.category}
-
+  console.log(req.body.imgdescription);
   Project.findById(req.body.id, function(err, project) {
     project.name              = req.body.name;
     project.title             = req.body.title;
@@ -160,6 +160,7 @@ router.post('/update_project', function(req, res, next) {
     project.dateHtml          = dateHtml;
     project.date              = date;
     project.time              = req.body.time;
+    project.imgdescription    = req.body.imgdescription;
     project.description       = marked(req.body.description);
     project.descriptionSource = req.body.description;
     project.category          = category;

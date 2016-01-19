@@ -147,11 +147,12 @@ function updateProject() {
   var title = $('#input-title').val();
   var name = $('#input-name').val();
   var date = $('#input-date').val();
+  var imgdescription = $('#input-imgdescription').val();
   var description = $('#input-description').val();
   var id = $('.active-link').attr('name');
   var category = $( '#category-selector option:selected' ).text();
   var visible = $('#project-visible').is(':checked');
-
+  console.log(imgdescription);
   if (name == '') {
     showAlert('danger', 'Cannot save: Set a NAME!');
     $('#input-name').parent().addClass('has-error');
@@ -169,6 +170,7 @@ function updateProject() {
         'title': title,
         'name': name,
         'date': date,
+        'imgdescription': imgdescription,
         'description': description,
         'category': category,
         'visible': visible

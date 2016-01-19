@@ -40,6 +40,9 @@ block content
                     if photo.description
                       .photo-description
                         p= photo.description
+          .photo-sub-description
+            span= projects[0].imgdescription
+
       #loadmore
         img(src='/img/LoaderDots.gif')
       //- a(onclick='$(window).scrollTop(0)')#goToTop end of page - go to top
