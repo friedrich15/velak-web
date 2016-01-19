@@ -22,14 +22,16 @@ body {
 }
 
 #top-menu ul {
-  margin-left: 1em;
+  margin-left: 1.7em;
+  margin-bottom: .5em;
   /*border: 1px solid #aaa;*/
   /*background: #eee;*/
   /*width: 30em;*/
   /*text-align: center;*/
 }
 .logo {
-  margin-right: 2em;
+  margin-top: 1.2em;
+  margin-right: 2.3em;
   color: #000;
 }
 .li-menu {
@@ -66,7 +68,7 @@ body {
 #side-menu {
   margin-top: 4em;
   height: 20em;
-  width: 9em;
+  width: 10em;
   position: fixed;
   float: left;
   padding: 1em;
@@ -75,15 +77,19 @@ body {
 #side-menu ul li {
   /*border: 1px solid #ccc;*/
   /*margin-bottom: .2em;*/
-  padding: 1px .1em;
-  line-height: 1.1em;
+  padding: 1px 1em;
+  line-height: 1.3em;
 }
 
 #content {
   padding-top: 5em;
-  margin-left: 9em;
+  margin-left: 10em;
   margin-right: .4em;
   overflow: hidden;
+}
+
+.project-container {
+  margin-bottom: 5em;
 }
 
 .info-box {
@@ -91,10 +97,10 @@ body {
   margin: 0;
   background-color: #000;
   /*border: .8em solid #a4f;*/
-  padding: 6em 4em;
+  padding: 4em 4em;
   color: #666;
   letter-spacing: .2em;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   font-weight: normal;
   line-height: 1.5em;
   /*box-shadow: 0 0 1em #333;*/

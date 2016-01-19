@@ -25,5 +25,8 @@ block content
       //-       a(href='/site/'+site+'/'+project._id).pjax.side-link= project.name
 
     #content
-      p= currentProject.name
-      p!= currentProject.description
+      #project-content
+        .project-container(id=currentProject._id)   
+          .info-box  
+            p= currentProject.name
+            p!= currentProject.description
