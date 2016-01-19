@@ -85,7 +85,8 @@ function letItScroll(){
     makeLiActive(scrollDirection);
     if(scrollTop == $(document).height() - $(window).height()) {
       if ($('.li-side.now-last').is(':last-child')){
-        $('#goToTop').fadeIn(300);
+        // $('#goToTop').fadeIn(300);
+        console.log('last');
       }
       else {
         var projectId = $('.li-side.now-last').next().data('project-id');
