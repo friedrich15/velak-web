@@ -19,9 +19,6 @@ block content
   //- - var currentProject = 'hausi'
   main
     nav#side-menu
-    #content
-      .info-box
-        h2 velak audio player
-        p this is the audioplayer
-        a(href='/audio/player#ext', onclick="window.open('/audio/player#ext', 'newwindow', 'width=400, height=500'); return false;") open external player
+    #content  
+      a(href='/audio/player#ext', onclick="window.open('/audio/player#ext', 'newwindow', 'width=400, height=500'); return false;") open external player
       #audio-player.loading
