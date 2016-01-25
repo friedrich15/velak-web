@@ -36,6 +36,12 @@ li.active a{
   /*text-align: center;*/
 }
 
+h3.upcoming {
+  margin-left: .5em;
+  color: #aaa;
+  font-size: 1.3em;
+}
+
 .project-container {
   margin-bottom: 2em;
 }
