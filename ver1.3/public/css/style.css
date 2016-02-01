@@ -5,6 +5,7 @@ body {
 
 a {
   color: #999;
+  text-decoration: none;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -15,6 +16,11 @@ a {
 a:hover {
   text-decoration: none;
   color: #bbb;
+}
+
+a:visited, a:active {
+  color: #999;
+  text-decoration: none;
 }
 
 .logo-style {
@@ -49,8 +55,11 @@ h3.upcoming {
 #loadmore {
   display: none;
 }
-#goToTop {
-  display: none;
+
+.project-divider {
+  width: 99%;
+  margin: .5em auto 0 auto;
+  border-top: 1px solid #eee;
 }
 
 .photo-list {

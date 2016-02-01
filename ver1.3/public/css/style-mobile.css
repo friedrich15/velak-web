@@ -2,6 +2,7 @@ body {
   font-size: 14px;
   padding: 10px;
   background-color: #000;
+  color: #999;
 }
 
 @media (max-width: 365px) {
@@ -23,6 +24,10 @@ body {
   body {
     font-size: 10px;
   }
+}
+
+a {
+  color: #bbb;
 }
 
 #top-menu ul li {
@@ -85,6 +90,11 @@ body {
 
 .img-container {
   margin-top: .2em;
+}
+
+.project-divider {
+  border-color: #111;
+
 }
 
 .audio-info {

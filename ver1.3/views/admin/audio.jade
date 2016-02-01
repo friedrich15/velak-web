@@ -54,12 +54,11 @@ block content
                 li(data-track-id=track.id).list-child
                   .li-cell
                     span=track.originalName
-                  each tags in track.mp3tags
-                    
-                    .li-cell
-                      span= tags.artist
-                    .li-cell
-                      span= tags.title
+                
+                  .li-cell
+                    span= track.artist
+                  .li-cell
+                    span= track.title
                   .li-cell
                     audio(controls='controls', preload='none')
                       source(src= '../../uploads/audio/'+track.name, type=track.fileType)
