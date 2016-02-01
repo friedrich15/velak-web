@@ -1,7 +1,26 @@
 //- h3.upcoming coming up:
 each project in projects
   if project.visible == true && project.deleted != true
-    a(href='/site/program/'+project._id).project-container
+    //- a(href='/site/program/'+project._id).project-container
+    //-   .info-box(class=project.category)
+    //-     h1= project.title
+    //-     p!= project.description
+
+    //- a(href='/site/program/'+project._id)
+    .project-container(id=project._id) 
       .info-box(class=project.category)
-        h1= project.title
+        h2= project.title
         p!= project.description
+      ul.photo-list.list-unstyled.visible
+        each photo in project.photo
+          if photo.deleted != true && photo.filePublic == true  
+            li(data-position=photo.position)
+              .img-container
+                img(src= '/uploads/small/small' +photo.name, onerror="this.style.display='none'")
+                if photo.description
+                  .photo-description
+                    p= photo.description
+      .photo-sub-description
+        span= project.imgdescription
+      br
+      .project-divider

@@ -52,14 +52,18 @@ h3.upcoming {
   margin-bottom: 2em;
 }
 
+#homepage {
+  margin-bottom: 1em;
+}
+
 #loadmore {
   display: none;
 }
 
 .project-divider {
   width: 99%;
-  margin: .5em auto 0 auto;
-  border-top: 1px solid #eee;
+  margin: 1.8em auto 0 auto;
+  border-top: 1px solid #ddd;
 }
 
 .photo-list {

@@ -1,6 +1,9 @@
+
+
 $(document).ready(function(){
   // sort_it();
   getFutureProjects();
+  // onImagesLoaded();
 
 });
 

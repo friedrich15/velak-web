@@ -1,5 +1,9 @@
 
 $(document).ready(function(){
+  onImagesLoaded();
+});
+
+function onImagesLoaded() {
   var $container = $('.grid');
   $container.imagesLoaded( function(){
     console.log('nau!');
@@ -9,4 +13,4 @@ $(document).ready(function(){
     });
     $('.image').addClass('image-visible');
   });
-});
+}
